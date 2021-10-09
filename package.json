@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "beauty": "prettier --config .prettierrc --write src/**/*.{js,json,scss,css} && prettier --config .prettierrc --write pages/**/*.{js,json,scss,css} "
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.36",

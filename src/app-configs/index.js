@@ -7,10 +7,10 @@ export const Configs = {
     FILE_MAXIMUM: 2, //MB
     PAGE_SIZE_20: 20,
     PAGE_SIZE_4: 4,
-};
+}
 
 export const REQUEST_STATE = {
     ERROR: "ERROR",
     REQUEST: "REQUEST",
     SUCCESS: "SUCCESS",
-};
+}
