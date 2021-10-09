@@ -11,7 +11,7 @@ export default function Home() {
             </Head>
             <Layout>
                 Đây là layout
-                <img src={ImagesPath.LOGO} />
+                <Image src={ImagesPath.banner3} />
             </Layout>
         </>
     )
