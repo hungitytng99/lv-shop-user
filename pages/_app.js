@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
-import "assets/css/globals.sass"
+import "assets/css/globals.scss"
 import dynamic from "next/dynamic"
 import "nprogress/nprogress.css"
 
