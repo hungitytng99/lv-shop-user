@@ -1,7 +1,6 @@
-import { Container } from "react-bootstrap"
-import Footer from "components/Layout/Footer/Footer"
-import Header from "components/Layout/Header/Header"
-import Sidebar from "./Sidebar/Sidebar"
+import Footer from "./footer/Footer"
+import Header from "./header/Header"
+import Sidebar from "./sidebar/Sidebar"
 
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
