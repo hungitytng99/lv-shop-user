@@ -2,3 +2,8 @@ $text_color: #252525;
 $text_color_hover: #f6470e;
 
 $Sidebar_width: 280px;
+
+$Z_index_label_sidebar: 10000000;
+$Z_index_sidebar: $Z_index_label_sidebar + 1;
+$Z_index_avatar_option: 1000;
+$Z_index_menu_multichoic: 999;

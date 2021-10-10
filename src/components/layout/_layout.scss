@@ -1,0 +1,32 @@
+.layout__sidebar {
+    & > label.label_sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: $Z_index_label_sidebar;
+        color: #fff;
+        display: inline-block;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        animation: toggle_label_sidebar 0.3s;
+    }
+    #toggle_sidebar {
+        display: none;
+    }
+    #toggle_sidebar:checked ~ .label_sidebar {
+        display: block;
+    }
+    #toggle_sidebar:checked ~ .sidebar {
+        display: block;
+    }
+}
+@keyframes toggle_label_sidebar {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

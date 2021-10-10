@@ -1,3 +1,85 @@
 .sidebar {
-    color: green;
+    position: fixed;
+    z-index: $Z_index_sidebar;
+    top: 0;
+    left: 0;
+    width: $Sidebar_width;
+    height: 100vh;
+    background: #fff;
+    display: none;
+    animation: toggle_sidebar 0.3s;
+    overflow: auto;
+    &-logo {
+        & > img {
+            height: 60px;
+            margin: 35px auto;
+        }
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        li {
+            cursor: pointer;
+            padding: 10px 0px 10px 20px;
+            &:hover > span {
+                color: $text_color_hover;
+            }
+        }
+        li.multichoice {
+            position: relative;
+            & > ul {
+                overflow: hidden;
+                transition: 0.4s;
+                height: 0;
+            }
+            & > input:checked ~ ul {
+                height: calc(var(--i) * 44px);
+            }
+            & > input:checked ~ label {
+                &::before {
+                    content: "\2212";
+                }
+            }
+            & > label {
+                top: 0;
+                position: absolute;
+                cursor: pointer;
+                display: block;
+                width: 40px;
+                height: 40px;
+                right: 20px;
+                &::before {
+                    position: absolute;
+                    top: -15px;
+                    left: 6px;
+                    font-size: 40px;
+                    content: "\002B";
+                }
+            }
+        }
+    }
+    & > ul > li {
+        border-top: 1px solid #efefef;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #4caf50;
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+@keyframes toggle_sidebar {
+    0% {
+        transform: translate(-100%);
+    }
+    100% {
+        transform: translate(0);
+    }
 }
