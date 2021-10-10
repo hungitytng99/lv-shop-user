@@ -10,13 +10,23 @@ a {
     text-decoration: none;
 }
 
-@keyframes move-right {
-    from {
-        opacity: 0.5;
-        transform: translateX(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 5px 0px;
+}
+.box_title {
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #57a545;
+    color: #fff;
+    margin: 15px 0px;
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
     }
 }
