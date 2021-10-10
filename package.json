@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "npm run format && next dev",
-        "build": "next build",
+        "dev": "next dev",
+        "build": "npm run format &&  next build",
         "start": "next start -p 7500",
         "lint": "next lint",
         "format": "prettier --config .prettierrc --write src/**/*.{js,json,scss,css} && prettier --config .prettierrc --write pages/**/*.{js,json,scss,css} "
