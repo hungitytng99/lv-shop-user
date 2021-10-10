@@ -1,0 +1,27 @@
+.review_card {
+    &-img {
+        width: 100%;
+        overflow: hidden;
+        img {
+            transition: 0.3s;
+            width: 100%;
+            aspect-ratio: 5/3;
+            cursor: pointer;
+        }
+    }
+    &-title {
+        font-weight: bold;
+        a {
+            color: rgb(28, 28, 28);
+            &:hover {
+                color: $text_color_hover;
+            }
+        }
+    }
+
+    &:hover {
+        .review_card-img img {
+            transform: scale(1.1);
+        }
+    }
+}
