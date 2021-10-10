@@ -1,4 +1,4 @@
-import Layout from "components/Layout/Layout"
+import Layout from "components/layout/Layout"
 import Head from "next/head"
 import { Col, Container, Row } from "react-bootstrap"
 import CardProduct from "./../src/components-share/Card/CardProduct/CardProduct"
