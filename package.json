@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "npm run format &&  next build",
+        "build": "next build",
         "start": "next start -p 7500",
         "lint": "next lint",
         "format": "prettier --config .prettierrc --write src/**/*.{js,json,scss,css} && prettier --config .prettierrc --write pages/**/*.{js,json,scss,css} "
@@ -23,6 +23,7 @@
         "react-bootstrap": "^1.6.4",
         "react-dom": "17.0.2",
         "react-multi-carousel": "^2.6.5",
+        "react-rating": "^2.0.5",
         "react-responsive-carousel": "^3.2.21",
         "sass": "^1.42.1"
     },

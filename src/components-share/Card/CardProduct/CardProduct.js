@@ -1,17 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/dist/client/link"
 import { Col } from "react-bootstrap"
 import { Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons"
+
 export default function CardProduct(props) {
-    const { data } = props
+    const { data, openReviewProductModal } = props
+
     return (
         <div className="product_card">
             <div className="product_card-img">
                 <img src={data.urlImg} />
                 <div className="product_card-img-mask">
-                    <span>
+                    <span onClick={() => openReviewProductModal()}>
                         <FontAwesomeIcon icon={faEye} />
                     </span>
                     <span>
