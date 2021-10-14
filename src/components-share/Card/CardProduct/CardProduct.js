@@ -28,12 +28,12 @@ export default function CardProduct(props) {
                 </Link>
             </p>
             <Row style={{ textAlign: "center", letterSpacing: "1px", paddingBottom: "15px" }}>
-                <Col xs={12} md={data?.oldPrice ? 6 : 12} style={{ color: "#f6470e", fontWeight: "bold" }}>
+                <Col xs={data?.oldPrice ? 6 : 12} style={{ color: "#f6470e", fontWeight: "bold", textAlign: data?.oldPrice ? "right" : "center" }}>
                     {data.curPrice}
                 </Col>
 
                 {data?.oldPrice ? (
-                    <Col xs={12} md={6} style={{ color: "#acacac", textDecoration: "line-through" }}>
+                    <Col xs={6} style={{ color: "#acacac", textDecoration: "line-through", textAlign: "left" }}>
                         {data.oldPrice}
                     </Col>
                 ) : (
