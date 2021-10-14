@@ -79,9 +79,8 @@ export default function ModalReviewProduct(props) {
                         <Col md={7} className="detal_product">
                             <h2 className="detal_product-name">Xốp dán tường</h2>
                             <p>Thương hiệu: Đang cập nhật | Tình trạng: Còn hàng</p>
-                            <div style={{ color: "#ff9800" }}>
-                                <StarRating initialRating={3.5} />
-                            </div>
+
+                            <StarRating initialRating={3.5} />
                             <div className="detal_product-cost">
                                 <h3 className="detal_product-cost-current">185.000₫</h3>
                                 <span className="detal_product-cost-old">225.000₫</span>
