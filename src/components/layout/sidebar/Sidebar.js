@@ -48,12 +48,12 @@ export default function Sidebar() {
                         <span>Liên hệ</span>
                     </li>
                 </Link>
-                <Link href="#" passHref>
+                <Link href="/dang-nhap/#dangnhap" passHref>
                     <li>
                         <span>Đăng nhập</span>
                     </li>
                 </Link>
-                <Link href="#" passHref>
+                <Link href="/dang-ky/#dangky" passHref>
                     <li>
                         <span>Đăng kí</span>
                     </li>

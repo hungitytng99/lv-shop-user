@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import { ImagesPath } from "constants/ImagesPath"
+import Link from "next/dist/client/link"
 export default function SwitchLoginLogout() {
     const [user, setUser] = useState(false)
     function clickLogin() {
@@ -20,10 +21,12 @@ export default function SwitchLoginLogout() {
                 </div>
                 <span>Tài khoản</span>
                 <div className="header-mid-account-option">
-                    <div style={{ display: user ? "none" : "block" }} onClick={clickLogin}>
-                        Đăng nhập
-                    </div>
-                    <div style={{ display: user ? "none" : "block" }}>Đăng ký</div>
+                    <Link href="/dang-nhap" passHref>
+                        <div style={{ display: user ? "none" : "block" }}>Đăng nhập</div>
+                    </Link>
+                    <Link href="/dang-ky" passHref>
+                        <div style={{ display: user ? "none" : "block" }}>Đăng ký</div>
+                    </Link>
                     <div style={{ display: user ? "block" : "none" }}>Tài khoản</div>
                     <div style={{ display: user ? "block" : "none" }} onClick={clickLogOut}>
                         Đăng xuất

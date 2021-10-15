@@ -48,6 +48,8 @@
             position: relative;
             border: 1px solid;
             padding-right: 14px;
+            border-radius: 5px;
+            overflow: hidden;
             & > input {
                 outline: none;
                 border: none;
