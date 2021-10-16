@@ -29,6 +29,15 @@ p {
     color: #fff;
     margin: 15px 0px;
 }
+
+.user-not-selected {
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none;
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1200px;
