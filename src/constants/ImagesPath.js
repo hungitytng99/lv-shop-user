@@ -9,6 +9,7 @@ import banner3 from "assets/images/banners/slider_3.jpg"
 
 export const ImagesPath = {
     LOGO: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/logo.png?1630998054887",
+    PAYMENT_LOGO: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/i_payment.png?1630998054887",
     phoneIcon: phone_svg_icon,
     emailIcon: email_svg_icon,
     listIcon: list_svg_icon,
