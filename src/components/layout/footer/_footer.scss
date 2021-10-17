@@ -38,15 +38,114 @@
             }
         }
     }
+    &-shop_information {
+        font-size: 14px;
+        h4 {
+            font-size: 16px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        & > div:first-child {
+            font-size: 14px;
+            & > div:nth-child(1) {
+                h4 {
+                    padding-left: 10px;
+                }
+                .contact-info {
+                    .contact-info-logo {
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    }
+
+                    .contact-info-item {
+                        padding-left: 10px;
+                    }
+                    .item {
+                        padding-bottom: 10px;
+                    }
+                }
+            }
+
+            ul.list-info-ul {
+                transition: 0.3s;
+                overflow: hidden;
+                height: 205px;
+                list-style-type: none;
+                padding-left: 0px;
+
+                li {
+                    padding-bottom: 20px;
+                }
+            }
+
+            & > div:nth-child(3) {
+                ul {
+                    height: 287px;
+                }
+            }
+
+            input.toggle-footer-menu {
+                display: none;
+            }
+        }
+    }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .footer {
+        h3 {
+            padding: 0;
+            text-align: center;
+        }
         .input-email > div:first-child {
             padding-right: 12px;
         }
         .input-email > div:last-child {
             padding-left: 12px;
             margin-top: 10px;
+        }
+
+        &-shop_information {
+            & > div:first-child {
+                & > div:nth-child(2) {
+                    padding-left: 20px;
+                }
+                & > div:nth-child(3) {
+                    padding-left: 20px;
+                }
+                & > div:nth-child(4) {
+                    padding-left: 20px;
+                }
+
+                .toggle-footer-menu:checked ~ ul {
+                    height: 0px;
+                }
+                .toggle-footer-menu:checked ~ label {
+                    &::before {
+                        content: "\002B";
+                    }
+                }
+                .list-info {
+                    position: relative;
+
+                    .toggle-footer-menu-button {
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        &::before {
+                            content: "\2212";
+                            font-size: 20px;
+                            position: absolute;
+                            top: -5px;
+                            left: 5px;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
         }
     }
 }
