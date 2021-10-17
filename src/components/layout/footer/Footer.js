@@ -28,7 +28,7 @@ export default function Footer() {
                     <Row>
                         <Col xs={12} sm={4}>
                             <div className="contact">
-                                <h4 classname="title-info">Liên hệ</h4>
+                                <h4 className="title-info">Liên hệ</h4>
                                 <div className="contact-info">
                                     <div className="contact-info-logo">
                                         <img src={ImagesPath.LOGO}></img>
@@ -56,7 +56,7 @@ export default function Footer() {
                         </Col>
                         <Col xs={12} sm={2}>
                             <div className="list-info">
-                                <h4 classname="title-info">Về chúng tôi</h4>
+                                <h4 className="title-info">Về chúng tôi</h4>
                                 <input id="toggle-footer-1" className="toggle-footer-menu" type="checkbox"></input>
                                 <label htmlFor="toggle-footer-1" className="toggle-footer-menu-button"></label>
                                 <ul className="list-info-ul">
@@ -80,7 +80,7 @@ export default function Footer() {
                         </Col>
                         <Col xs={12} sm={3}>
                             <div className="list-info">
-                                <h4 classname="title-info">Chính sách</h4>
+                                <h4 className="title-info">Chính sách</h4>
                                 <input id="toggle-footer-2" className="toggle-footer-menu" type="checkbox"></input>
                                 <label htmlFor="toggle-footer-2" className="toggle-footer-menu-button"></label>
                                 <ul className="list-info-ul">
@@ -110,12 +110,12 @@ export default function Footer() {
                         </Col>
                         <Col xs={12} sm={3}>
                             <div className="payment">
-                                <h4 classname="title-info">Hỗ trợ thanh toán</h4>
+                                <h4 className="title-info">Hỗ trợ thanh toán</h4>
                                 <div>
                                     <img src={ImagesPath.PAYMENT_LOGO} style={{ width: "-webkit-fill-available" }}></img>
                                 </div>
                                 <div>
-                                    <h4 classname="title-info">Tổng đài hỗ trợ</h4>
+                                    <h4 className="title-info">Tổng đài hỗ trợ</h4>
                                 </div>
                                 <div className="tel-contact" style={{ color: "#f6470e", fontSize: "30px" }}>
                                     <FontAwesomeIcon icon={faPodcast}></FontAwesomeIcon>
