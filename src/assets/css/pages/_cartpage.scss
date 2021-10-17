@@ -1,0 +1,25 @@
+.cart_page {
+    &-table {
+        border: 1px solid $text_color_hover;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    &-headtable {
+        text-align: center;
+        font-weight: bold;
+        margin: 15px 0px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $text_color_hover;
+    }
+}
+@media only screen and (max-width: 720px) {
+    .cart_page {
+        &-table {
+            border: none;
+            padding: 0px;
+        }
+        &-headtable {
+            display: none;
+        }
+    }
+}

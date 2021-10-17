@@ -35,29 +35,31 @@ export default function SwitchLoginLogout() {
             </span>
 
             <span className="header-mid-account-cart">
-                <div className="header-mid-account-icon">
-                    <Image src={ImagesPath.cartIcon}></Image>
-                    <span
-                        style={{
-                            position: "absolute",
-                            right: "-5px",
-                            top: "-8px",
-                            background: "red",
-                            borderRadius: "50%",
-                            display: "block",
-                            padding: "2px",
-                            width: "fit-content",
-                            height: "20px",
-                            lineHeight: "15px",
-                            textAlign: "center",
-                            minWidth: "20px",
-                            color: "#fff",
-                            fontSize: "small",
-                        }}
-                    >
-                        0
-                    </span>
-                </div>
+                <Link href="/cart" passHref>
+                    <div className="header-mid-account-icon">
+                        <Image src={ImagesPath.cartIcon}></Image>
+                        <span
+                            style={{
+                                position: "absolute",
+                                right: "-5px",
+                                top: "-8px",
+                                background: "red",
+                                borderRadius: "50%",
+                                display: "block",
+                                padding: "2px",
+                                width: "fit-content",
+                                height: "20px",
+                                lineHeight: "15px",
+                                textAlign: "center",
+                                minWidth: "20px",
+                                color: "#fff",
+                                fontSize: "small",
+                            }}
+                        >
+                            0
+                        </span>
+                    </div>
+                </Link>
                 <div className="header-mid-account-cart-product">
                     <div>Không có sản phẩm trong giỏ hàng</div>
                 </div>
