@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Image from "next/image"
-import { ImagesPath } from "constants/ImagesPath"
+import { ImagesPath } from "src/constants/ImagesPath"
 import Link from "next/dist/client/link"
 export default function SwitchLoginLogout() {
     const [user, setUser] = useState(false)
