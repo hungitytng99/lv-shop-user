@@ -1,12 +1,14 @@
-import ModalReviewProduct from "components-share/Modal/ModalReviewProduct/ModalReviewProduct"
-import Layout from "components/layout/Layout"
+import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/ModalReviewProduct"
+import Layout from "src/components/layout/Layout"
 import Head from "next/head"
 import { Col, Container, Row } from "react-bootstrap"
-import CardProduct from "./../src/components-share/Card/CardProduct/CardProduct"
-import CardReview from "./../src/components-share/Card/CardReview/CardReview"
-import CarouselBannerHomePage from "./../src/components-share/Carousel/CarouselBannerHomePage"
-import CarouselProduct from "./../src/components-share/Carousel/CarouselProduct"
-import { useState } from "react"
+import CardProduct from "src/components-share/Card/CardProduct/CardProduct"
+import CardReview from "src/components-share/Card/CardReview/CardReview"
+import CarouselBannerHomePage from "src/components-share/Carousel/CarouselBannerHomePage"
+import CarouselProduct from "src/components-share/Carousel/CarouselProduct"
+import { useEffect, useState } from "react"
+import { fetchUserById, login } from "./homeSlices"
+import { useDispatch, useSelector } from "react-redux"
 const reviewCard = {
     imageUrl: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
     urlPage: "#",
@@ -31,6 +33,7 @@ const productData2 = {
 export default function Home() {
     const [openModal, setOpenModal] = useState(false)
     const [dataModal, setData] = useState(1)
+
     function openModalEvent(dataPro) {
         setOpenModal(true)
         setData(dataPro)
@@ -39,13 +42,28 @@ export default function Home() {
         setOpenModal(false)
     }
 
-    console.log("HOme")
+    const dispatch = useDispatch()
+    const userState = useSelector((state) => state.homepage)
+    function handleLogin() {
+        // 3.1 REDUX ASYNC: dispatch an async event
+        // dispatch(fetchUserById({ userId: 2 }));
+        // .unwrap().then(response => {
+        //     console.log('response: ', response);
+        // });
+
+        // 3.1 REDUX STANDARD: dispatch an event
+        dispatch(login({ email: "emailLogin@gmail.com" }))
+    }
     return (
         <>
             <Head>
                 <title>Trang chủ</title>
             </Head>
             <Layout>
+                {/* For guide only */}
+                User: {userState.errors ?? userState?.user.email}
+                <button onClick={handleLogin}>Login</button>
+                {/* End */}
                 <CarouselBannerHomePage />
                 <Container className="home">
                     <Row>
