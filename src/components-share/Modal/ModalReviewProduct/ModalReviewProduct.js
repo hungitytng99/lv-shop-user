@@ -5,10 +5,8 @@ import { Container, Row } from "react-bootstrap"
 
 import "react-responsive-carousel/lib/styles/carousel.min.css" // requires a loader
 import { Carousel } from "react-responsive-carousel"
-import { ImagesPath } from "constants/ImagesPath"
-import Image from "next/dist/client/image"
 import { Col } from "react-bootstrap"
-import StarRating from "components-share/Rating/StarRating"
+import StarRating from "src/components-share/Rating/StarRating"
 
 export default function ModalReviewProduct(props) {
     const { isOpen, data, closeModalEvent } = props

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react"
-import Layout from "./../../src/components/layout/Layout"
+import Layout from "src/components/layout/Layout"
 import { Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebook, faGooglePlus } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/dist/client/link"
-import { InputState } from "../../src/constants/InputState"
-import InputError from "components-share/Error/InputError"
+import { InputState } from "src/constants/InputState"
+import InputError from "src/components-share/Error/InputError"
 
 export default function SignUp() {
     const breadcrumb = [
