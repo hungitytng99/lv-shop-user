@@ -2,8 +2,10 @@ import React from "react"
 import { ImagesPath } from "../../../constants/ImagesPath"
 import Link from "next/link"
 import { danhmuc } from "../../../constants/danhmuc"
+import { useSelector } from "react-redux"
 
 export default function Sidebar() {
+    const subMenu = useSelector((stores) => stores.menuSlice.value)
     return (
         <div className="sidebar">
             <div className="sidebar-logo">
@@ -25,10 +27,10 @@ export default function Sidebar() {
                     <span>Sản phẩm</span>
                     <input id="toggle_submenu_sidebar" type="checkbox" style={{ display: "none" }} />
                     <label htmlFor="toggle_submenu_sidebar"></label>
-                    <ul style={{ "--i": danhmuc.length }}>
-                        {danhmuc.map((item, index) => {
+                    <ul style={{ "--i": subMenu.data?.length || 0 }}>
+                        {subMenu.data?.map((item, index) => {
                             return (
-                                <Link key={"Sidebar" + index} href={item.url} passHref>
+                                <Link key={"Sidebar" + index} href={item.urlPage} passHref>
                                     <li>
                                         <span>{item.title}</span>
                                     </li>

@@ -6,6 +6,8 @@ import "nprogress/nprogress.css"
 import { Provider } from "react-redux"
 import store from "src/redux/store"
 
+// import axios from "axios"
+// axios.defaults.baseURL = `${process.env.BACKEND_BASE_URL}/api/v1`
 // Dùng để tạo loading khi chuyển route
 const TopProgressBar = dynamic(
     () => {
