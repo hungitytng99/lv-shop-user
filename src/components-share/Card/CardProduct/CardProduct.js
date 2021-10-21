@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons"
 
 export default function CardProduct(props) {
-    const { data, openReviewProductModal } = props
+    const { data, openReviewProductModal, openReviewCartModal } = props
 
     return (
         <div className="product_card">
@@ -16,7 +16,7 @@ export default function CardProduct(props) {
                     <span onClick={() => openReviewProductModal()}>
                         <FontAwesomeIcon icon={faEye} />
                     </span>
-                    <span>
+                    <span onClick={() => openReviewCartModal()}>
                         {" "}
                         <FontAwesomeIcon icon={faCartPlus} />
                     </span>

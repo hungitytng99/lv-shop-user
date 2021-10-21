@@ -2,6 +2,7 @@ import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/Mo
 import Layout from "src/components/layout/Layout"
 import Head from "next/head"
 import { Col, Container, Row } from "react-bootstrap"
+import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalReviewCart"
 import CardProduct from "src/components-share/Card/CardProduct/CardProduct"
 import CardReview from "src/components-share/Card/CardReview/CardReview"
 import CarouselBannerHomePage from "src/components-share/Carousel/CarouselBannerHomePage"
@@ -29,19 +30,34 @@ const productData2 = {
     oldPrice: "120300đ",
     status: "sale",
 }
+const datatest = {
+    quantity: 5,
+    urlImg: "https://bizweb.dktcdn.net/thumb/large/100/367/937/products/2-4d4650c2-dfd4-4467-bcb4-205c692552e1.jpg?v=1615519760717",
+    title: "Cửa lưới chống muỗi loại to to to",
+    price: 100000,
+}
 
 export default function Home() {
-    const [openModal, setOpenModal] = useState(false)
-    const [dataModal, setData] = useState(1)
-
-    function openModalEvent(dataPro) {
-        setOpenModal(true)
-        setData(dataPro)
+    const [openProductModal, setOpenProductModal] = useState(false)
+    const [dataProductModal, setDataProductModal] = useState(1)
+    function openProductModalEvent(dataPro) {
+        setOpenProductModal(true)
+        setDataProductModal(dataPro)
     }
-    function closeModalEvent() {
-        setOpenModal(false)
+    function closeProductModal() {
+        setOpenProductModal(false)
     }
 
+    console.log("HOme")
+    const [openCartModal, setOpenCartModal] = useState(false)
+    const [dataCartModal, setDataCartModal] = useState(1)
+    function openCartModalEvent(dataPro) {
+        setOpenCartModal(true)
+        setDataCartModal(dataPro)
+    }
+    function closeCartModal() {
+        setOpenCartModal(false)
+    }
     const dispatch = useDispatch()
     const userState = useSelector((state) => state.homepage)
     function handleLogin() {
@@ -86,16 +102,20 @@ export default function Home() {
                     </div>
                     <div>
                         <CarouselProduct>
-                            <CardProduct data={productData} openReviewProductModal={() => openModalEvent(2)} />
-                            <CardProduct data={productData2} openReviewProductModal={() => openModalEvent(3)} />
-                            <CardProduct data={productData} openReviewProductModal={() => openModalEvent(4)} />
-                            <CardProduct data={productData2} openReviewProductModal={() => openModalEvent(5)} />
-                            <CardProduct data={productData2} openReviewProductModal={() => openModalEvent(6)} />
-                            <CardProduct data={productData} openReviewProductModal={() => openModalEvent(7)} />
-                            <CardProduct data={productData2} openReviewProductModal={() => openModalEvent(8)} />
-                            <CardProduct data={productData} openReviewProductModal={() => openModalEvent(9)} />
-                            <CardProduct data={productData} openReviewProductModal={() => openModalEvent(10)} />
-                            <CardProduct data={productData2} openReviewProductModal={() => openModalEvent(11)} />
+                            <CardProduct
+                                data={productData}
+                                openReviewProductModal={() => openProductModalEvent(2)}
+                                openReviewCartModal={() => openCartModalEvent()}
+                            />
+                            <CardProduct data={productData2} openReviewProductModal={() => openProductModalEvent(3)} />
+                            <CardProduct data={productData} openReviewProductModal={() => openProductModalEvent(4)} />
+                            <CardProduct data={productData2} openReviewProductModal={() => openProductModalEvent(5)} />
+                            <CardProduct data={productData2} openReviewProductModal={() => openProductModalEvent(6)} />
+                            <CardProduct data={productData} openReviewProductModal={() => openProductModalEvent(7)} />
+                            <CardProduct data={productData2} openReviewProductModal={() => openProductModalEvent(8)} />
+                            <CardProduct data={productData} openReviewProductModal={() => openProductModalEvent(9)} />
+                            <CardProduct data={productData} openReviewProductModal={() => openProductModalEvent(10)} />
+                            <CardProduct data={productData2} openReviewProductModal={() => openProductModalEvent(11)} />
                         </CarouselProduct>
                     </div>
                     <div className="box_title">
@@ -110,7 +130,8 @@ export default function Home() {
                     <div className="box_title">
                         <h4>Tin tức {"&"} kiến thức</h4>
                     </div>
-                    <ModalReviewProduct isOpen={openModal} data={dataModal} closeModalEvent={closeModalEvent} />
+                    <ModalReviewProduct isOpen={openProductModal} data={dataProductModal} closeModalEvent={closeProductModal} />
+                    <ModalReviewCart data={datatest} isOpen={openCartModal} closeModalEvent={closeCartModal} />
                 </Container>
             </Layout>
         </>
