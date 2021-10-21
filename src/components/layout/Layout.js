@@ -1,9 +1,20 @@
 import Footer from "./footer/Footer"
 import Header from "./header/Header"
 import Sidebar from "./sidebar/Sidebar"
-
+import { useEffect } from "react"
+import { categoryService } from "../../services/category/index"
+import { useDispatch } from "react-redux"
+import { saveMenuData } from "src/redux/slices/menuSlice"
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
+    const dispatch = useDispatch()
+    useEffect(() => {
+        ;(async () => {
+            const category = await categoryService.listCategory()
+            console.log(category)
+            dispatch(saveMenuData(category))
+        })()
+    }, [])
     return (
         <div className="layout">
             <div className="layout__header">

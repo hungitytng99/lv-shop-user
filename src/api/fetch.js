@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ACTION_TYPE, Configs } from "app-configs/index.js"
+import { ACTION_TYPE, Configs } from "src/app-configs/index.js"
 
 let token = ""
 
@@ -11,13 +11,13 @@ export const getOptions = (options) => {
         ...options,
     }
 
-    // if (!token) {
-    //     const source = sessionStorage.getItem("token");
+    if (!token) {
+        const source = sessionStorage.getItem("token")
 
-    //     if (source) {
-    //         token = JSON.parse(source).value;
-    //     }
-    // }
+        if (source) {
+            token = JSON.parse(source).value
+        }
+    }
 
     if (token) {
         opts.headers.Authorization = "Bearer " + token

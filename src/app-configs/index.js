@@ -1,6 +1,6 @@
 // config for dev;
 export const Configs = {
-    BASE_API: "",
+    BASE_API: `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1`,
     DOMAIN: "",
 }
 
