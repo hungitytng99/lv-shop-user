@@ -28,31 +28,48 @@ export default function SignUp() {
         if (nameRef.current.value === "") {
             nameRef.current.style.border = "1px solid red"
             setNameState(InputState.EMPTY)
+            return false
         }
+        return true
     }
     function checkEmail() {
         if (emailRef.current.value === "") {
             emailRef.current.style.border = "1px solid red"
             setEmailState(InputState.EMPTY)
+            return false
         }
+        return true
     }
     function checkPhone() {
         if (phoneRef.current.value === "") {
             phoneRef.current.style.border = "1px solid red"
             setPhoneState(InputState.EMPTY)
+            return false
         }
+        return true
     }
     function checkPasswork() {
         if (passwordRef.current.value === "") {
             passwordRef.current.style.border = "1px solid red"
             setPasswordState(InputState.EMPTY)
+            return false
         }
+        return true
     }
     function dangkySubmit() {
-        checkName()
-        checkEmail()
-        checkPhone()
-        checkPasswork()
+        let checkSubmit = checkName()
+        checkSubmit = checkEmail() && checkSubmit
+        checkSubmit = checkPhone() && checkSubmit
+        checkSubmit = checkPasswork() && checkSubmit
+        if (checkSubmit) {
+            const dataPost = {
+                name: nameRef.current.value,
+                email: emailRef.current.value,
+                phone: phoneRef.current.value,
+                password: passwordRef.current.value,
+            }
+            alert("call api\n" + JSON.stringify(dataPost))
+        }
     }
     function clearState(e, clearError) {
         e.target.style.border = "1px solid #bbbbbb"
