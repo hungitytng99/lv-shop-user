@@ -3,6 +3,8 @@ import { ImagesPath } from "../../../constants/ImagesPath"
 import { Container, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPodcast } from "@fortawesome/free-solid-svg-icons"
+import Link from "next/link"
+import Image from "next/image"
 export default function Footer() {
     return (
         <div className="footer">
@@ -46,7 +48,9 @@ export default function Footer() {
                                         <div className="item">
                                             <span>
                                                 <span style={{ color: "#f6470e" }}>Hotline: </span>
-                                                <span>0363181888</span>
+                                                <Link href={{ pathname: "tel:0962020446" }} passHref>
+                                                    <span className="hotline-item">0962.020.446</span>
+                                                </Link>
                                             </span>
                                         </div>
                                         <span>Giấy ĐKKD MST: 0601199076, Sở Kế Hoạch Và Đầu Tư Tỉnh Nam Định Cấp: 07/07/2020</span>
@@ -61,19 +65,29 @@ export default function Footer() {
                                 <label htmlFor="toggle-footer-1" className="toggle-footer-menu-button"></label>
                                 <ul className="list-info-ul">
                                     <li className="item-info">
-                                        <a>Trang chủ</a>
+                                        <Link href="/">
+                                            <span>Trang chủ</span>
+                                        </Link>
                                     </li>
                                     <li className="item-info">
-                                        <a>Giới thiệu</a>
+                                        <Link href="/gioi-thieu">
+                                            <span>Giới thiệu</span>
+                                        </Link>
                                     </li>
                                     <li className="item-info">
-                                        <a>Sản phẩm</a>
+                                        <Link href="/san-pham">
+                                            <span>Sản phẩm</span>
+                                        </Link>
                                     </li>
                                     <li className="item-info">
-                                        <a>Tin tức</a>
+                                        <Link href="/tin-tuc">
+                                            <span>Tin tức</span>
+                                        </Link>
                                     </li>
                                     <li className="item-info">
-                                        <a>Liên hệ</a>
+                                        <Link href="/lien-he">
+                                            <span>Liên hệ</span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -85,25 +99,39 @@ export default function Footer() {
                                 <label htmlFor="toggle-footer-2" className="toggle-footer-menu-button"></label>
                                 <ul className="list-info-ul">
                                     <li className="item-policy">
-                                        <a>Chính sách bảo mật</a>
+                                        <Link href="/chinh-sach-bao-mat">
+                                            <span>Chính sách bảo mật</span>
+                                        </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <a>Chính sách vận chuyển</a>
+                                        <Link href="#">
+                                            <span>Chính sách vận chuyển</span>
+                                        </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <a>Chính sách bảo hành</a>
+                                        <Link href="#">
+                                            <span>Chính sách bảo hành</span>
+                                        </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <a>Chính sách đổi trả</a>
+                                        <Link href="#">
+                                            <span>Chính sách đổi trả</span>
+                                        </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <a>Chính sách thanh toán</a>
+                                        <Link href="#">
+                                            <span>Chính sách thanh toán</span>
+                                        </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <a>Quy định sử dụng</a>
+                                        <Link href="#">
+                                            <span>Quy định sử dụng</span>
+                                        </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <a>Hướng dẫn mua hàng</a>
+                                        <Link href="#">
+                                            <span>Hướng dẫn mua hàng</span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -111,7 +139,7 @@ export default function Footer() {
                         <Col xs={12} sm={3}>
                             <div className="payment">
                                 <h4 className="title-info">Hỗ trợ thanh toán</h4>
-                                <div>
+                                <div className="payment-image">
                                     <img src={ImagesPath.PAYMENT_LOGO} style={{ width: "-webkit-fill-available" }}></img>
                                 </div>
                                 <div>
