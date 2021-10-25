@@ -6,6 +6,7 @@ import { faFacebook, faGooglePlus } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/dist/client/link"
 import { InputState } from "../../src/constants/InputState"
 import InputError from "src/components-share/Error/InputError"
+import { userService } from "./../../src/services/user/index"
 
 export default function Login() {
     const breadcrumb = [
@@ -24,18 +25,32 @@ export default function Login() {
         if (emailRef.current.value === "") {
             emailRef.current.style.border = "1px solid red"
             setEmailState(InputState.EMPTY)
+            return false
         }
+        return true
     }
 
     function checkPasswork() {
         if (passwordRef.current.value === "") {
             passwordRef.current.style.border = "1px solid red"
             setPasswordState(InputState.EMPTY)
+            return false
         }
+        return true
     }
     function dangnhapSubmit() {
-        checkEmail()
-        checkPasswork()
+        let checkSumit = checkEmail()
+        checkSumit = checkPasswork() && checkSumit
+        if (checkSumit) {
+            const dataPost = {
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+            }
+            ;(async () => {
+                const userdata = await userService.login(dataPost)
+                console.log({ userdata })
+            })()
+        }
     }
     function clearState(e, clearError) {
         e.target.style.border = "1px solid #bbbbbb"
