@@ -7,6 +7,8 @@ import Link from "next/dist/client/link"
 import { InputState } from "../../src/constants/InputState"
 import InputError from "src/components-share/Error/InputError"
 import { userService } from "./../../src/services/user/index"
+import { useDispatch } from "react-redux"
+import { userLogin } from "./../../src/redux/slices/userSlice"
 
 export default function Login() {
     const breadcrumb = [
@@ -15,6 +17,7 @@ export default function Login() {
             url: "/dang-nhap",
         },
     ]
+    const dispatch = useDispatch()
     const [emailState, setEmailState] = useState(InputState.VALID)
     const [passwordState, setPasswordState] = useState(InputState.VALID)
 
@@ -46,10 +49,7 @@ export default function Login() {
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
             }
-            ;(async () => {
-                const userdata = await userService.login(dataPost)
-                console.log({ userdata })
-            })()
+            dispatch(userLogin(dataPost))
         }
     }
     function clearState(e, clearError) {
