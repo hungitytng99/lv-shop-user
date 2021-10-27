@@ -1,14 +1,22 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { ImagesPath } from "src/constants/ImagesPath"
 import Link from "next/dist/client/link"
+import { useDispatch } from "react-redux"
+import { storageKey } from "./../../../../constants/storageKeys"
+import { clearUserData } from "src/redux/slices/userSlice"
 export default function SwitchLoginLogout() {
+    const dispatch = useDispatch()
     const [user, setUser] = useState(false)
-    function clickLogin() {
-        setUser(true)
-    }
+    useEffect(() => {
+        if (localStorage.getItem(storageKey.TOKEN)) {
+            setUser(true)
+        }
+    }, [])
+
     function clickLogOut() {
         setUser(false)
+        dispatch(clearUserData())
     }
     return (
         <div className="header-mid-account">

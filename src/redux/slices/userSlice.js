@@ -17,10 +17,10 @@ export const userSlice = createSlice({
     name: "users",
     initialState: initialState,
     reducers: {
-        saveData: (state, action) => {
+        saveUserData: (state, action) => {
             state.value = action.payload
         },
-        clearData: (state, action) => {
+        clearUserData: (state, action) => {
             state.value = initialState
             localStorage.removeItem(storageKey.TOKEN)
         },
@@ -40,4 +40,4 @@ export const userSlice = createSlice({
 })
 
 export default userSlice.reducer
-export const { saveData, clearData } = userSlice.actions
+export const { saveUserData, clearUserData } = userSlice.actions

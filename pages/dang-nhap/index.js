@@ -76,6 +76,7 @@ export default function Login() {
                             ref={emailRef}
                             onFocus={(e) => clearState(e, () => setEmailState(InputState.VALID))}
                             className="input_data"
+                            name="email"
                             type="email"
                             placeholder="Email"
                         />
@@ -85,6 +86,7 @@ export default function Login() {
                             ref={passwordRef}
                             onFocus={(e) => clearState(e, () => setPasswordState(InputState.VALID))}
                             className="input_data"
+                            name="password"
                             type="password"
                             placeholder="Mật khẩu"
                         />
