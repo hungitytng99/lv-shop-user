@@ -94,6 +94,7 @@ export default function SignUp() {
                             ref={nameRef}
                             onFocus={(e) => clearState(e, () => setNameState(InputState.VALID))}
                             className="input_data"
+                            name="name"
                             type="text"
                             placeholder="Họ và tên"
                         />
@@ -102,6 +103,7 @@ export default function SignUp() {
                             ref={emailRef}
                             onFocus={(e) => clearState(e, () => setEmailState(InputState.VALID))}
                             className="input_data"
+                            name="email"
                             type="email"
                             placeholder="Email"
                         />
@@ -110,6 +112,7 @@ export default function SignUp() {
                             ref={phoneRef}
                             onFocus={(e) => clearState(e, () => setPhoneState(InputState.VALID))}
                             className="input_data"
+                            name="phone"
                             type="tel"
                             placeholder="Số điện thoại"
                         />
