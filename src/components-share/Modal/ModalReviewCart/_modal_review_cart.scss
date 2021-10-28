@@ -1,0 +1,14 @@
+.modal_review_cart {
+    .cart_total_price {
+        font-size: x-large;
+        color: $text_color_hover;
+        font-weight: 400;
+        text-align: right;
+        padding: 0px 10px;
+        & > span {
+            &::before {
+                content: "Tổng cộng: ";
+            }
+        }
+    }
+}

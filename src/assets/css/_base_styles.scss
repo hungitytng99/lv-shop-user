@@ -36,6 +36,35 @@ p {
     -webkit-touch-callout: none;
 }
 
+.btn-gray {
+    background-color: #ebebeb;
+    color: #252525;
+    padding: 12px 40px;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
+    &:hover {
+        color: #fff;
+        background-color: #252525;
+    }
+}
+.btn-red {
+    background-color: $text_color_hover;
+    display: inline-block;
+    color: #fff;
+    padding: 12px 40px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
+    &:hover {
+        color: #fff;
+        background-color: #cd3808;
+    }
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1200px;

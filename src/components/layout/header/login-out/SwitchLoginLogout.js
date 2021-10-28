@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { ImagesPath } from "src/constants/ImagesPath"
 import Link from "next/dist/client/link"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { storageKey } from "./../../../../constants/storageKeys"
 import { clearUserData } from "src/redux/slices/userSlice"
 export default function SwitchLoginLogout() {
     const dispatch = useDispatch()
     const [user, setUser] = useState(false)
+    const cartData = useSelector((stores) => stores.cartSlice.value)
     useEffect(() => {
         if (localStorage.getItem(storageKey.TOKEN)) {
             setUser(true)
@@ -64,7 +65,7 @@ export default function SwitchLoginLogout() {
                                 fontSize: "small",
                             }}
                         >
-                            0
+                            {cartData.totalProduct}
                         </span>
                     </div>
                 </Link>

@@ -5,10 +5,12 @@ import { useEffect } from "react"
 import { categoryService } from "../../services/category/index"
 import { useDispatch } from "react-redux"
 import { saveMenuData } from "src/redux/slices/menuSlice"
+import { getProductCart } from "./../../redux/slices/cartSlices"
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
     const dispatch = useDispatch()
     useEffect(() => {
+        dispatch(getProductCart())
         ;(async () => {
             const category = await categoryService.listCategory()
             console.log(category)
