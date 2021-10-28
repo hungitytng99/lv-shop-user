@@ -11,8 +11,20 @@
         padding-bottom: 15px;
         border-bottom: 1px solid $text_color_hover;
     }
+    .cart_total_price {
+        font-size: x-large;
+        color: $text_color_hover;
+        font-weight: 400;
+        text-align: right;
+        padding: 20px 10px;
+        & > span {
+            &::before {
+                content: "Tổng cộng:    ";
+            }
+        }
+    }
 }
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 769px) {
     .cart_page {
         &-table {
             border: none;
@@ -20,6 +32,19 @@
         }
         &-headtable {
             display: none;
+        }
+        .btn-red {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0px;
+        }
+        .btn-gray {
+            width: 100%;
+            text-align: center;
+            margin: 0px;
+        }
+        .cart_total_price {
+            padding: 0px;
         }
     }
 }

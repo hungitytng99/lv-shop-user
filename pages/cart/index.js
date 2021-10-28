@@ -2,6 +2,9 @@ import React from "react"
 import Layout from "src/components/layout/Layout"
 import { Col, Container, Row } from "react-bootstrap"
 import CartItem from "./../../src/components-share/Cart/cart_item/CartItem"
+import Link from "next/dist/client/link"
+import { format_d_currency } from "./../../src/share_function/index"
+import { useSelector } from "react-redux"
 
 const data1 = {
     quantity: 1,
@@ -24,6 +27,8 @@ export default function Cart() {
             url: "/cart",
         },
     ]
+    const cartData = useSelector((stores) => stores.cartSlice.value)
+    const productList = cartData.products
     return (
         <div className="cart_page">
             <Layout titlePage="Giỏ hàng" breadcrumb={breadcrumb}>
@@ -38,8 +43,23 @@ export default function Cart() {
                             <Col md={3}>Số lượng</Col>
                             <Col md={2}>Thành tiền</Col>
                         </Row>
-                        <CartItem data={data1}></CartItem>
-                        <CartItem data={data2}></CartItem>
+                        {productList?.map((item, index) => {
+                            return (
+                                <div key={"productcart" + index}>
+                                    <CartItem data={item}></CartItem>
+                                </div>
+                            )
+                        })}
+                        <hr />
+                        <div className="cart_total_price">
+                            <span>{format_d_currency(cartData.totalPrice)}</span>
+                        </div>
+                        <div style={{ textAlign: "right", margin: "10px 0px" }}>
+                            <Link href="/" passHref>
+                                <span className="btn-gray">Tiếp tục mua hàng</span>
+                            </Link>
+                            <span className="btn-red">Tiến hành thanh toán</span>
+                        </div>
                     </div>
                 </Container>
             </Layout>

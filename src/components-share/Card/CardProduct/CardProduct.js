@@ -4,10 +4,16 @@ import { Col } from "react-bootstrap"
 import { Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons"
+import { addProductToCart } from "src/redux/slices/cartSlices"
+import { useDispatch } from "react-redux"
 
 export default function CardProduct(props) {
     const { data, openReviewProductModal, openReviewCartModal } = props
-
+    const dispatch = useDispatch()
+    function addProduct() {
+        dispatch(addProductToCart())
+        openReviewCartModal()
+    }
     return (
         <div className="product_card">
             <div className="product_card-img">
@@ -16,7 +22,7 @@ export default function CardProduct(props) {
                     <span onClick={() => openReviewProductModal()}>
                         <FontAwesomeIcon icon={faEye} />
                     </span>
-                    <span onClick={() => openReviewCartModal()}>
+                    <span onClick={() => addProduct()}>
                         {" "}
                         <FontAwesomeIcon icon={faCartPlus} />
                     </span>

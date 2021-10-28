@@ -4,13 +4,7 @@ import { Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { useState, useRef } from "react"
-
-function formatCurrency(num) {
-    return num.toLocaleString("it-IT", {
-        style: "currency",
-        currency: "VND",
-    })
-}
+import { format_d_currency } from "./../../../share_function/index"
 
 export default function CartItem(props) {
     const { data } = props
@@ -49,7 +43,7 @@ export default function CartItem(props) {
                 {data.title}
             </Col>
             <Col md={2} className="cart_item-price">
-                {formatCurrency(data.price)}
+                {format_d_currency(data.price)}
             </Col>
             <Col md={3} xs={3}>
                 <div className="order_product-quantity">
@@ -70,7 +64,7 @@ export default function CartItem(props) {
                 </div>
             </Col>
             <Col md={2} className="cart_item-total_price">
-                <span>{formatCurrency(totalCost)}</span>
+                <span>{format_d_currency(totalCost)}</span>
             </Col>
         </Row>
     )
