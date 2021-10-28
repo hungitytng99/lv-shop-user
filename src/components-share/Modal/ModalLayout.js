@@ -14,7 +14,7 @@ export default function ModalLayout(props) {
                 <span onClick={closeModal} className="modal_custom-close">
                     <FontAwesomeIcon icon={faTimes} />
                 </span>
-                <div className="main_content">{children}</div>
+                <Container className="main_content">{children}</Container>
             </Container>
         </div>
     )

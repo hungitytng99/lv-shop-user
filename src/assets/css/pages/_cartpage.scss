@@ -33,18 +33,19 @@
         &-headtable {
             display: none;
         }
-        .btn-red {
-            width: 100%;
-            text-align: center;
-            margin: 10px 0px;
-        }
-        .btn-gray {
-            width: 100%;
-            text-align: center;
-            margin: 0px;
-        }
+
         .cart_total_price {
             padding: 0px;
         }
+    }
+    .btn-red {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0px;
+    }
+    .btn-gray {
+        width: 100%;
+        text-align: center;
+        margin: 0px;
     }
 }

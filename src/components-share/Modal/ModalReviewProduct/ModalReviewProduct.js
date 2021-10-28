@@ -26,7 +26,7 @@ export default function ModalReviewProduct(props) {
     }
     return (
         <ModalLayout isOpen={isOpen} closeModalEvent={() => closeModalEvent()}>
-            <Row>
+            <Row style={{ marginTop: "20px" }}>
                 <Col md={5} style={{ padding: "0px 45px 0px 45px" }}>
                     <Carousel
                         autoPlay={true}
