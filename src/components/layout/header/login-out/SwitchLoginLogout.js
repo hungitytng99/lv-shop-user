@@ -5,15 +5,38 @@ import Link from "next/dist/client/link"
 import { useDispatch, useSelector } from "react-redux"
 import { storageKey } from "./../../../../constants/storageKeys"
 import { clearUserData } from "src/redux/slices/userSlice"
+import { v4 as uuidv4 } from "uuid"
+import CartItemReview from "./../../../../components-share/Cart/cart_item_review/CartItemReview"
+import { format_d_currency } from "src/share_function"
+
 export default function SwitchLoginLogout() {
     const dispatch = useDispatch()
     const [user, setUser] = useState(false)
     const cartData = useSelector((stores) => stores.cartSlice.value)
+    const productList = cartData.products
     useEffect(() => {
         if (localStorage.getItem(storageKey.TOKEN)) {
             setUser(true)
         }
     }, [])
+
+    function renderProductList() {
+        if (cartData.totalProduct == 0) {
+            return <div>Không có sản phẩm nào trong giỏ hàng</div>
+        } else {
+            return (
+                <>
+                    {productList?.map((item) => {
+                        return (
+                            <div key={uuidv4()}>
+                                <CartItemReview data={item} />
+                            </div>
+                        )
+                    })}
+                </>
+            )
+        }
+    }
 
     function clickLogOut() {
         setUser(false)
@@ -70,7 +93,16 @@ export default function SwitchLoginLogout() {
                     </div>
                 </Link>
                 <div className="header-mid-account-cart-product">
-                    <div>Không có sản phẩm trong giỏ hàng</div>
+                    <div className="product_list">{renderProductList()}</div>
+                    <div className="cart_total_price">
+                        <span>{format_d_currency(cartData.totalPrice)}</span>
+                    </div>
+                    <div style={{ textAlign: "right", margin: "10px 0px" }}>
+                        <Link href="/cart" passHref>
+                            <span className="btn-gray">Tới giỏ hàng</span>
+                        </Link>
+                        <span className="btn-red">Tiến hành thanh toán</span>
+                    </div>
                 </div>
             </span>
         </div>
