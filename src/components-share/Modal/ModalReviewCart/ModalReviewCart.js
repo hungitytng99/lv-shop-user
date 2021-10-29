@@ -7,6 +7,7 @@ import ModalLayout from "../ModalLayout"
 import { useSelector } from "react-redux"
 import Link from "next/dist/client/link"
 import { format_d_currency } from "src/share_function"
+import { v4 as uuidv4 } from "uuid"
 
 export default function ModalReviewCart(props) {
     const { isOpen, data, closeModalEvent } = props
@@ -22,15 +23,14 @@ export default function ModalReviewCart(props) {
             <div className="modal_review_cart">
                 <div style={{ background: "#e8e6e6", padding: "20px 0px", textAlign: "center", margin: "0px -11px" }}>
                     <span style={{ color: "green" }}>
-                        {" "}
-                        <FontAwesomeIcon icon={faCheckCircle} />{" "}
+                        <FontAwesomeIcon icon={faCheckCircle} />
                     </span>
                     <span style={{ fontWeight: "bold" }}>Sản phẩm vừa được thêm giỏ hàng</span>
                 </div>
                 <div style={{ maxHeight: "300px", overflow: "auto" }}>
                     {productList?.map((item, index) => {
                         return (
-                            <div key={"productReviewcart" + index}>
+                            <div key={uuidv4()}>
                                 <CartItem data={item}></CartItem>
                             </div>
                         )
