@@ -24,7 +24,9 @@ export default function Sidebar() {
                 </Link>
 
                 <li className="multichoice">
-                    <span>Sản phẩm</span>
+                    <Link href="/san-pham/all" passHref>
+                        <span>Sản phẩm</span>
+                    </Link>
                     <input id="toggle_submenu_sidebar" type="checkbox" style={{ display: "none" }} />
                     <label htmlFor="toggle_submenu_sidebar"></label>
                     <ul style={{ "--i": subMenu.data?.length || 0 }}>

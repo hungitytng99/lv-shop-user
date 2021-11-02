@@ -113,6 +113,7 @@
             }
             &-option {
                 position: absolute;
+                border-radius: 5px;
                 top: 41px;
                 z-index: $Z_index_avatar_option;
                 padding: 5px 15px;
@@ -126,6 +127,7 @@
                     text-align: center;
                     margin: 5px 0px;
                     transition: 0.2s;
+                    border-radius: 5px;
                     &:nth-child(2n + 1) {
                         color: #fff;
                         background: $text_color_hover;
@@ -173,6 +175,7 @@
                     animation: toggle_submenu 0.2s;
                     transform-origin: 0% 0%;
                     display: none;
+                    border-radius: 5px;
                     &::before {
                         position: absolute;
                         content: "";
@@ -300,7 +303,7 @@
         height: 214px;
         display: flex;
         align-items: center;
-        background: url("https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/bg_breadcrumb.jpg?1630997812798") no-repeat center center fixed;
+        background: url("https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/bg_breadcrumb.jpg?1630997812798") no-repeat top center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;

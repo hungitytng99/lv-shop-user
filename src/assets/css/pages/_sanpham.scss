@@ -1,0 +1,36 @@
+.san_pham {
+    .danh_muc_san_pham {
+        ul li {
+            cursor: pointer;
+            &:hover {
+                color: $text_color_hover;
+            }
+        }
+    }
+    .sort_by {
+        float: right;
+        position: relative;
+        &:hover {
+            .choice {
+                display: block;
+            }
+        }
+        .choice {
+            background: #fff;
+            color: $text_color;
+            z-index: 10000;
+            position: absolute;
+            right: 0;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgb(157, 157, 157);
+            display: none;
+            & > * {
+                padding: 10px 25px 5px 20px;
+                cursor: pointer;
+                &:hover {
+                    color: $text_color_hover;
+                }
+            }
+        }
+    }
+}

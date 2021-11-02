@@ -7,8 +7,8 @@ import { format_d_currency } from "./../../../share_function/index"
 export default function CartItemReview(props) {
     const { title, urlImg, price, quantity } = props.data
     return (
-        <Row className="cart_item_review">
-            <Col xs={5}>
+        <Row className="cart_item_review ">
+            <Col xs={5} className="no_pading_col">
                 <Row className="no_pading_col">
                     <Col xs={4} style={{ textAlign: "center" }}>
                         <span className="cart_item_review-remove">
