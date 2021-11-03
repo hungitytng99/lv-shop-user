@@ -76,7 +76,7 @@ export default function Header(props) {
                         <div className={route === "/gioi-thieu" ? "active" : ""}>Giới thiệu</div>
                     </Link>
                     <div className={route.includes("/san-pham") ? "multi_choice active" : "multi_choice"}>
-                        <Link href="/san-pham" passHref>
+                        <Link href="/san-pham/all" passHref>
                             <div>
                                 <span style={{ marginRight: "10px" }}>Sản phẩm</span>
                                 <FontAwesomeIcon icon={faCaretDown} />

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons"
 import { addProductToCart } from "src/redux/slices/cartSlices"
 import { useDispatch } from "react-redux"
+import { format_d_currency } from "./../../../share_function/index"
 
 export default function CardProduct(props) {
     const { data, openReviewProductModal, openReviewCartModal } = props
@@ -33,14 +34,14 @@ export default function CardProduct(props) {
                     <a>{data.title}</a>
                 </Link>
             </p>
-            <Row style={{ textAlign: "center", letterSpacing: "1px", paddingBottom: "15px" }}>
-                <Col xs={data?.oldPrice ? 6 : 12} style={{ color: "#f6470e", fontWeight: "bold", textAlign: data?.oldPrice ? "right" : "center" }}>
-                    {data.curPrice}
+            <Row style={{ paddingBottom: "15px" }}>
+                <Col md={data.oldPrice ? 6 : 12} style={{ color: "#f6470e", fontWeight: "bold", textAlign: "center" }}>
+                    {format_d_currency(data.curPrice)}
                 </Col>
 
                 {data?.oldPrice ? (
-                    <Col xs={6} style={{ color: "#acacac", textDecoration: "line-through", textAlign: "left" }}>
-                        {data.oldPrice}
+                    <Col md={6} style={{ color: "#acacac", textDecoration: "line-through", textAlign: "center" }}>
+                        {format_d_currency(data.oldPrice)}
                     </Col>
                 ) : (
                     <></>
