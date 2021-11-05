@@ -7,13 +7,18 @@ import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons"
 import { addProductToCart } from "src/redux/slices/cartSlices"
 import { useDispatch } from "react-redux"
 import { format_d_currency } from "./../../../share_function/index"
+import { openProductModal } from "./../../../redux/slices/modalProductSlice"
+import { openCartModal } from "src/redux/slices/modalCartSlice"
 
 export default function CardProduct(props) {
-    const { data, openReviewProductModal, openReviewCartModal } = props
+    const { data, openReviewCartModal } = props
     const dispatch = useDispatch()
     function addProduct() {
         dispatch(addProductToCart())
-        openReviewCartModal()
+        dispatch(openCartModal())
+    }
+    function openReviewProductModal() {
+        dispatch(openProductModal())
     }
     return (
         <div className="product_card">

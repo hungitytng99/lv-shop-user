@@ -6,6 +6,8 @@ import { categoryService } from "../../services/category/index"
 import { useDispatch } from "react-redux"
 import { saveMenuData } from "src/redux/slices/menuSlice"
 import { getProductCart } from "./../../redux/slices/cartSlices"
+import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/ModalReviewProduct"
+import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalReviewCart"
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
     const dispatch = useDispatch()
@@ -31,6 +33,8 @@ function Layout(props) {
             <div className="layout__footer">
                 <Footer />
             </div>
+            <ModalReviewProduct />
+            <ModalReviewCart />
         </div>
     )
 }
