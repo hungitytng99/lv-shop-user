@@ -4,22 +4,23 @@ import { Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 import ModalLayout from "../ModalLayout"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Link from "next/dist/client/link"
 import { format_d_currency } from "src/share_function"
 import { v4 as uuidv4 } from "uuid"
+import { closeCartModal } from "src/redux/slices/modalCartSlice"
 
 export default function ModalReviewCart(props) {
-    const { isOpen, data, closeModalEvent } = props
-
+    const dispatch = useDispatch()
+    const { open, loading } = useSelector((stores) => stores.modalCartSlice)
     const cartData = useSelector((stores) => stores.cartSlice.value)
     const productList = cartData.products
 
-    function closeModal() {
-        closeModalEvent()
+    function closeModalEvent() {
+        dispatch(closeCartModal())
     }
     return (
-        <ModalLayout isOpen={isOpen} closeModalEvent={() => closeModalEvent()}>
+        <ModalLayout isOpen={open} closeModalEvent={() => closeModalEvent()}>
             <div className="modal_review_cart">
                 <div style={{ background: "#e8e6e6", padding: "20px 0px", textAlign: "center", margin: "0px -11px" }}>
                     <span style={{ color: "green" }}>
