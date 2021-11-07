@@ -15,6 +15,13 @@
                 display: block;
             }
         }
+        // & > span {
+        //     &::after {
+        //         content: "\003e";
+        //         font-size: 14px;
+        //         transform: rotate(deg(90));
+        //     }
+        // }
         .choice {
             background: #fff;
             color: $text_color;
@@ -35,4 +42,14 @@
             }
         }
     }
+}
+
+.rotate_90 {
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg); /*  for IE  */
+    /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+    -webkit-transform: rotate(90deg);
+    display: inline-block;
+    transform-origin: center;
+    padding-left: 3px;
 }
