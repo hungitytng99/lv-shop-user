@@ -5,3 +5,10 @@ export const format_d_currency = (number) => {
 export const format_VND_currency = (number) => {
     return number.toLocaleString("it-IT", { style: "currency", currency: "VND" })
 }
+
+export const clearParamUrl = (paramName, url) => {
+    if (url === "" || url === undefined) {
+        return "#"
+    }
+    // if ()
+}
