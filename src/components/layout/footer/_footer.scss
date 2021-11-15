@@ -106,6 +106,22 @@
             }
         }
     }
+
+    &-copyright {
+        background: #161829;
+        color: #acacac;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        & > div {
+            font-size: 14px;
+            & > div {
+                & > div {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }
+    }
 }
 @media only screen and (max-width: 767px) {
     .footer {
@@ -176,6 +192,21 @@
                 .payment-image {
                     margin-top: 20px;
                     margin-bottom: 30px;
+                }
+            }
+        }
+        &-copyright {
+            .hidden_sign {
+                display: none;
+            }
+            & > div {
+                & > div {
+                    & > div {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                    }
                 }
             }
         }

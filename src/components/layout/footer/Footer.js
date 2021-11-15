@@ -154,6 +154,23 @@ export default function Footer() {
                     </Row>
                 </div>
             </Container>
+            <div className="footer-copyright">
+                <Container>
+                    <Row>
+                        <Col>
+                            <span>
+                                Bản quyền thuộc về
+                                <span style={{ color: "#f6470e" }}> CÔNG TY THHH TIỆN ÍCH HT | 0326.330.338 </span>
+                                <span className="hidden_sign"> | </span>
+                            </span>
+                            <span>
+                                Cung cấp bởi
+                                <span style={{ color: "#f6470e" }}> Sapo</span>
+                            </span>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         </div>
     )
 }
