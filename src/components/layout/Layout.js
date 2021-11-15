@@ -8,6 +8,8 @@ import { saveMenuData } from "src/redux/slices/menuSlice"
 import { getProductCart } from "./../../redux/slices/cartSlices"
 import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/ModalReviewProduct"
 import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalReviewCart"
+import FingerprintJS from "@fingerprintjs/fingerprintjs"
+
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
     const dispatch = useDispatch()
@@ -18,7 +20,17 @@ function Layout(props) {
             console.log(category)
             dispatch(saveMenuData(category))
         })()
+
+        const fpPromise = FingerprintJS.load()
+        ;(async () => {
+            // Get the visitor identifier when you need it.
+            const fp = await fpPromise
+            const result = await fp.get()
+            const visitorId = result.visitorId
+            console.log(visitorId)
+        })()
     }, [])
+
     return (
         <div className="layout">
             <div className="layout__header">

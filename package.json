@@ -10,6 +10,7 @@
         "format": "prettier --config .prettierrc --write src/**/*.{js,json,scss,css} && prettier --config .prettierrc --write pages/**/*.{js,json,scss,css} "
     },
     "dependencies": {
+        "@fingerprintjs/fingerprintjs": "^3.3.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.36",
         "@fortawesome/free-brands-svg-icons": "^5.15.4",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",

@@ -12,7 +12,7 @@ import { sortType } from "./../../src/constants/sortType"
 
 export default function Slug(props) {
     const { query, baseUrlForPagination, baseUrlForSort, baseUrlForRange } = props
-    const { page, sort } = query
+    const { page = "1", sort = "latest" } = query
     const menu = useSelector((stores) => stores.menuSlice.value.data)
     const listProducts = [productData, productData2, productData2, productData, productData, productData, productData]
     return (
