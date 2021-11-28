@@ -4,17 +4,19 @@ import { storageKey } from "./../../constants/storageKeys"
 
 export const apiLogin = async (params) => {
     try {
-        const response = await POST("/user/sign-in", params, { isFullPath: false })
-        return {
+        const response = await POST("/auth/login", params, { isFullPath: false })
+        const result = {
+            data: response.result,
             state: REQUEST_STATE.SUCCESS,
-            data: response.data,
         }
+        console.log("apiLogin", result)
+        return result
     } catch (error) {
         console.log("error", error)
         return {
             state: REQUEST_STATE.ERROR,
             error: error,
-            data: [],
+            data: {},
         }
     }
 }
@@ -33,7 +35,7 @@ export const apiRegisterByDevice = async (params) => {
         return {
             state: REQUEST_STATE.ERROR,
             error: error,
-            data: [],
+            data: {},
         }
     }
 }
@@ -52,7 +54,7 @@ export const apiGetUserInforbyToken = async (params) => {
         return {
             state: REQUEST_STATE.ERROR,
             error: error,
-            data: [],
+            data: {},
         }
     }
 }
