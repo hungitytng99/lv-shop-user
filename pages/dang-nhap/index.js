@@ -8,7 +8,7 @@ import { InputState } from "../../src/constants/InputState"
 import InputError from "src/components-share/Error/InputError"
 import { userService } from "./../../src/services/user/index"
 import { useDispatch } from "react-redux"
-import { userLogin } from "./../../src/redux/slices/userSlice"
+import { userLogin } from "src/redux/slices/userSlice"
 
 export default function Login() {
     const breadcrumb = [
@@ -49,6 +49,7 @@ export default function Login() {
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
             }
+            // alert(JSON.stringify(dataPost))
             dispatch(userLogin(dataPost))
         }
     }
