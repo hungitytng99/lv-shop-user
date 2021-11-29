@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "src/components/layout/Layout"
-import { Container } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
+import UserInforCard from "src/components/pages/tai-khoan/UserInforCard"
 export default function index() {
     const breadcrumb = [
         {
@@ -11,7 +12,14 @@ export default function index() {
     return (
         <div>
             <Layout titlePage={breadcrumb[0].title} breadcrumb={breadcrumb}>
-                <Container>alo</Container>
+                <Container className="account">
+                    <Row>
+                        <Col lg={8}></Col>
+                        <Col lg={4}>
+                            <UserInforCard />
+                        </Col>
+                    </Row>
+                </Container>
             </Layout>
         </div>
     )

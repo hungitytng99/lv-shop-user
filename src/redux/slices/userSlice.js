@@ -77,7 +77,7 @@ export const userSlice = createSlice({
         [getVisitorInformation.rejected]: (state, action) => {
             state.loading = false
         },
-
+        // ----------------------------------------------------------------------------------------
         [userLogin.pending]: (state, action) => {
             state.loading = true
         },
@@ -89,7 +89,7 @@ export const userSlice = createSlice({
             state.value = initialState
             state.loading = false
         },
-
+        // ----------------------------------------------------------------------------------------
         [userLogout.pending]: (state, action) => {
             state.loading = true
         },

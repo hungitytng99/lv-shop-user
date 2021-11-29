@@ -1,0 +1,36 @@
+.account {
+    .avatar-wrapper {
+        position: relative;
+        height: 200px;
+        width: 200px;
+        margin: 15px auto;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 1px 1px 15px -5px black;
+        transition: all 0.3s ease;
+        &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+            .upload-button {
+                top: 0px;
+                background: rgba(255, 214, 5, 0.5);
+            }
+        }
+    }
+    .display_avata {
+        height: 100%;
+        width: 100%;
+    }
+    .profile-pic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .upload-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        transition: 0.3s;
+    }
+}
