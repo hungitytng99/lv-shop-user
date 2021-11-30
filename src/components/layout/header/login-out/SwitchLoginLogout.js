@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
-import { ImagesPath } from "src/constants/ImagesPath"
 import Link from "next/dist/client/link"
 import { useDispatch, useSelector } from "react-redux"
 import { storageKey } from "./../../../../constants/storageKeys"
@@ -8,17 +7,19 @@ import { clearUserData } from "src/redux/slices/userSlice"
 import { v4 as uuidv4 } from "uuid"
 import CartItemReview from "./../../../../components-share/Cart/cart_item_review/CartItemReview"
 import { format_d_currency } from "src/share_function"
+import { ImagesPath } from "./../../../../constants/ImagesPath"
+import { userLogout } from "./../../../../redux/slices/userSlice"
+import { REQUEST_STATE } from "src/app-configs"
 
 export default function SwitchLoginLogout() {
     const dispatch = useDispatch()
-    const [user, setUser] = useState(false)
+
     const cartData = useSelector((stores) => stores.cartSlice.value)
     const productList = cartData.products
-    useEffect(() => {
-        if (localStorage.getItem(storageKey.TOKEN)) {
-            setUser(true)
-        }
-    }, [])
+
+    const userData = useSelector((stores) => stores.userSlice.value)
+    let isUser = false
+    if (userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR) isUser = true
 
     function renderProductList() {
         if (cartData.totalProduct == 0) {
@@ -39,28 +40,29 @@ export default function SwitchLoginLogout() {
     }
 
     function clickLogOut() {
-        setUser(false)
-        dispatch(clearUserData())
+        dispatch(userLogout())
     }
     return (
         <div className="header-mid-account">
             <span>
-                <div style={{ display: user ? "none" : "inline-block" }} className="header-mid-account-icon">
+                <div style={{ display: isUser ? "none" : "inline-block" }} className="header-mid-account-icon">
                     <Image src={ImagesPath.userIcon}></Image>
                 </div>
-                <div style={{ display: user ? "inline-block" : "none" }} className="header-mid-account-icon header-mid-account-avata">
+                <div style={{ display: isUser ? "inline-block" : "none" }} className="header-mid-account-icon header-mid-account-avata">
                     <img src="https://recmiennam.com/wp-content/uploads/2020/09/anh-gai-xinh-facebook-21.jpg"></img>
                 </div>
                 <span>Tài khoản</span>
                 <div className="header-mid-account-option">
                     <Link href="/dang-nhap" passHref>
-                        <div style={{ display: user ? "none" : "block" }}>Đăng nhập</div>
+                        <div style={{ display: isUser ? "none" : "block" }}>Đăng nhập</div>
                     </Link>
                     <Link href="/dang-ky" passHref>
-                        <div style={{ display: user ? "none" : "block" }}>Đăng ký</div>
+                        <div style={{ display: isUser ? "none" : "block" }}>Đăng ký</div>
                     </Link>
-                    <div style={{ display: user ? "block" : "none" }}>Tài khoản</div>
-                    <div style={{ display: user ? "block" : "none" }} onClick={clickLogOut}>
+                    <Link href="/tai-khoan" passHref>
+                        <div style={{ display: isUser ? "block" : "none" }}>Tài khoản</div>
+                    </Link>
+                    <div style={{ display: isUser ? "block" : "none" }} onClick={clickLogOut}>
                         Đăng xuất
                     </div>
                 </div>

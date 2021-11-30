@@ -1,5 +1,7 @@
 import axios from "axios"
 import { ACTION_TYPE, Configs } from "src/app-configs/index.js"
+import Cookies from "js-cookie"
+import { storageKey } from "./../constants/storageKeys"
 
 let token = ""
 
@@ -7,13 +9,13 @@ export const getOptions = (options) => {
     const opts = {
         headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + Cookies.get(storageKey.Cookie_token),
         },
         ...options,
     }
 
     if (!token) {
         const source = sessionStorage.getItem("token")
-
         if (source) {
             token = JSON.parse(source).value
         }

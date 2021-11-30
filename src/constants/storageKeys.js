@@ -1,4 +1,4 @@
 export const storageKey = {
-    TOKEN: "lv_shop_user_token",
+    Cookie_token: "auth",
     CART: "product_cart",
 }

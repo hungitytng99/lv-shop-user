@@ -3,8 +3,8 @@ import Head from "next/head"
 import { Col, Container, Row } from "react-bootstrap"
 import CardProduct from "src/components-share/Card/CardProduct/CardProduct"
 import CardReview from "src/components-share/Card/CardReview/CardReview"
-import CarouselBannerHomePage from "src/components-share/Carousel/CarouselBannerHomePage"
 import CarouselProduct from "src/components-share/Carousel/CarouselProduct"
+import CarouselBannerHomePage from "src/components/pages/home/CarouselBannerHomePage"
 
 const reviewCard = {
     imageUrl: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",

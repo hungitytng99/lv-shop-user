@@ -8,17 +8,16 @@ import { saveMenuData } from "src/redux/slices/menuSlice"
 import { getProductCart } from "./../../redux/slices/cartSlices"
 import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/ModalReviewProduct"
 import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalReviewCart"
+import { storageKey } from "./../../constants/storageKeys"
+import { getVisitorInformation } from "./../../redux/slices/userSlice"
+
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getProductCart())
-        ;(async () => {
-            const category = await categoryService.listCategory()
-            console.log(category)
-            dispatch(saveMenuData(category))
-        })()
+        dispatch(getVisitorInformation())
     }, [])
+
     return (
         <div className="layout">
             <div className="layout__header">

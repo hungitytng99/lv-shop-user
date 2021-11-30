@@ -7,20 +7,25 @@ import { productData, productData2 } from "./../../src/constants/dataTest"
 import CardProduct from "src/components-share/Card/CardProduct/CardProduct"
 import PaginationCustom from "src/components-share/Pagination/PaginationCustom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
+import { faCaretDown, faList, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { sortType } from "./../../src/constants/sortType"
 
 export default function Slug(props) {
     const { query, baseUrlForPagination, baseUrlForSort, baseUrlForRange } = props
-    const { page, sort } = query
+    const { page = "1", sort = "latest" } = query
     const menu = useSelector((stores) => stores.menuSlice.value.data)
     const listProducts = [productData, productData2, productData2, productData, productData, productData, productData]
     return (
         <div>
             <SanPham>
                 <Row>
-                    <Col xl={3}>
+                    <Col xl={3} className="sidebar_sanpham">
+                        <input id="toggle_sidebar_danhmucsanpham" type="checkbox" />
                         <div className="danh_muc_san_pham">
+                            <label htmlFor="toggle_sidebar_danhmucsanpham">
+                                <FontAwesomeIcon icon={faList} />
+                                <FontAwesomeIcon icon={faTimes} />
+                            </label>
                             <div className="box_title">Danh mục sản phẩm</div>
                             <div>
                                 <ul>

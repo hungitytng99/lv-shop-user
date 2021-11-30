@@ -7,8 +7,11 @@ import Link from "next/dist/client/link"
 import { InputState } from "../../src/constants/InputState"
 import InputError from "src/components-share/Error/InputError"
 import { userService } from "./../../src/services/user/index"
-import { useDispatch } from "react-redux"
-import { userLogin } from "./../../src/redux/slices/userSlice"
+import { REQUEST_STATE } from "src/app-configs"
+import Cookies from "js-cookie"
+import { useRouter } from "next/router"
+import { saveUserData } from "src/redux/slices/userSlice"
+import { storageKey } from "src/constants/storageKeys"
 
 export default function Login() {
     const breadcrumb = [
@@ -17,7 +20,8 @@ export default function Login() {
             url: "/dang-nhap",
         },
     ]
-    const dispatch = useDispatch()
+    const routers = useRouter()
+
     const [emailState, setEmailState] = useState(InputState.VALID)
     const [passwordState, setPasswordState] = useState(InputState.VALID)
 
@@ -41,7 +45,7 @@ export default function Login() {
         }
         return true
     }
-    function dangnhapSubmit() {
+    async function dangnhapSubmit() {
         let checkSumit = checkEmail()
         checkSumit = checkPasswork() && checkSumit
         if (checkSumit) {
@@ -49,7 +53,18 @@ export default function Login() {
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
             }
-            dispatch(userLogin(dataPost))
+
+            const response = await userService.login(dataPost)
+
+            if (response.state === REQUEST_STATE.SUCCESS) {
+                Cookies.set(storageKey.Cookie_token, response.data.token)
+                saveUserData(response)
+                routers.back()
+            }
+            if (response.state === REQUEST_STATE.ERROR) {
+                if (response?.error?.message === InputState.WRONG_PASSWORD) setPasswordState(InputState.WRONG_PASSWORD)
+                if (response?.error?.message === InputState.USER_NOT_FOUND) setEmailState(InputState.USER_NOT_FOUND)
+            }
         }
     }
     function clearState(e, clearError) {
