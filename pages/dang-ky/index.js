@@ -6,6 +6,7 @@ import { faFacebook, faGooglePlus } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/dist/client/link"
 import { InputState } from "src/constants/InputState"
 import InputError from "src/components-share/Error/InputError"
+import Head from "next/head"
 
 export default function SignUp() {
     const breadcrumb = [
@@ -76,7 +77,10 @@ export default function SignUp() {
         clearError()
     }
     return (
-        <div>
+        <>
+            <Head>
+                <title>{breadcrumb[0].title}</title>
+            </Head>
             <Layout titlePage="Đăng ký tài khoản" breadcrumb={breadcrumb}>
                 <Container>
                     <div id="dangky" className="login_page">
@@ -136,6 +140,6 @@ export default function SignUp() {
                     </div>
                 </Container>
             </Layout>
-        </div>
+        </>
     )
 }

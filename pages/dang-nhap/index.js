@@ -12,6 +12,7 @@ import Cookies from "js-cookie"
 import { useRouter } from "next/router"
 import { saveUserData } from "src/redux/slices/userSlice"
 import { storageKey } from "src/constants/storageKeys"
+import Head from "next/head"
 
 export default function Login() {
     const breadcrumb = [
@@ -72,7 +73,10 @@ export default function Login() {
         clearError()
     }
     return (
-        <div>
+        <>
+            <Head>
+                <title>{breadcrumb[0].title}</title>
+            </Head>
             <Layout titlePage="Đăng nhập tài khoản" breadcrumb={breadcrumb}>
                 <Container>
                     <div id="dangnhap" className="login_page">
@@ -117,6 +121,6 @@ export default function Login() {
                     </div>
                 </Container>
             </Layout>
-        </div>
+        </>
     )
 }

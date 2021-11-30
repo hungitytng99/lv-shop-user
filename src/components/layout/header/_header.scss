@@ -330,15 +330,6 @@
     }
 }
 
-@keyframes toggle_submenu {
-    0% {
-        transform: perspective(600px) rotateX(-90deg);
-    }
-    100% {
-        transform: perspective(600px) rotateX(0deg);
-    }
-}
-
 @media only screen and (max-width: 980px) {
     .header {
         &-top > div {
