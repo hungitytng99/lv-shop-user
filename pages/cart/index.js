@@ -1,4 +1,5 @@
 import React from "react"
+import Head from "next/head"
 import Layout from "src/components/layout/Layout"
 import { Col, Container, Row } from "react-bootstrap"
 import CartItem from "./../../src/components-share/Cart/cart_item/CartItem"
@@ -30,40 +31,45 @@ export default function Cart() {
     const cartData = useSelector((stores) => stores.cartSlice.value)
     const productList = cartData.products
     return (
-        <div className="cart_page">
+        <>
+            <Head>
+                <title>{breadcrumb[0].title}</title>
+            </Head>
             <Layout titlePage="Giỏ hàng" breadcrumb={breadcrumb}>
-                <Container>
-                    <h3 style={{ margin: "20px 0px" }}>Giỏ hàng của bạn</h3>
-                    <div className="cart_page-table">
-                        <Row className="cart_page-headtable" style={{}}>
-                            <Col md={1}></Col>
-                            <Col md={1}></Col>
-                            <Col md={3}>Sản phẩm</Col>
-                            <Col md={2}>Giá</Col>
-                            <Col md={3}>Số lượng</Col>
-                            <Col md={2}>Thành tiền</Col>
-                        </Row>
-                        {productList?.map((item, index) => {
-                            return (
-                                <div key={"productcart" + index}>
-                                    <CartItem data={item}></CartItem>
-                                </div>
-                            )
-                        })}
-                        <hr />
-                        <div className="cart_total_price">
-                            <span>{format_d_currency(cartData.totalPrice)}</span>
+                <div className="cart_page">
+                    <Container>
+                        <h3 style={{ margin: "20px 0px" }}>Giỏ hàng của bạn</h3>
+                        <div className="cart_page-table">
+                            <Row className="cart_page-headtable" style={{}}>
+                                <Col md={1}></Col>
+                                <Col md={1}></Col>
+                                <Col md={3}>Sản phẩm</Col>
+                                <Col md={2}>Giá</Col>
+                                <Col md={3}>Số lượng</Col>
+                                <Col md={2}>Thành tiền</Col>
+                            </Row>
+                            {productList?.map((item, index) => {
+                                return (
+                                    <div key={"productcart" + index}>
+                                        <CartItem data={item}></CartItem>
+                                    </div>
+                                )
+                            })}
+                            <hr />
+                            <div className="cart_total_price">
+                                <span>{format_d_currency(cartData.totalPrice)}</span>
+                            </div>
+                            <div style={{ textAlign: "right", margin: "10px 0px" }}>
+                                <Link href="/" passHref>
+                                    <span className="btn-gray">Tiếp tục mua hàng</span>
+                                </Link>
+                                <span className="btn-red">Tiến hành thanh toán</span>
+                            </div>
                         </div>
-                        <div style={{ textAlign: "right", margin: "10px 0px" }}>
-                            <Link href="/" passHref>
-                                <span className="btn-gray">Tiếp tục mua hàng</span>
-                            </Link>
-                            <span className="btn-red">Tiến hành thanh toán</span>
-                        </div>
-                    </div>
-                </Container>
+                    </Container>
+                </div>
             </Layout>
-        </div>
+        </>
     )
 }
 export async function getServerSideProps() {

@@ -1,5 +1,6 @@
 @import "base_variables";
 @import "base_styles";
+@import "keyframes";
 
 @import "../../components/layout/layout";
 @import "../../components/layout/header/header";
@@ -16,7 +17,12 @@
 @import "../../components-share/Cart/cart_item_review/cart_item_review";
 
 @import "./pages/homepage";
+
 @import "./pages/loginpage";
+
 @import "./pages/cartpage";
+
 @import "./pages/sanpham";
+@import "../../components/pages/san-pham/chi-tiet-san-pham/product_detail";
+
 @import "./pages/taikhoan";

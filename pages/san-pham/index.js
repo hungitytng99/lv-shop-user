@@ -1,50 +1,48 @@
 import React from "react"
+import Head from "next/head"
 import Layout from "src/components/layout/Layout"
 import { Container, Row, Col } from "react-bootstrap"
-import CardReview from "src/components-share/Card/CardReview/CardReview"
-const reviewCard = {
-    imageUrl: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
-    urlPage: "#",
-    title: "Tiện ích nhà bếp",
-}
+
+import { chiTietSanPham } from "src/constants/dataTest"
+import ProductDetail from "src/components/pages/san-pham/chi-tiet-san-pham/ProductDetail"
+import TabsInfor from "src/components/pages/san-pham/tabsInfor/TabsInfor"
+
 export default function SanPham(props) {
-    const { children } = props
+    const { product_id } = props
     const breadcrumb = [
         {
-            title: "Tất cả sản phẩm",
-            url: "/san-pham",
+            title: "Sản phẩm",
+            url: "/san-pham/all",
+        },
+        {
+            title: "Găng tay đi xe máy mùa đông lót nỉ",
+            url: "/san-pham?product_id=" + product_id,
         },
     ]
     return (
-        <div>
-            <Layout titlePage="Tất cả sản phẩm" breadcrumb={breadcrumb}>
+        <>
+            <Head>
+                <title>{breadcrumb[1].title}</title>
+            </Head>
+            <Layout titlePage={breadcrumb[1].title} breadcrumb={breadcrumb}>
                 <Container className="san_pham">
-                    <Row style={{ marginTop: "30px" }}>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                    </Row>
-                    <hr />
-                    {children}
+                    <ProductDetail product={chiTietSanPham} />
+                    <TabsInfor />
                 </Container>
             </Layout>
-        </div>
+        </>
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    const { resolvedUrl, query, params } = context
+    const { product_id = "Không xác định" } = query
+    console.log({ resolvedUrl, query, params })
     try {
         return {
-            props: {},
+            props: {
+                product_id,
+            },
         }
     } catch (error) {
         return {

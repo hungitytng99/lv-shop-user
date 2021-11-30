@@ -4,6 +4,8 @@ import { Col, Container, Row } from "react-bootstrap"
 import UserInforCard from "src/components/pages/tai-khoan/UserInforCard"
 import ListAddress from "src/components/pages/tai-khoan/ListAddress"
 import HistoryOrders from "src/components/pages/tai-khoan/HistoryOrders"
+import Head from "next/head"
+
 export default function index() {
     const breadcrumb = [
         {
@@ -12,7 +14,10 @@ export default function index() {
         },
     ]
     return (
-        <div>
+        <>
+            <Head>
+                <title>{breadcrumb[0].title}</title>
+            </Head>
             <Layout titlePage={breadcrumb[0].title} breadcrumb={breadcrumb}>
                 <Container className="account">
                     <Row>
@@ -26,7 +31,7 @@ export default function index() {
                     </Row>
                 </Container>
             </Layout>
-        </div>
+        </>
     )
 }
 export async function getServerSideProps() {

@@ -1,0 +1,34 @@
+@keyframes toggle_submenu {
+    0% {
+        transform: perspective(600px) rotateX(-90deg);
+    }
+    100% {
+        transform: perspective(600px) rotateX(0deg);
+    }
+}
+
+@keyframes toggle_sidebar {
+    0% {
+        transform: translate(-100%);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes zoomOut {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

@@ -27,8 +27,6 @@
                     font-size: 70px;
                     display: none;
                 }
-                .user_img {
-                }
             }
             .upload_button {
                 transition: inherit;
@@ -43,7 +41,7 @@
                 transform: scale(1.05);
                 .upload_button {
                     opacity: 1;
-                    background: rgba(246, 71, 14, 0.75);
+                    background: rgba(87, 165, 69, 0.5);
                 }
             }
         }
@@ -56,6 +54,40 @@
         }
     }
     .add_address {
+        position: relative;
+        cursor: pointer;
+        &:hover {
+            svg {
+                transform: scale(1.15);
+            }
+        }
+        &::before {
+            position: absolute;
+            transition: 0.3s;
+            content: "Thêm địa chỉ";
+            display: block;
+            white-space: nowrap;
+            width: max-content;
+            color: $text_color;
+            font-size: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            right: 30px;
+            top: 0px;
+            padding: 5px;
+            background: #fff;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            top: 9px;
+            right: 25px;
+            display: block;
+            width: 10px;
+            height: 10px;
+            transform: rotate(45deg);
+            background-color: rgb(255, 255, 255);
+        }
     }
     .list_address {
         overflow: auto;

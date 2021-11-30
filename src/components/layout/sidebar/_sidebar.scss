@@ -75,11 +75,3 @@
         background: #555;
     }
 }
-@keyframes toggle_sidebar {
-    0% {
-        transform: translate(-100%);
-    }
-    100% {
-        transform: translate(0);
-    }
-}
