@@ -9,6 +9,7 @@ import CartItemReview from "./../../../../components-share/Cart/cart_item_review
 import { format_d_currency } from "src/share_function"
 import { ImagesPath } from "./../../../../constants/ImagesPath"
 import { userLogout } from "./../../../../redux/slices/userSlice"
+import { REQUEST_STATE } from "src/app-configs"
 
 export default function SwitchLoginLogout() {
     const dispatch = useDispatch()
@@ -18,7 +19,7 @@ export default function SwitchLoginLogout() {
 
     const userData = useSelector((stores) => stores.userSlice.value)
     let isUser = false
-    if (userData.data?.deviceId == null) isUser = true
+    if (userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR) isUser = true
 
     function renderProductList() {
         if (cartData.totalProduct == 0) {
@@ -58,7 +59,9 @@ export default function SwitchLoginLogout() {
                     <Link href="/dang-ky" passHref>
                         <div style={{ display: isUser ? "none" : "block" }}>Đăng ký</div>
                     </Link>
-                    <div style={{ display: isUser ? "block" : "none" }}>Tài khoản</div>
+                    <Link href="/tai-khoan" passHref>
+                        <div style={{ display: isUser ? "block" : "none" }}>Tài khoản</div>
+                    </Link>
                     <div style={{ display: isUser ? "block" : "none" }} onClick={clickLogOut}>
                         Đăng xuất
                     </div>

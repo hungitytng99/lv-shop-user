@@ -20,23 +20,23 @@ export const getVisitorInformation = createAsyncThunk("users/getVisitorInfor", a
         return response
     } else {
         const fpPromise = FingerprintJS.load()
-        ;(async () => {
-            // Get the visitor identifier when you need it.
-            const fp = await fpPromise
-            const result = await fp.get()
-            const visitorId = result.visitorId
-            const response = await userService.registerByDevice({ deviceId: visitorId })
+        const fp = await fpPromise
+        const result = await fp.get()
+        const visitorId = result.visitorId
 
-            if (response.state === REQUEST_STATE.SUCCESS) Cookies.set(storageKey.Cookie_token, response.data.token)
+        const response = await userService.registerByDevice({ deviceId: visitorId })
 
-            return response
-        })()
+        if (response.state === REQUEST_STATE.SUCCESS) Cookies.set(storageKey.Cookie_token, response.data.token)
+
+        return response
     }
 })
 
 export const userLogin = createAsyncThunk("users/login", async (params, thunkAPI) => {
     const response = await userService.login(params)
-    if (response.state === REQUEST_STATE.SUCCESS) Cookies.set(storageKey.Cookie_token, response.data.token)
+    if (response.state === REQUEST_STATE.SUCCESS) {
+        Cookies.set(storageKey.Cookie_token, response.data.token)
+    }
     return response
 })
 
@@ -77,7 +77,7 @@ export const userSlice = createSlice({
         [getVisitorInformation.rejected]: (state, action) => {
             state.loading = false
         },
-
+        // ----------------------------------------------------------------------------------------
         [userLogin.pending]: (state, action) => {
             state.loading = true
         },
@@ -89,7 +89,7 @@ export const userSlice = createSlice({
             state.value = initialState
             state.loading = false
         },
-
+        // ----------------------------------------------------------------------------------------
         [userLogout.pending]: (state, action) => {
             state.loading = true
         },
