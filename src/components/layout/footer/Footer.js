@@ -11,10 +11,10 @@ export default function Footer() {
             <Container>
                 <div className="footer-get_email box_title">
                     <Row>
-                        <Col xs={12} md={6}>
+                        <Col xs={12} md={12} lg={6}>
                             <h3>Đăng ký nhận tin khuyến mãi</h3>
                         </Col>
-                        <Col xs={12} md={6}>
+                        <Col xs={12} md={12} lg={6}>
                             <Row className="input-email">
                                 <Col xd={12} md={9}>
                                     <input placeholder="Nhập email ở đây..."></input>
@@ -104,32 +104,32 @@ export default function Footer() {
                                         </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <Link href="#">
+                                        <Link href="/chinh-sach-van-chuyen">
                                             <span>Chính sách vận chuyển</span>
                                         </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <Link href="#">
+                                        <Link href="/chinh-sach-bao-hanh">
                                             <span>Chính sách bảo hành</span>
                                         </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <Link href="#">
+                                        <Link href="/chinh-sach-doi-tra">
                                             <span>Chính sách đổi trả</span>
                                         </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <Link href="#">
+                                        <Link href="/chinh-sach-thanh-toan">
                                             <span>Chính sách thanh toán</span>
                                         </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <Link href="#">
+                                        <Link href="/quy-dinh-su-dung">
                                             <span>Quy định sử dụng</span>
                                         </Link>
                                     </li>
                                     <li className="item-policy">
-                                        <Link href="#">
+                                        <Link href="/huong-dan-mua-hang">
                                             <span>Hướng dẫn mua hàng</span>
                                         </Link>
                                     </li>
@@ -145,7 +145,7 @@ export default function Footer() {
                                 <div>
                                     <h4 className="title-info">Tổng đài hỗ trợ</h4>
                                 </div>
-                                <div className="tel-contact" style={{ color: "#f6470e", fontSize: "30px" }}>
+                                <div className="tel-contact">
                                     <FontAwesomeIcon icon={faPodcast}></FontAwesomeIcon>
                                     <span style={{ marginLeft: "20px" }}>0363.181.888</span>
                                 </div>

@@ -19,16 +19,19 @@
         input {
             padding: 10px 10px 10px 20px;
             width: 100%;
-            height: 100%;
+            // height: 100%;
             color: #333;
             outline: none;
+            border-radius: 5px;
+            border: 0px;
         }
 
         button {
             outline: none;
             padding: 10px;
             width: 100%;
-            height: 100%;
+            // height: 100%;
+            border-radius: 5px;
             background-color: $text_color_hover;
             color: white;
             border: 1px solid $text_color_hover;
@@ -104,6 +107,11 @@
                     color: $text_color_hover;
                 }
             }
+            .tel-contact {
+                margin: 10px 0 30px 0;
+                color: #f6470e;
+                font-size: 30px;
+            }
         }
     }
 
@@ -123,10 +131,25 @@
         }
     }
 }
+@media only screen and (max-width: 992px) {
+    .footer {
+        h3 {
+            // padding: 0;
+            text-align: center;
+        }
+        &-shop_information {
+            & > div:first-child {
+                .tel-contact {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
 @media only screen and (max-width: 767px) {
     .footer {
         h3 {
-            padding: 0;
+            padding: 5px 0 5px 0;
             text-align: center;
         }
         .input-email > div:first-child {
@@ -192,6 +215,9 @@
                 .payment-image {
                     margin-top: 20px;
                     margin-bottom: 30px;
+                }
+                .tel-contact {
+                    font-size: 24px;
                 }
             }
         }
