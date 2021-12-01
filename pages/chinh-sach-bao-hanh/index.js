@@ -16,7 +16,7 @@ export default function index() {
                     {/* code here */}
                     <Row style={{ marginTop: "30px", marginBottom: "30px", paddingLeft: "10px", paddingRight: "10px" }}>
                         <Col xs={12}>
-                            <div className="Delivery">
+                            <div className="insurance">
                                 <div className="page-title">
                                     <Link href="/chinh-sach-bao-hanh">
                                         <h1>Chính sách bảo hành</h1>
@@ -47,40 +47,34 @@ export default function index() {
                                     <p>
                                         Sản phẩm sẽ được bảo hành nếu thỏa mãn đầy đủ các điều kiện sau:
                                         <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm còn trong hạn bảo hành tại thời điểm Khách hàng yêu cầu, áp dụng như mục 1.1
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Hư hỏng do chất lượng linh kiện hay lỗi kỹ thuật trong quá trình sản xuất.
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm phải còn nguyên dạng, nhãn sản phẩm, số sê ri (S/N)
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm không thuộc trường hợp bị từ chối bảo hành quy định tại điều 1.3
+                                        <ul>
+                                            <li>Sản phẩm còn trong hạn bảo hành tại thời điểm Khách hàng yêu cầu, áp dụng như mục 1.1</li>
+                                            <li>Hư hỏng do chất lượng linh kiện hay lỗi kỹ thuật trong quá trình sản xuất.</li>
+                                            <li>Sản phẩm phải còn nguyên dạng, nhãn sản phẩm, số sê ri (S/N)</li>
+                                            <li>Sản phẩm không thuộc trường hợp bị từ chối bảo hành quy định tại điều 1.3</li>
+                                        </ul>
                                     </p>
                                     <p>
                                         <b>1.3. Trường hợp từ chối bảo hành</b>
                                     </p>
                                     <p>
                                         Sản phẩm thuộc một trong những trường hợp sau sẽ bị mất quyền bảo hành:
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm bị hư hại do thiên tai, hỏa hoạn, lụt lội, sét đánh…
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm bị đặt tại nơi bụi bẩn, ẩm ướt;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm bị biến dạng do tác động nhiệt, tác động lực bên ngoài;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm có vết mốc, rỉ sét hoặc bị ăn mòn, oxy hóa bởi hóa chất;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm bị hư hỏng do dùng sai điện thế và dòng điện chỉ định;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm lắp đặt, bảo trì, sử dụng không đúng theo hướng dẫn của Elmich nên gây ra hư hỏng;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm đã từng bị thay đổi, sửa chữa nhưng không được thực hiện bởi các Trung tâm Bảo
-                                        hành của <b>TIỆN ÍCH XANH</b> :<br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Không bảo hành các phụ kiện kèm theo: dây cáp, dây nối, gioăng …;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Không bảo hành các chi tiết hao mòn: lưỡi dao, nhông truyền, bóng đèn, chi tiết thủy tinh,
-                                        khớp nối…;
-                                        <br></br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;- Sản phẩm hết hạn bảo hành.
+                                        <ul>
+                                            <li> Sản phẩm bị hư hại do thiên tai, hỏa hoạn, lụt lội, sét đánh…</li>
+                                            <li> Sản phẩm bị đặt tại nơi bụi bẩn, ẩm ướt;</li>
+                                            <li> Sản phẩm bị biến dạng do tác động nhiệt, tác động lực bên ngoài;</li>
+                                            <li> Sản phẩm có vết mốc, rỉ sét hoặc bị ăn mòn, oxy hóa bởi hóa chất;</li>
+                                            <li> Sản phẩm bị hư hỏng do dùng sai điện thế và dòng điện chỉ định;</li>
+                                            <li> Sản phẩm lắp đặt, bảo trì, sử dụng không đúng theo hướng dẫn của Elmich nên gây ra hư hỏng;</li>
+                                            <li>
+                                                {" "}
+                                                Sản phẩm đã từng bị thay đổi, sửa chữa nhưng không được thực hiện bởi các Trung tâm Bảo hành của{" "}
+                                                <b>TIỆN ÍCH XANH</b> :
+                                            </li>
+                                            <li> Không bảo hành các phụ kiện kèm theo: dây cáp, dây nối, gioăng …;</li>
+                                            <li> Không bảo hành các chi tiết hao mòn: lưỡi dao, nhông truyền, bóng đèn, chi tiết thủy tinh, khớp nối…;</li>
+                                            <li> Sản phẩm hết hạn bảo hành.</li>
+                                        </ul>
                                     </p>
                                     <p>
                                         <b>

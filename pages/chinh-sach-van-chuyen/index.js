@@ -12,11 +12,11 @@ export default function index() {
     return (
         <div>
             <Layout titlePage="Chính sách vận chuyển" breadcrumb={breadcrumb}>
-                <Container>
+                <Container className="chinh_sach_van_chuyen">
                     {/* code here */}
                     <Row>
                         <Col xs={12}>
-                            <div className="Delivery">
+                            <div className="delivery">
                                 <div className="page-title">
                                     <Link href="/chinh-sach-van-chuyen">
                                         <h1>Chính sách vận chuyển</h1>
