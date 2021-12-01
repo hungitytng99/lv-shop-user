@@ -1,0 +1,62 @@
+.lien_he {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .contact-info {
+        .address {
+            margin-bottom: 20px;
+        }
+        .phone {
+            margin-bottom: 20px;
+            .phone-number {
+                cursor: pointer;
+                &:hover {
+                    color: $text_color_hover;
+                }
+            }
+        }
+        .email {
+            margin-bottom: 20px;
+        }
+        .icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 30px;
+            color: #f6470e;
+            background: white;
+            // padding-bottom: 10px;
+            border: 1px solid red;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        // .content {
+        //     padding-left: 10px;
+        // }
+        ul {
+            list-style: none;
+        }
+    }
+    .get-customer-info {
+        margin-left: 30px;
+        margin-top: 30px;
+        input {
+            margin-bottom: 10px;
+            width: 100%;
+            // box-shadow: 0px 0px 1px rgb(255, 252, 252);
+            // border-color: whitesmoke;
+            padding: 15px 15px 15px 15px;
+        }
+        // input.content {
+        //     height: 100px;
+        //     padding-top: 10px;
+        // }
+        button {
+            margin-top: 10px;
+            padding: 20px 30px 20px 30px;
+            background-color: #f6470e;
+            color: white;
+            border: none;
+        }
+    }
+}
