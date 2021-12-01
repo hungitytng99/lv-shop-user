@@ -2,10 +2,28 @@ import React from "react"
 import Head from "next/head"
 import Layout from "src/components/layout/Layout"
 import { Container, Row, Col } from "react-bootstrap"
+import CardProduct from "src/components-share/Card/CardProduct/CardProduct"
+import CarouselProduct from "src/components-share/Carousel/CarouselProduct"
 
 import { chiTietSanPham } from "src/constants/dataTest"
 import ProductDetail from "src/components/pages/san-pham/chi-tiet-san-pham/ProductDetail"
 import TabsInfor from "src/components/pages/san-pham/tabsInfor/TabsInfor"
+
+const productData = {
+    urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
+    urlProduct: "/san-pham?product_id=jfdhjsdkfhhfkfhkjsdhfjkdhfjhf",
+    title: "Tiện ích nhà bếp",
+    curPrice: 120000,
+    status: "new",
+}
+const productData2 = {
+    urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
+    urlProduct: "/san-pham?product_id=cainaymoilam",
+    title: "Tiện ích nhà bếp",
+    curPrice: 120000,
+    oldPrice: 120300,
+    status: "sale",
+}
 
 export default function SanPham(props) {
     const { product_id } = props
@@ -28,6 +46,25 @@ export default function SanPham(props) {
                 <Container className="san_pham">
                     <ProductDetail product={chiTietSanPham} />
                     <TabsInfor />
+                    <div>
+                        <div className="box_title">
+                            <h4 style={{ textAlign: "center" }}>Sản phẩm liên quan</h4>
+                        </div>
+                        <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }}>
+                            <CarouselProduct>
+                                <CardProduct data={productData} />
+                                <CardProduct data={productData2} />
+                                <CardProduct data={productData} />
+                                <CardProduct data={productData2} />
+                                <CardProduct data={productData2} />
+                                <CardProduct data={productData} />
+                                <CardProduct data={productData2} />
+                                <CardProduct data={productData} />
+                                <CardProduct data={productData} />
+                                <CardProduct data={productData2} />
+                            </CarouselProduct>
+                        </div>
+                    </div>
                 </Container>
             </Layout>
         </>

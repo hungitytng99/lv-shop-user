@@ -21,7 +21,7 @@ export default function CardProduct(props) {
         dispatch(openProductModal())
     }
     return (
-        <div className="product_card">
+        <div className="product_card user-not-selected">
             <div className="product_card-img">
                 <img src={data.urlImg} />
                 <div className="product_card-img-mask">

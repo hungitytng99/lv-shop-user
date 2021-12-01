@@ -23,7 +23,7 @@ export default function SwitchLoginLogout() {
 
     function renderProductList() {
         if (cartData.totalProduct == 0) {
-            return <div>Không có sản phẩm nào trong giỏ hàng</div>
+            return <div style={{ padding: "10px" }}>Không có sản phẩm nào trong giỏ hàng</div>
         } else {
             return (
                 <>

@@ -63,7 +63,9 @@ export default function Cart() {
                                 <Link href="/" passHref>
                                     <span className="btn-gray">Tiếp tục mua hàng</span>
                                 </Link>
-                                <span className="btn-red">Tiến hành thanh toán</span>
+                                <Link href="/checkout?order=23445845345830598" passHref>
+                                    <span className="btn-red">Tiến hành thanh toán</span>
+                                </Link>
                             </div>
                         </div>
                     </Container>

@@ -2,7 +2,7 @@ import React from "react"
 import { Tabs, Tab } from "react-bootstrap"
 export default function TabsInfor() {
     return (
-        <div>
+        <div style={{ margin: "20px 0px 40px 0px" }}>
             <Tabs defaultActiveKey="mota" id="uncontrolled-tab-example" className="mb-3">
                 <Tab eventKey="mota" title="Mô tả">
                     <pre>

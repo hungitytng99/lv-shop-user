@@ -61,7 +61,7 @@ export default function Home() {
                         <h4>Hot Sale Mỗi Ngày</h4>
                         <p>Sản phẩm với giá cực kỳ hấp dẫn</p>
                     </div>
-                    <div>
+                    <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }}>
                         <CarouselProduct>
                             <CardProduct data={productData} />
                             <CardProduct data={productData2} />
