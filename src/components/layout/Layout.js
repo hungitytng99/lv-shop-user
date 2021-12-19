@@ -10,12 +10,16 @@ import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/Mo
 import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalReviewCart"
 import { storageKey } from "./../../constants/storageKeys"
 import { getVisitorInformation } from "./../../redux/slices/userSlice"
+import { getMenu } from "./../../redux/slices/menuSlice"
 
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getVisitorInformation())
+        ;(async () => {
+            await dispatch(getVisitorInformation())
+            dispatch(getMenu())
+        })()
     }, [])
 
     return (

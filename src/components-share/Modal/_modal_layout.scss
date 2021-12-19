@@ -6,6 +6,8 @@
     height: 100vh;
     z-index: $Z_index_sidebar;
     padding-top: 35px;
+    justify-content: center;
+    align-items: center;
     &-background {
         position: absolute;
         top: 0;
@@ -18,7 +20,7 @@
     &-content {
         min-width: 250px;
         min-height: 150px;
-        max-height: 570px;
+        max-height: 595px;
         background-color: #fff;
         position: relative;
         animation: zoomOut 0.3s;

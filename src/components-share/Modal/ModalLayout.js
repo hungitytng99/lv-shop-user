@@ -8,7 +8,7 @@ export default function ModalLayout(props) {
         closeModalEvent()
     }
     return (
-        <div className="modal_custom" style={{ display: isOpen ? "block" : "none" }}>
+        <div className="modal_custom" style={{ display: isOpen ? "flex" : "none" }}>
             <div className="modal_custom-background" onClick={closeModal}></div>
             <Container className="modal_custom-content">
                 <span onClick={closeModal} className="modal_custom-close">

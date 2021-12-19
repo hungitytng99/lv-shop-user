@@ -19,22 +19,33 @@ const reviewCard = {
 }
 
 export default function Slug(props) {
-    const breadcrumb = [
+    let breadcrumb = [
         {
             title: "Tất cả sản phẩm",
             url: "/san-pham",
         },
     ]
-    const { query, baseUrlForPagination, baseUrlForSort, baseUrlForRange } = props
+    const { collectionId, query, baseUrlForPagination, baseUrlForSort, baseUrlForRange } = props
     const { page = "1", sort = "latest" } = query
     const menu = useSelector((stores) => stores.menuSlice.value.data)
+    const lengthMenu = menu?.length || 0
+    for (let i = 0; i < lengthMenu; i++) {
+        if (menu[i].cateId === collectionId) {
+            breadcrumb.push({
+                title: menu[i].title,
+                url: menu[i].urlPage,
+            })
+            break
+        }
+    }
+
     const listProducts = [productData, productData2, productData2, productData, productData, productData, productData]
     return (
         <>
             <Head>
-                <title>{breadcrumb[0].title}</title>
+                <title>{breadcrumb[1]?.title || breadcrumb[0].title}</title>
             </Head>
-            <Layout titlePage={breadcrumb[0].title} breadcrumb={breadcrumb}>
+            <Layout titlePage={breadcrumb[1]?.title || breadcrumb[0].title} breadcrumb={breadcrumb}>
                 <Container className="san_pham">
                     <Row style={{ marginTop: "30px" }}>
                         <Col lg={3} xs={6}>
@@ -78,7 +89,7 @@ export default function Slug(props) {
                         </Col>
                         <Col xl={9}>
                             <div className="box_title">
-                                <span>Tất cả sản phẩm</span>
+                                <span>{breadcrumb[1]?.title || breadcrumb[0].title}</span>
                                 <span className="sort_by">
                                     <span>
                                         Sắp xếp theo: {sortType[sort]}{" "}
@@ -140,7 +151,9 @@ export async function getServerSideProps(context) {
         let baseUrlForSort = baseUrl + "?page=1" + (query.range === undefined ? "" : "&range=" + query.range)
         let baseUrlForRange = baseUrl + "?page=1&sort=" + (query.sort === undefined ? "latest" : query.sort)
 
+        const collectionId = Number(query.slug.split("-")[0])
         console.log({
+            collectionId,
             query,
             baseUrlForPagination,
             baseUrlForSort,
@@ -148,6 +161,7 @@ export async function getServerSideProps(context) {
         })
         return {
             props: {
+                collectionId,
                 query,
                 baseUrlForPagination,
                 baseUrlForSort,

@@ -103,7 +103,9 @@ export default function SwitchLoginLogout() {
                         <Link href="/cart" passHref>
                             <span className="btn-gray">Tới giỏ hàng</span>
                         </Link>
-                        <span className="btn-red">Tiến hành thanh toán</span>
+                        <Link href="/checkout" passHref>
+                            <span className="btn-red">Tiến hành thanh toán</span>
+                        </Link>
                     </div>
                 </div>
             </span>
