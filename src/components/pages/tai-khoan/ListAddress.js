@@ -1,9 +1,9 @@
-import { faPencilAlt, faPlusCircle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { Row, Col } from "react-bootstrap"
-import { faEye } from "@fortawesome/free-solid-svg-icons"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faPencilAlt, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const fakedata = [
     {
@@ -21,7 +21,7 @@ const fakedata = [
         address: "Số 2 ngõ 165, giáp bát, hoàng mai, hà nội",
         phone: "0941158376",
     },
-]
+];
 
 export default function ListAddress() {
     return (
@@ -58,10 +58,10 @@ export default function ListAddress() {
                                     </span>
                                 </Col>
                             </Row>
-                        )
+                        );
                     })}
                 </div>
             </div>
         </>
-    )
+    );
 }

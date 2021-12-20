@@ -1,14 +1,14 @@
-import React from "react"
-import Layout from "src/components/layout/Layout"
-import { Col, Container, Row } from "react-bootstrap"
-import Link from "next/link"
+import React from "react";
+import Layout from "src/components/layout/Layout";
+import { Col, Container, Row } from "react-bootstrap";
+import Link from "next/link";
 export default function index() {
     const breadcrumb = [
         {
             title: "Chính sách bảo hành",
             url: "/chinh-sach-bao-hanh",
         },
-    ]
+    ];
     return (
         <div>
             <Layout titlePage="Chính sách bảo hành" breadcrumb={breadcrumb}>
@@ -26,8 +26,8 @@ export default function index() {
                                     <p style={{ color: "#e74c3c" }}>
                                         <b>+ Cam kết hàng chuẩn như mô tả, hình ảnh, video .</b>
                                         <br></br>
-                                        Tất cả sản phẩm mang thương hiệu <b>TIỆN ÍCH XANH</b> : được phân phối chính thức tại thị trường Việt Nam sẽ được bảo
-                                        hành theo những quy định sau:
+                                        Tất cả sản phẩm mang thương hiệu <b>TIỆN ÍCH XANH</b> : được phân phối chính thức tại thị trường Việt Nam sẽ được bảo hành theo những quy
+                                        định sau:
                                     </p>
                                     <p>
                                         <b>1. Phạm vi bảo hành</b>
@@ -36,9 +36,9 @@ export default function index() {
                                         <b>1.1. Sản phẩm và thời hạn bảo hành</b>
                                     </p>
                                     <p>
-                                        Thời hạn bảo hành sản phẩm được xác nhận dựa vào phiếu bảo hành đi kèm theo từng sản phẩm của <b>TIỆN ÍCH XANH</b> : và
-                                        hóa đơn mua hàng nhưng không được vượt quá thời hạn bảo hành kể từ ngày sản xuất. Trong trường hợp Khách hàng mất phiếu
-                                        bảo hành và hóa đơn mua hàng, thời hạn bảo hành kể từ ngày sản xuất sẽ được áp dụng.
+                                        Thời hạn bảo hành sản phẩm được xác nhận dựa vào phiếu bảo hành đi kèm theo từng sản phẩm của <b>TIỆN ÍCH XANH</b> : và hóa đơn mua hàng
+                                        nhưng không được vượt quá thời hạn bảo hành kể từ ngày sản xuất. Trong trường hợp Khách hàng mất phiếu bảo hành và hóa đơn mua hàng, thời
+                                        hạn bảo hành kể từ ngày sản xuất sẽ được áp dụng.
                                     </p>
                                     <p>Thời gian bảo hành: Xem thông tin chi tiết sản phẩm trên website hoặc phiếu bảo hành đi kèm sản phẩm.</p>
                                     <p>
@@ -59,6 +59,7 @@ export default function index() {
                                     </p>
                                     <p>
                                         Sản phẩm thuộc một trong những trường hợp sau sẽ bị mất quyền bảo hành:
+
                                         <ul>
                                             <li> Sản phẩm bị hư hại do thiên tai, hỏa hoạn, lụt lội, sét đánh…</li>
                                             <li> Sản phẩm bị đặt tại nơi bụi bẩn, ẩm ướt;</li>
@@ -75,6 +76,7 @@ export default function index() {
                                             <li> Không bảo hành các chi tiết hao mòn: lưỡi dao, nhông truyền, bóng đèn, chi tiết thủy tinh, khớp nối…;</li>
                                             <li> Sản phẩm hết hạn bảo hành.</li>
                                         </ul>
+
                                     </p>
                                     <p>
                                         <b>
@@ -90,34 +92,31 @@ export default function index() {
                                         Tổng đài Chăm sóc Khách hàng trên toàn quốc : <b>0326.330.338</b>
                                     </p>
                                     <p>
-                                        Khách hàng có thể liên lạc đến số điện thoại này để được giải đáp về: thông tin sản phẩm, thông tin linh kiện, thông tin
-                                        khuyến mại, thông tin dịch vụ, điều kiện, thủ tục, địa điểm bảo hành được cập nhật mới nhất.
+                                        Khách hàng có thể liên lạc đến số điện thoại này để được giải đáp về: thông tin sản phẩm, thông tin linh kiện, thông tin khuyến mại, thông
+                                        tin dịch vụ, điều kiện, thủ tục, địa điểm bảo hành được cập nhật mới nhất.
                                     </p>
                                     <p>
                                         <b>2.2. Các dịch vụ bảo hành cơ bản</b>
                                     </p>
                                     <p>&nbsp; &nbsp; &nbsp; &nbsp;- Dịch vụ sửa chữa bảo hành</p>
                                     <p>
-                                        Khi sản phẩm phát sinh hư hỏng, Khách hàng có thể mang sản phẩm đến trực tiếp Trung Tâm Bảo hành <b>TIỆN ÍCH XANH</b> để
-                                        yêu cầu dịch vụ bảo hành. Đồng thời Khách hàng sẽ được trung tâm yêu cầu cung cấp thông tin, bao gồm:
+                                        Khi sản phẩm phát sinh hư hỏng, Khách hàng có thể mang sản phẩm đến trực tiếp Trung Tâm Bảo hành <b>TIỆN ÍCH XANH</b> để yêu cầu dịch vụ bảo
+                                        hành. Đồng thời Khách hàng sẽ được trung tâm yêu cầu cung cấp thông tin, bao gồm:
                                         <br></br>
                                         &nbsp;&nbsp;√ Thông tin sản phẩm: Kiểu máy, số máy, ngày mua sản phẩm...
                                         <br></br>
-                                        &nbsp;&nbsp;√ Thông tin Khách hàng: Tên Khách hàng, số điện thoại liên hệ, địa chỉ liên lạc và nội dung yêu cầu dịch vụ
-                                        sửa chữa.
+                                        &nbsp;&nbsp;√ Thông tin Khách hàng: Tên Khách hàng, số điện thoại liên hệ, địa chỉ liên lạc và nội dung yêu cầu dịch vụ sửa chữa.
                                     </p>
                                     <p>
                                         &nbsp; &nbsp; &nbsp; &nbsp;- <b>Dịch vụ sửa chữa ngoài bảo hành</b>
                                     </p>
                                     <p>
-                                        Trong trường hợp Khách hàng có nhu cầu yêu cầu dịch vụ sửa chữa ngoài bảo hành, các Trung tâm Bảo hành của{" "}
-                                        <b>TIỆN ÍCH XANH</b>
-                                        có trách nhiệm phục vụ và sửa chữa sản phẩm tận tình và chu đáo. Khách hàng sẽ thanh toán các chi phí phát sinh cho việc
-                                        sửa chữa như linh kiện thay thế, tiền công và chi phí khác (nếu có) dựa theo thỏa thuận giữa 2 bên.
+                                        Trong trường hợp Khách hàng có nhu cầu yêu cầu dịch vụ sửa chữa ngoài bảo hành, các Trung tâm Bảo hành của <b>TIỆN ÍCH XANH</b>
+                                        có trách nhiệm phục vụ và sửa chữa sản phẩm tận tình và chu đáo. Khách hàng sẽ thanh toán các chi phí phát sinh cho việc sửa chữa như linh
+                                        kiện thay thế, tiền công và chi phí khác (nếu có) dựa theo thỏa thuận giữa 2 bên.
                                     </p>
                                     <p>
-                                        Linh kiện thay thế được bảo hành một (01) tháng kể từ ngày sửa chữa thay thế bởi Trung tâm Bảo hành của{" "}
-                                        <b>TIỆN ÍCH XANH</b>
+                                        Linh kiện thay thế được bảo hành một (01) tháng kể từ ngày sửa chữa thay thế bởi Trung tâm Bảo hành của <b>TIỆN ÍCH XANH</b>
                                         trên toàn quốc.
                                     </p>
 
@@ -136,18 +135,18 @@ export default function index() {
                                         <b>4. Địa điểm bảo hành</b>
                                     </p>
                                     <p>
-                                        Địa chỉ các Trung tâm Bảo hành trên toàn quốc của <b>TIỆN ÍCH XANH</b> được in trên phiếu bảo hành kèm theo sản phẩm
-                                        hoặc trên website: https://dienmaycuongthuy.vn/
+                                        Địa chỉ các Trung tâm Bảo hành trên toàn quốc của <b>TIỆN ÍCH XANH</b> được in trên phiếu bảo hành kèm theo sản phẩm hoặc trên website:
+                                        https://dienmaycuongthuy.vn/
                                     </p>
                                     <p>
                                         <b>Lưu ý:</b>
                                     </p>
                                     <p>
-                                        Trung tâm Bảo hành của <b>TIỆN ÍCH XANH</b> đều có phiếu tiếp nhận bảo hành khi tiếp nhận sản phẩm bảo hành của Khách
-                                        hàng (bao gồm thông tin Khách hàng và sản phẩm, thông tin tình trạng sản phẩm, thời gian hoàn tất bảo hành...).
+                                        Trung tâm Bảo hành của <b>TIỆN ÍCH XANH</b> đều có phiếu tiếp nhận bảo hành khi tiếp nhận sản phẩm bảo hành của Khách hàng (bao gồm thông
+                                        tin Khách hàng và sản phẩm, thông tin tình trạng sản phẩm, thời gian hoàn tất bảo hành...).
                                         <br></br>
-                                        Vui lòng liên hệ lại trực tiếp với Trung tâm Bảo hành hoặc liên hệ với Công ty Cổ phần <b>TIỆN ÍCH XANH</b> theo số tổng
-                                        đài chăm sóc Khách hàng <b>0326.330.338</b> để được hỗ trợ.
+                                        Vui lòng liên hệ lại trực tiếp với Trung tâm Bảo hành hoặc liên hệ với Công ty Cổ phần <b>TIỆN ÍCH XANH</b> theo số tổng đài chăm sóc Khách
+                                        hàng <b>0326.330.338</b> để được hỗ trợ.
                                         <br></br>
                                     </p>
                                     <p>
@@ -160,16 +159,16 @@ export default function index() {
                 </Container>
             </Layout>
         </div>
-    )
+    );
 }
 export async function getServerSideProps() {
     try {
         return {
             props: {},
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }

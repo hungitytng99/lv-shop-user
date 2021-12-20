@@ -5,13 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope, faMapMarkerAlt, faMobileAlt } from "@fortawesome/free-solid-svg-icons"
 import { faStackExchange } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/link"
+
 export default function LienHe() {
     const breadcrumb = [
         {
             title: "Liên Hệ",
             url: "/lien-he",
         },
-    ]
+    ];
     return (
         <div>
             <Layout titlePage="Liên Hệ" breadcrumb={breadcrumb}>
@@ -67,17 +68,17 @@ export default function LienHe() {
                 </Container>
             </Layout>
         </div>
-    )
+    );
 }
 
 export async function getServerSideProps() {
     try {
         return {
             props: {},
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }

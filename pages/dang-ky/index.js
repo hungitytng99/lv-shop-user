@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react"
-import Layout from "src/components/layout/Layout"
-import { Container } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebook, faGooglePlus } from "@fortawesome/free-brands-svg-icons"
-import Link from "next/dist/client/link"
-import { InputState } from "src/constants/InputState"
-import InputError from "src/components-share/Error/InputError"
-import Head from "next/head"
+import React, { useEffect, useRef, useState } from "react";
+import Layout from "src/components/layout/Layout";
+import { Container } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faGooglePlus } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/dist/client/link";
+import { InputState } from "src/constants/InputState";
+import InputError from "src/components-share/Error/InputError";
+import Head from "next/head";
 
 export default function SignUp() {
     const breadcrumb = [
@@ -14,67 +14,67 @@ export default function SignUp() {
             title: "Đăng ký",
             url: "/dang-ky",
         },
-    ]
-    const [nameState, setNameState] = useState(InputState.VALID)
-    const [emailState, setEmailState] = useState(InputState.VALID)
-    const [phoneState, setPhoneState] = useState(InputState.VALID)
-    const [passwordState, setPasswordState] = useState(InputState.VALID)
+    ];
+    const [nameState, setNameState] = useState(InputState.VALID);
+    const [emailState, setEmailState] = useState(InputState.VALID);
+    const [phoneState, setPhoneState] = useState(InputState.VALID);
+    const [passwordState, setPasswordState] = useState(InputState.VALID);
 
-    const nameRef = useRef("")
-    const emailRef = useRef("")
-    const phoneRef = useRef("")
-    const passwordRef = useRef("")
+    const nameRef = useRef("");
+    const emailRef = useRef("");
+    const phoneRef = useRef("");
+    const passwordRef = useRef("");
 
     function checkName() {
         if (nameRef.current.value === "") {
-            nameRef.current.style.border = "1px solid red"
-            setNameState(InputState.EMPTY)
-            return false
+            nameRef.current.style.border = "1px solid red";
+            setNameState(InputState.EMPTY);
+            return false;
         }
-        return true
+        return true;
     }
     function checkEmail() {
         if (emailRef.current.value === "") {
-            emailRef.current.style.border = "1px solid red"
-            setEmailState(InputState.EMPTY)
-            return false
+            emailRef.current.style.border = "1px solid red";
+            setEmailState(InputState.EMPTY);
+            return false;
         }
-        return true
+        return true;
     }
     function checkPhone() {
         if (phoneRef.current.value === "") {
-            phoneRef.current.style.border = "1px solid red"
-            setPhoneState(InputState.EMPTY)
-            return false
+            phoneRef.current.style.border = "1px solid red";
+            setPhoneState(InputState.EMPTY);
+            return false;
         }
-        return true
+        return true;
     }
     function checkPasswork() {
         if (passwordRef.current.value === "") {
-            passwordRef.current.style.border = "1px solid red"
-            setPasswordState(InputState.EMPTY)
-            return false
+            passwordRef.current.style.border = "1px solid red";
+            setPasswordState(InputState.EMPTY);
+            return false;
         }
-        return true
+        return true;
     }
     function dangkySubmit() {
-        let checkSubmit = checkName()
-        checkSubmit = checkEmail() && checkSubmit
-        checkSubmit = checkPhone() && checkSubmit
-        checkSubmit = checkPasswork() && checkSubmit
+        let checkSubmit = checkName();
+        checkSubmit = checkEmail() && checkSubmit;
+        checkSubmit = checkPhone() && checkSubmit;
+        checkSubmit = checkPasswork() && checkSubmit;
         if (checkSubmit) {
             const dataPost = {
                 name: nameRef.current.value,
                 email: emailRef.current.value,
                 phone: phoneRef.current.value,
                 password: passwordRef.current.value,
-            }
-            alert("call api\n" + JSON.stringify(dataPost))
+            };
+            alert("call api\n" + JSON.stringify(dataPost));
         }
     }
     function clearState(e, clearError) {
-        e.target.style.border = "1px solid #bbbbbb"
-        clearError()
+        e.target.style.border = "1px solid #bbbbbb";
+        clearError();
     }
     return (
         <>
@@ -141,5 +141,5 @@ export default function SignUp() {
                 </Container>
             </Layout>
         </>
-    )
+    );
 }

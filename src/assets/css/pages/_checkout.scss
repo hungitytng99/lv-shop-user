@@ -1,0 +1,25 @@
+.checkout {
+    .checkout_header {
+        margin: 30px 0px;
+        display: flex;
+        justify-content: space-between;
+        .login_logout {
+            cursor: pointer;
+            color: rgb(54, 151, 184);
+            &:hover {
+                color: blue;
+            }
+        }
+    }
+    .checkout_order {
+        border-left: 1px solid rgb(197, 197, 197);
+        min-height: 100vh;
+    }
+}
+
+.box_radio {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px 10px;
+}

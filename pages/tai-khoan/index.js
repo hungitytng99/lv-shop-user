@@ -1,10 +1,10 @@
-import React from "react"
-import Layout from "src/components/layout/Layout"
-import { Col, Container, Row } from "react-bootstrap"
-import UserInforCard from "src/components/pages/tai-khoan/UserInforCard"
-import ListAddress from "src/components/pages/tai-khoan/ListAddress"
-import HistoryOrders from "src/components/pages/tai-khoan/HistoryOrders"
-import Head from "next/head"
+import React from "react";
+import Layout from "src/components/layout/Layout";
+import { Col, Container, Row } from "react-bootstrap";
+import UserInforCard from "src/components/pages/tai-khoan/UserInforCard";
+import ListAddress from "src/components/pages/tai-khoan/ListAddress";
+import HistoryOrders from "src/components/pages/tai-khoan/HistoryOrders";
+import Head from "next/head";
 
 export default function index() {
     const breadcrumb = [
@@ -12,7 +12,7 @@ export default function index() {
             title: "Thông tin tài khoản",
             url: "/tai-khoan",
         },
-    ]
+    ];
     return (
         <>
             <Head>
@@ -32,16 +32,16 @@ export default function index() {
                 </Container>
             </Layout>
         </>
-    )
+    );
 }
 export async function getServerSideProps() {
     try {
         return {
             props: {},
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }

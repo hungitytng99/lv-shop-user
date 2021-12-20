@@ -5,4 +5,4 @@ export const sortType = {
     prices_desc: "Giá giảm dần",
     name_asc: "Từ A->Z",
     name_desc: "Từ Z->A",
-}
+};

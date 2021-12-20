@@ -1,7 +1,7 @@
-import React from "react"
-import Link from "next/dist/client/link"
+import React from "react";
+import Link from "next/dist/client/link";
 export default function CardReview(props) {
-    const { data } = props
+    const { data } = props;
     return (
         <div className="review_card">
             <div className="review_card-img">
@@ -18,5 +18,5 @@ export default function CardReview(props) {
                 </Link>
             </p>
         </div>
-    )
+    );
 }

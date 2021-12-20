@@ -1,10 +1,10 @@
-import React from "react"
-import { ImagesPath } from "../../../constants/ImagesPath"
-import { Container, Row, Col } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPodcast } from "@fortawesome/free-solid-svg-icons"
-import Link from "next/link"
-import Image from "next/image"
+import React from "react";
+import { ImagesPath } from "../../../constants/ImagesPath";
+import { Container, Row, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPodcast } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import Image from "next/image";
 export default function Footer() {
     return (
         <div className="footer">
@@ -172,5 +172,5 @@ export default function Footer() {
                 </Container>
             </div>
         </div>
-    )
+    );
 }
