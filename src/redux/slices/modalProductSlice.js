@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { chiTietSanPham } from "src/constants/dataTest";
+import { productService } from "./../../services/product/index";
 
 const initialState = {
     open: false,
@@ -10,6 +11,8 @@ const initialState = {
 
 export const openProductModal = createAsyncThunk("modal_product/open_modal", async (productId, thunkAPI) => {
     // call api
+    const response = await productService.getDetailProduct(productId);
+    console.log(response);
     return chiTietSanPham;
 });
 

@@ -1,6 +1,5 @@
 import { GET, PUT, POST, DELETE } from "../fetch";
 import { REQUEST_STATE } from "../../app-configs/index";
-// Data Flow: Step 1
 
 export const apiGetCollection = async (params) => {
     try {

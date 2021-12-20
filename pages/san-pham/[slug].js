@@ -123,7 +123,7 @@ export default function Slug(props) {
                                 {listProducts.map((item, index) => {
                                     return (
                                         <Col key={"danhsachsanpham" + index} lg={3} xs={6} md={4} style={{ margin: "10px 0px" }}>
-                                            <CardProduct data={item} openReviewProductModal={() => alert("2")} openReviewCartModal={() => alert("3")} />
+                                            <CardProduct data={item} />
                                         </Col>
                                     );
                                 })}

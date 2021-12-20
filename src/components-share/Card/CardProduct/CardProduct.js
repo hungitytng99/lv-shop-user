@@ -11,14 +11,14 @@ import { openProductModal } from "./../../../redux/slices/modalProductSlice";
 import { openCartModal } from "src/redux/slices/modalCartSlice";
 
 export default function CardProduct(props) {
-    const { data, openReviewCartModal } = props;
+    const { data } = props;
     const dispatch = useDispatch();
     function addProduct() {
         dispatch(addProductToCart());
         dispatch(openCartModal());
     }
     function openReviewProductModal() {
-        dispatch(openProductModal());
+        dispatch(openProductModal(data.id));
     }
     return (
         <div className="product_card user-not-selected">

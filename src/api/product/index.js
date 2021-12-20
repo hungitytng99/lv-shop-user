@@ -1,19 +1,18 @@
 import { GET, PUT, POST, DELETE } from "../fetch";
 import { REQUEST_STATE } from "../../app-configs/index";
-// Data Flow: Step 1
 
-export const apiListCategory = async (params) => {
+export const apiGetDetailProduct = async (id) => {
     try {
-        const response = await GET("/cate/list", params, { isFullPath: false });
+        const response = await GET(`/products/${id}`, null, { isFullPath: false });
         return {
             state: REQUEST_STATE.SUCCESS,
-            data: response.data,
+            data: response.result,
         };
     } catch (error) {
         console.log("error", error);
         return {
             state: REQUEST_STATE.ERROR,
-            data: [],
+            data: {},
         };
     }
 };

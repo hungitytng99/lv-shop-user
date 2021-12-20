@@ -1,4 +1,5 @@
 export const productData = {
+    id: 90,
     urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
     urlProduct: "#",
     title: "Tiện ích nhà bếp",
@@ -6,6 +7,7 @@ export const productData = {
     status: "new",
 };
 export const productData2 = {
+    id: 100,
     urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
     urlProduct: "#",
     title: "Tiện ích nhà bếp",
