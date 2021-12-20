@@ -1,4 +1,4 @@
-.chinh_sach_van_chuyen {
+.quy_dinh_su_dung {
     text-align: justify;
     font-size: 15px;
     h1 {
@@ -15,5 +15,14 @@
     li {
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+    ol {
+        font-weight: bold;
+    }
+    ul {
+        li {
+            list-style-type: disc;
+            font-weight: normal;
+        }
     }
 }

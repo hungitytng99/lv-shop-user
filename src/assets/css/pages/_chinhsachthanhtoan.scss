@@ -1,4 +1,4 @@
-.chinh_sach_van_chuyen {
+.chinh_sach_thanh_toan {
     text-align: justify;
     font-size: 15px;
     h1 {
@@ -15,5 +15,10 @@
     li {
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+    ul {
+        li {
+            list-style-type: disc;
+        }
     }
 }
