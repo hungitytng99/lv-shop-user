@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react"
-import Image from "next/image"
-import Link from "next/dist/client/link"
-import { useDispatch, useSelector } from "react-redux"
-import { storageKey } from "./../../../../constants/storageKeys"
-import { clearUserData } from "src/redux/slices/userSlice"
-import { v4 as uuidv4 } from "uuid"
-import CartItemReview from "./../../../../components-share/Cart/cart_item_review/CartItemReview"
-import { format_d_currency } from "src/share_function"
-import { ImagesPath } from "./../../../../constants/ImagesPath"
-import { userLogout } from "./../../../../redux/slices/userSlice"
-import { REQUEST_STATE } from "src/app-configs"
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/dist/client/link";
+import { useDispatch, useSelector } from "react-redux";
+import { storageKey } from "./../../../../constants/storageKeys";
+import { clearUserData } from "src/redux/slices/userSlice";
+import { v4 as uuidv4 } from "uuid";
+import CartItemReview from "./../../../../components-share/Cart/cart_item_review/CartItemReview";
+import { format_d_currency } from "src/share_function";
+import { ImagesPath } from "./../../../../constants/ImagesPath";
+import { userLogout } from "./../../../../redux/slices/userSlice";
+import { REQUEST_STATE } from "src/app-configs";
 
 export default function SwitchLoginLogout() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const cartData = useSelector((stores) => stores.cartSlice.value)
-    const productList = cartData.products
+    const cartData = useSelector((stores) => stores.cartSlice.value);
+    const productList = cartData.products;
 
-    const userData = useSelector((stores) => stores.userSlice.value)
-    let isUser = false
-    if (userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR) isUser = true
+    const userData = useSelector((stores) => stores.userSlice.value);
+    let isUser = false;
+    if (userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR) isUser = true;
 
     function renderProductList() {
         if (cartData.totalProduct == 0) {
-            return <div style={{ padding: "10px" }}>Không có sản phẩm nào trong giỏ hàng</div>
+            return <div style={{ padding: "10px" }}>Không có sản phẩm nào trong giỏ hàng</div>;
         } else {
             return (
                 <>
@@ -32,15 +32,15 @@ export default function SwitchLoginLogout() {
                             <div key={uuidv4()}>
                                 <CartItemReview data={item} />
                             </div>
-                        )
+                        );
                     })}
                 </>
-            )
+            );
         }
     }
 
     function clickLogOut() {
-        dispatch(userLogout())
+        dispatch(userLogout());
     }
     return (
         <div className="header-mid-account">
@@ -110,5 +110,5 @@ export default function SwitchLoginLogout() {
                 </div>
             </span>
         </div>
-    )
+    );
 }

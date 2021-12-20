@@ -1,23 +1,23 @@
-import React from "react"
-import CartItem from "./../../Cart/cart_item/CartItem"
-import { Container } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
-import ModalLayout from "../ModalLayout"
-import { useDispatch, useSelector } from "react-redux"
-import Link from "next/dist/client/link"
-import { format_d_currency } from "src/share_function"
-import { v4 as uuidv4 } from "uuid"
-import { closeCartModal } from "src/redux/slices/modalCartSlice"
+import React from "react";
+import CartItem from "./../../Cart/cart_item/CartItem";
+import { Container } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import ModalLayout from "../ModalLayout";
+import { useDispatch, useSelector } from "react-redux";
+import Link from "next/dist/client/link";
+import { format_d_currency } from "src/share_function";
+import { v4 as uuidv4 } from "uuid";
+import { closeCartModal } from "src/redux/slices/modalCartSlice";
 
 export default function ModalReviewCart(props) {
-    const dispatch = useDispatch()
-    const { open, loading } = useSelector((stores) => stores.modalCartSlice)
-    const cartData = useSelector((stores) => stores.cartSlice.value)
-    const productList = cartData.products
+    const dispatch = useDispatch();
+    const { open, loading } = useSelector((stores) => stores.modalCartSlice);
+    const cartData = useSelector((stores) => stores.cartSlice.value);
+    const productList = cartData.products;
 
     function closeModalEvent() {
-        dispatch(closeCartModal())
+        dispatch(closeCartModal());
     }
     return (
         <ModalLayout isOpen={open} closeModalEvent={() => closeModalEvent()}>
@@ -34,7 +34,7 @@ export default function ModalReviewCart(props) {
                             <div key={uuidv4()}>
                                 <CartItem data={item}></CartItem>
                             </div>
-                        )
+                        );
                     })}
                 </div>
                 <hr />
@@ -49,5 +49,5 @@ export default function ModalReviewCart(props) {
                 </div>
             </div>
         </ModalLayout>
-    )
+    );
 }

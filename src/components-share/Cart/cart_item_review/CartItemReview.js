@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { Col, Row } from "react-bootstrap"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
-import { format_d_currency } from "./../../../share_function/index"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Col, Row } from "react-bootstrap";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { format_d_currency } from "./../../../share_function/index";
 
 export default function CartItemReview(props) {
-    const { title, urlImg, price, quantity } = props.data
+    const { title, urlImg, price, quantity } = props.data;
     return (
         <Row className="cart_item_review ">
             <Col xs={5} className="no_pading_col">
@@ -28,5 +28,5 @@ export default function CartItemReview(props) {
                 </div>
             </Col>
         </Row>
-    )
+    );
 }

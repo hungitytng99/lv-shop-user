@@ -1,11 +1,11 @@
-import React from "react"
-import { ImagesPath } from "../../../constants/ImagesPath"
-import Link from "next/link"
-import { danhmuc } from "../../../constants/danhmuc"
-import { useSelector } from "react-redux"
+import React from "react";
+import { ImagesPath } from "../../../constants/ImagesPath";
+import Link from "next/link";
+import { danhmuc } from "../../../constants/danhmuc";
+import { useSelector } from "react-redux";
 
 export default function Sidebar() {
-    const subMenu = useSelector((stores) => stores.menuSlice.value)
+    const subMenu = useSelector((stores) => stores.menuSlice.value);
     return (
         <div className="sidebar">
             <div className="sidebar-logo">
@@ -37,7 +37,7 @@ export default function Sidebar() {
                                         <span>{item.title}</span>
                                     </li>
                                 </Link>
-                            )
+                            );
                         })}
                     </ul>
                 </li>
@@ -73,5 +73,5 @@ export default function Sidebar() {
                 </li>
             </ul>
         </div>
-    )
+    );
 }

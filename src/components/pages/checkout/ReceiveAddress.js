@@ -1,5 +1,5 @@
-import React from "react"
-import { FloatingLabel, Form } from "react-bootstrap"
+import React from "react";
+import { FloatingLabel, Form } from "react-bootstrap";
 export default function ReceiveAddress() {
     return (
         <div>
@@ -22,5 +22,5 @@ export default function ReceiveAddress() {
                 </FloatingLabel>
             </div>
         </div>
-    )
+    );
 }

@@ -1,13 +1,13 @@
-import React from "react"
-import Head from "next/head"
-import Layout from "src/components/layout/Layout"
-import { Container, Row, Col } from "react-bootstrap"
-import CardProduct from "src/components-share/Card/CardProduct/CardProduct"
-import CarouselProduct from "src/components-share/Carousel/CarouselProduct"
+import React from "react";
+import Head from "next/head";
+import Layout from "src/components/layout/Layout";
+import { Container, Row, Col } from "react-bootstrap";
+import CardProduct from "src/components-share/Card/CardProduct/CardProduct";
+import CarouselProduct from "src/components-share/Carousel/CarouselProduct";
 
-import { chiTietSanPham } from "src/constants/dataTest"
-import ProductDetail from "src/components/pages/san-pham/chi-tiet-san-pham/ProductDetail"
-import TabsInfor from "src/components/pages/san-pham/tabsInfor/TabsInfor"
+import { chiTietSanPham } from "src/constants/dataTest";
+import ProductDetail from "src/components/pages/san-pham/chi-tiet-san-pham/ProductDetail";
+import TabsInfor from "src/components/pages/san-pham/tabsInfor/TabsInfor";
 
 const productData = {
     urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
@@ -15,7 +15,7 @@ const productData = {
     title: "Tiện ích nhà bếp",
     curPrice: 120000,
     status: "new",
-}
+};
 const productData2 = {
     urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
     urlProduct: "/san-pham?product_id=cainaymoilam",
@@ -23,10 +23,10 @@ const productData2 = {
     curPrice: 120000,
     oldPrice: 120300,
     status: "sale",
-}
+};
 
 export default function SanPham(props) {
-    const { product_id } = props
+    const { product_id } = props;
     const breadcrumb = [
         {
             title: "Sản phẩm",
@@ -36,7 +36,7 @@ export default function SanPham(props) {
             title: "Găng tay đi xe máy mùa đông lót nỉ",
             url: "/san-pham?product_id=" + product_id,
         },
-    ]
+    ];
     return (
         <>
             <Head>
@@ -68,22 +68,22 @@ export default function SanPham(props) {
                 </Container>
             </Layout>
         </>
-    )
+    );
 }
 
 export async function getServerSideProps(context) {
-    const { resolvedUrl, query, params } = context
-    const { product_id = "Không xác định" } = query
-    console.log({ resolvedUrl, query, params })
+    const { resolvedUrl, query, params } = context;
+    const { product_id = "Không xác định" } = query;
+    console.log({ resolvedUrl, query, params });
     try {
         return {
             props: {
                 product_id,
             },
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }

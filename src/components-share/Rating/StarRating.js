@@ -1,8 +1,8 @@
-import React from "react"
-import Rating from "react-rating"
+import React from "react";
+import Rating from "react-rating";
 
 export default function StarRating(props) {
-    const { initialRating } = props
+    const { initialRating } = props;
     return (
         <div style={{ color: "#ff9800" }}>
             <Rating
@@ -44,5 +44,5 @@ export default function StarRating(props) {
                 initialRating={initialRating}
             />
         </div>
-    )
+    );
 }

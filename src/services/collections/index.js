@@ -1,6 +1,6 @@
 // Data Flow: Step 2
-import { apiGetCollection } from "./../../api/collections/index"
-import { convertURL } from "./../../share_function/index"
+import { apiGetCollection } from "./../../api/collections/index";
+import { convertURL } from "./../../share_function/index";
 
 // transform data to fit with UI;
 export const collectionService = {
@@ -11,9 +11,9 @@ export const collectionService = {
                     cateId: item.id,
                     urlPage: "/san-pham/" + item.id + "-" + convertURL(item.title),
                     title: item.title,
-                }
-            })
-            return response
-        })
+                };
+            });
+            return response;
+        });
     },
-}
+};

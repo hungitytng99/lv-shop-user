@@ -1,47 +1,38 @@
-import React, { useRef } from "react"
-import { Row } from "react-bootstrap"
-import { Carousel } from "react-responsive-carousel"
-import { Col } from "react-bootstrap"
-import StarRating from "src/components-share/Rating/StarRating"
-import { format_d_currency } from "src/share_function"
+import React, { useRef } from "react";
+import { Row } from "react-bootstrap";
+import { Carousel } from "react-responsive-carousel";
+import { Col } from "react-bootstrap";
+import StarRating from "src/components-share/Rating/StarRating";
+import { format_d_currency } from "src/share_function";
 
 export default function ProductDetail(props) {
-    const { product } = props
-    const { listImg, title, trademark, status, rating, productInfo, curPrice, oldPrice } = product
+    const { product } = props;
+    const { listImg, title, trademark, status, rating, productInfo, curPrice, oldPrice } = product;
 
-    const numberOrder = useRef(1)
+    const numberOrder = useRef(1);
 
     function increaseOder() {
-        numberOrder.current.value++
+        numberOrder.current.value++;
     }
     function decreaseOder() {
-        if (numberOrder.current.value > 1) numberOrder.current.value--
+        if (numberOrder.current.value > 1) numberOrder.current.value--;
     }
 
     function checkInputNum(e) {
-        let currentvalue = Number.parseInt(numberOrder.current.value)
+        let currentvalue = Number.parseInt(numberOrder.current.value);
         // console.log(currentvalue == NaN)
-        if (isNaN(currentvalue) || currentvalue < 1) numberOrder.current.value = "1"
+        if (isNaN(currentvalue) || currentvalue < 1) numberOrder.current.value = "1";
     }
     return (
         <Row style={{ marginTop: "20px" }}>
             <Col md={5} style={{ padding: "0px 45px 0px 45px" }}>
-                <Carousel
-                    autoPlay={true}
-                    interval={5000}
-                    showArrows={false}
-                    infiniteLoop={true}
-                    showThumbs={true}
-                    emulateTouch={true}
-                    thumbWidth={100}
-                    className="custom_carousel"
-                >
+                <Carousel autoPlay={true} interval={5000} showArrows={false} infiniteLoop={true} showThumbs={true} emulateTouch={true} thumbWidth={100} className="custom_carousel">
                     {listImg?.map((item, index) => {
                         return (
                             <div key={item + index}>
                                 <img src={item} alt="Tiện ích Lộc Vừng shop" />
                             </div>
-                        )
+                        );
                     })}
                 </Carousel>
             </Col>
@@ -72,5 +63,5 @@ export default function ProductDetail(props) {
                 </div>
             </Col>
         </Row>
-    )
+    );
 }

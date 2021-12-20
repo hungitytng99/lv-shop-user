@@ -1,24 +1,24 @@
-import React, { useState } from "react"
-import Link from "next/dist/client/link"
-import { Col } from "react-bootstrap"
-import { Row } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons"
-import { addProductToCart } from "src/redux/slices/cartSlices"
-import { useDispatch } from "react-redux"
-import { format_d_currency } from "./../../../share_function/index"
-import { openProductModal } from "./../../../redux/slices/modalProductSlice"
-import { openCartModal } from "src/redux/slices/modalCartSlice"
+import React, { useState } from "react";
+import Link from "next/dist/client/link";
+import { Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons";
+import { addProductToCart } from "src/redux/slices/cartSlices";
+import { useDispatch } from "react-redux";
+import { format_d_currency } from "./../../../share_function/index";
+import { openProductModal } from "./../../../redux/slices/modalProductSlice";
+import { openCartModal } from "src/redux/slices/modalCartSlice";
 
 export default function CardProduct(props) {
-    const { data, openReviewCartModal } = props
-    const dispatch = useDispatch()
+    const { data, openReviewCartModal } = props;
+    const dispatch = useDispatch();
     function addProduct() {
-        dispatch(addProductToCart())
-        dispatch(openCartModal())
+        dispatch(addProductToCart());
+        dispatch(openCartModal());
     }
     function openReviewProductModal() {
-        dispatch(openProductModal())
+        dispatch(openProductModal());
     }
     return (
         <div className="product_card user-not-selected">
@@ -54,5 +54,5 @@ export default function CardProduct(props) {
             </Row>
             <span className={"product_card-status " + "product_card-status-" + data?.status}></span>
         </div>
-    )
+    );
 }

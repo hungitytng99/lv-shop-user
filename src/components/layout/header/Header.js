@@ -1,19 +1,19 @@
-import React, { useState } from "react"
-import { Breadcrumb, Container } from "react-bootstrap"
-import Link from "next/link"
-import Image from "next/image"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars, faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons"
-import { ImagesPath } from "src/constants/ImagesPath"
-import { danhmuc } from "src/constants/danhmuc"
-import { useRouter } from "next/router"
-import SwitchLoginLogout from "./login-out/SwitchLoginLogout"
-import { useSelector } from "react-redux"
+import React, { useState } from "react";
+import { Breadcrumb, Container } from "react-bootstrap";
+import Link from "next/link";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { ImagesPath } from "src/constants/ImagesPath";
+import { danhmuc } from "src/constants/danhmuc";
+import { useRouter } from "next/router";
+import SwitchLoginLogout from "./login-out/SwitchLoginLogout";
+import { useSelector } from "react-redux";
 
 export default function Header(props) {
-    const route = useRouter().route
-    const { titlePage, breadcrumb } = props
-    const subMenu = useSelector((stores) => stores.menuSlice.value)
+    const route = useRouter().route;
+    const { titlePage, breadcrumb } = props;
+    const subMenu = useSelector((stores) => stores.menuSlice.value);
     return (
         <header className="header">
             <Container>
@@ -88,7 +88,7 @@ export default function Header(props) {
                                     <Link key={"danhmucmenu" + index} href={item.urlPage}>
                                         <span>{item.title}</span>
                                     </Link>
-                                )
+                                );
                             })}
                         </div>
                     </div>
@@ -111,11 +111,11 @@ export default function Header(props) {
                                 <Breadcrumb.Item key={"bread" + index} href={item.url}>
                                     {item.title}
                                 </Breadcrumb.Item>
-                            )
+                            );
                         })}
                     </Breadcrumb>
                 </div>
             </div>
         </header>
-    )
+    );
 }

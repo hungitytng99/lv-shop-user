@@ -1,14 +1,14 @@
-import React from "react"
-import Layout from "src/components/layout/Layout"
-import { Col, Container, Row } from "react-bootstrap"
-import Link from "next/link"
+import React from "react";
+import Layout from "src/components/layout/Layout";
+import { Col, Container, Row } from "react-bootstrap";
+import Link from "next/link";
 export default function index() {
     const breadcrumb = [
         {
             title: "Chính sách vận chuyển",
             url: "/chinh-sach-van-chuyen",
         },
-    ]
+    ];
     return (
         <div>
             <Layout titlePage="Chính sách vận chuyển" breadcrumb={breadcrumb}>
@@ -55,8 +55,8 @@ export default function index() {
                                         <span style={{ color: "#2980b9" }}>
                                             <b>TIỆN ÍCH XANH</b>
                                         </span>{" "}
-                                        liên kết với đơn vị vận chuyển Giao hàng nhanh ( GHN) nhằm cung cấp cho gian hàng dịch vụ vận chuyển, giao hàng thu tiền
-                                        tin cậy và hiệu quả nhất.
+                                        liên kết với đơn vị vận chuyển Giao hàng nhanh ( GHN) nhằm cung cấp cho gian hàng dịch vụ vận chuyển, giao hàng thu tiền tin cậy và hiệu quả
+                                        nhất.
                                     </p>
                                     <p>
                                         + Các đơn hàng vận chuyển mà gian hàng xác nhận vận chuyển qua hệ thống của{" "}
@@ -74,16 +74,16 @@ export default function index() {
                 </Container>
             </Layout>
         </div>
-    )
+    );
 }
 export async function getServerSideProps() {
     try {
         return {
             props: {},
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }

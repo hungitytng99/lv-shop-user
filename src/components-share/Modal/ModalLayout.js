@@ -1,11 +1,11 @@
-import React from "react"
-import { Container } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import React from "react";
+import { Container } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 export default function ModalLayout(props) {
-    const { isOpen, closeModalEvent, children } = props
+    const { isOpen, closeModalEvent, children } = props;
     function closeModal() {
-        closeModalEvent()
+        closeModalEvent();
     }
     return (
         <div className="modal_custom" style={{ display: isOpen ? "flex" : "none" }}>
@@ -17,5 +17,5 @@ export default function ModalLayout(props) {
                 <Container className="main_content">{children}</Container>
             </Container>
         </div>
-    )
+    );
 }

@@ -1,5 +1,5 @@
-import React from "react"
-import { Tabs, Tab } from "react-bootstrap"
+import React from "react";
+import { Tabs, Tab } from "react-bootstrap";
 export default function TabsInfor() {
     return (
         <div style={{ margin: "20px 0px 40px 0px" }}>
@@ -20,5 +20,5 @@ export default function TabsInfor() {
                 </Tab>
             </Tabs>
         </div>
-    )
+    );
 }

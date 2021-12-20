@@ -1,9 +1,9 @@
-import React from "react"
+import React from "react";
 
 export default function UserInforCard() {
     function getImageUpload(e) {
-        const file = e.target.files[0]
-        console.log(file)
+        const file = e.target.files[0];
+        console.log(file);
     }
 
     return (
@@ -27,5 +27,5 @@ export default function UserInforCard() {
                 <p>Lê Đình Quyền</p>
             </div>
         </div>
-    )
+    );
 }

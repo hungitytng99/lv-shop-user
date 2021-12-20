@@ -1,13 +1,13 @@
-import React from "react"
-import { Container } from "react-bootstrap"
-import { Row, Col } from "react-bootstrap"
-import Head from "next/head"
-import ReceiveAddress from "src/components/pages/checkout/ReceiveAddress"
-import { ImagesPath } from "./../../src/constants/ImagesPath"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
-import Link from "next/dist/client/link"
-import Transport from "src/components/pages/checkout/Transport"
+import React from "react";
+import { Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import Head from "next/head";
+import ReceiveAddress from "src/components/pages/checkout/ReceiveAddress";
+import { ImagesPath } from "./../../src/constants/ImagesPath";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/dist/client/link";
+import Transport from "src/components/pages/checkout/Transport";
 
 export default function Checkout(props) {
     return (
@@ -41,22 +41,22 @@ export default function Checkout(props) {
                 </Row>
             </Container>
         </>
-    )
+    );
 }
 
 export async function getServerSideProps(context) {
-    const { resolvedUrl, query, params } = context
-    const { order = "Không xác định" } = query
-    console.log({ resolvedUrl, query, params })
+    const { resolvedUrl, query, params } = context;
+    const { order = "Không xác định" } = query;
+    console.log({ resolvedUrl, query, params });
     try {
         return {
             props: {
                 order,
             },
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }

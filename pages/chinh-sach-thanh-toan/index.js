@@ -1,14 +1,14 @@
-import React from "react"
-import Layout from "src/components/layout/Layout"
-import { Col, Container, Row } from "react-bootstrap"
-import Link from "next/link"
+import React from "react";
+import Layout from "src/components/layout/Layout";
+import { Col, Container, Row } from "react-bootstrap";
+import Link from "next/link";
 export default function index() {
     const breadcrumb = [
         {
             title: "Chính sách thanh toán",
             url: "/chinh-sach-thanh-toan",
         },
-    ]
+    ];
     return (
         <div>
             <Layout titlePage="Chính sách thanh toán" breadcrumb={breadcrumb}>
@@ -29,16 +29,16 @@ export default function index() {
                 </Container>
             </Layout>
         </div>
-    )
+    );
 }
 export async function getServerSideProps() {
     try {
         return {
             props: {},
-        }
+        };
     } catch (error) {
         return {
             notFound: true,
-        }
+        };
     }
 }
