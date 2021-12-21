@@ -13,11 +13,28 @@
             text-decoration: line-through;
         }
     }
+    .pick_variant {
+        .btn_pick_variant {
+            display: inline-block;
+            cursor: pointer;
+            padding: 2.5px 5px;
+            margin: 2.5px;
+            border-radius: 5px;
+            border: 1.5px solid rgb(199, 199, 199);
+            &:hover {
+                color: $text_color_hover;
+            }
+        }
+        .active_btn_opt {
+            color: $text_color_hover;
+            border-color: $text_color_hover;
+        }
+    }
 }
 
 .order_product {
     &-quantity {
-        display: inline-block;
+        display: inline-flex;
 
         span {
             display: inline-block;

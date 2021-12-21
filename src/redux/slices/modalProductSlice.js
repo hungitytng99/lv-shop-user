@@ -5,7 +5,7 @@ import { productService } from "./../../services/product/index";
 
 const initialState = {
     open: false,
-    product: {},
+    value: {},
     loading: false,
 };
 
@@ -13,7 +13,7 @@ export const openProductModal = createAsyncThunk("modal_product/open_modal", asy
     // call api
     const response = await productService.getDetailProduct(productId);
     console.log(response);
-    return chiTietSanPham;
+    return response;
 });
 
 export const modalProductSlice = createSlice({
@@ -21,7 +21,7 @@ export const modalProductSlice = createSlice({
     initialState: initialState,
     reducers: {
         closeProductModal: (state, action) => {
-            state.product = {};
+            state.value = {};
             state.loading = false;
             state.open = false;
         },
@@ -32,12 +32,12 @@ export const modalProductSlice = createSlice({
             state.open = true;
         },
         [openProductModal.fulfilled]: (state, action) => {
-            state.product = action.payload;
+            state.value = action.payload;
             state.open = true;
             state.loading = false;
         },
         [openProductModal.rejected]: (state, action) => {
-            state.product = action.payload;
+            state.value = action.payload;
             state.open = true;
             state.loading = false;
         },
