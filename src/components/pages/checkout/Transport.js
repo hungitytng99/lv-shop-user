@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 export default function Transport() {
     return (
         <div>
-            <h5>Vận chuyển</h5>
+            <h5 style={{ paddingLeft: "10px" }}>Vận chuyển</h5>
             <Row className="box_radio">
                 <Col xs={1}>
                     <input type="radio" name="freeFee" id="free" />

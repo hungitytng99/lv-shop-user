@@ -5,7 +5,6 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { ImagesPath } from "src/constants/ImagesPath";
-import { danhmuc } from "src/constants/danhmuc";
 import { useRouter } from "next/router";
 import SwitchLoginLogout from "./login-out/SwitchLoginLogout";
 import { useSelector } from "react-redux";

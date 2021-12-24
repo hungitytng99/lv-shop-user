@@ -3,6 +3,7 @@
     max-width: 205px;
     box-shadow: 0px 2px 46.41px 4.59px rgb(2 38 113 / 8%);
     cursor: pointer;
+    height: 100%;
     position: relative;
     border-radius: 5px;
     overflow: hidden;
@@ -49,6 +50,10 @@
     }
     &-title {
         padding: 5px 10px;
+        font-size: 13.5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         a {
             color: $text_color;
         }

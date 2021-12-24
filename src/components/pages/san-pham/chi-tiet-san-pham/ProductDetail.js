@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Row } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 import { Col } from "react-bootstrap";
@@ -7,8 +7,45 @@ import { format_d_currency } from "src/share_function";
 
 export default function ProductDetail(props) {
     const { product } = props;
-    const { listImg, title, trademark, status, rating, productInfo, curPrice, oldPrice } = product;
+    const { listImg = [], title = "", trademark = "", status = "", productInfo = "", curPrice = 0, oldPrice = 0, options = [], variants = [] } = product;
+    const [datashow, setDataShow] = useState({
+        oldPrice: oldPrice,
+        curPrice: curPrice,
+        imageIndex: 0,
+        activeOption: variants[0]?.existByOptions || [],
+    });
 
+    function changeOptionVariant(indexOptionChange, valueChange) {
+        let newActiveOption = [...datashow.activeOption];
+        newActiveOption[indexOptionChange] = valueChange;
+        let variantLength = variants?.length;
+        let activeOptionLength = newActiveOption.length;
+        let newDataShow = {};
+        for (let i = 0; i < variantLength; i++) {
+            let kt = true;
+            for (let j = 0; j < activeOptionLength; j++) {
+                if (newActiveOption[j] != variants[i].existByOptions[j]) {
+                    kt = false;
+                    break;
+                }
+            }
+            if (kt == true) {
+                listImg.map((img, index) => {
+                    if (img.id == variants[i].featureImageId) {
+                        newDataShow.imageIndex = index;
+                    }
+                });
+                newDataShow = {
+                    oldPrice: variants[i].oldPrice,
+                    curPrice: variants[i].curPrice,
+                    activeOption: variants[i].existByOptions,
+                };
+
+                break;
+            }
+        }
+        setDataShow({ ...newDataShow });
+    }
     const numberOrder = useRef(1);
 
     function increaseOder() {
@@ -24,13 +61,23 @@ export default function ProductDetail(props) {
         if (isNaN(currentvalue) || currentvalue < 1) numberOrder.current.value = "1";
     }
     return (
-        <Row style={{ marginTop: "20px" }}>
+        <Row style={{ margin: "20px 0px" }}>
             <Col md={5} style={{ padding: "0px 45px 0px 45px" }}>
-                <Carousel autoPlay={true} interval={5000} showArrows={false} infiniteLoop={true} showThumbs={true} emulateTouch={true} thumbWidth={100} className="custom_carousel">
+                <Carousel
+                    selectedItem={datashow.imageIndex}
+                    autoPlay={false}
+                    interval={5000}
+                    showArrows={false}
+                    infiniteLoop={true}
+                    showThumbs={true}
+                    emulateTouch={true}
+                    thumbWidth={100}
+                    className="custom_carousel"
+                >
                     {listImg?.map((item, index) => {
                         return (
-                            <div key={item + index}>
-                                <img src={item} alt="Tiện ích Lộc Vừng shop" />
+                            <div key={"detailproduct" + item.id + index}>
+                                <img src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.id}`} />
                             </div>
                         );
                     })}
@@ -42,14 +89,34 @@ export default function ProductDetail(props) {
                     Thương hiệu: {trademark} | Tình trạng: {status}
                 </p>
 
-                <StarRating initialRating={rating} />
+                {/* <StarRating initialRating={rating} /> */}
                 <div className="detal_product-cost">
-                    <h3 className="detal_product-cost-current">{format_d_currency(curPrice)}</h3>
-                    <span className="detal_product-cost-old">{format_d_currency(oldPrice)}</span>
+                    <h3 className="detal_product-cost-current">{format_d_currency(datashow.curPrice)}</h3>
+                    <span className="detal_product-cost-old">{format_d_currency(datashow.oldPrice)}</span>
                 </div>
                 <p>Thông tin sản phẩm {productInfo}</p>
                 <hr />
-                <div className="order_product">
+                {options?.map((opt, i) => {
+                    return (
+                        <div key={"opt" + opt.title + i} className="pick_variant">
+                            <p className="opt_title">{opt.title}:</p>
+                            <div>
+                                {opt.values.map((val, j) => {
+                                    return (
+                                        <span
+                                            key={opt.title + val + j}
+                                            className={datashow.activeOption[i] == val ? "btn_pick_variant active_btn_opt" : "btn_pick_variant"}
+                                            onClick={() => changeOptionVariant(i, val)}
+                                        >
+                                            {val}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                })}
+                <div className="order_product" style={{ marginTop: "20px" }}>
                     <div className="order_product-quantity">
                         <span className="order_product-quantity-minus" onClick={decreaseOder}>
                             {" - "}

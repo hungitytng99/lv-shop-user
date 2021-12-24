@@ -11,14 +11,14 @@ import { openProductModal } from "./../../../redux/slices/modalProductSlice";
 import { openCartModal } from "src/redux/slices/modalCartSlice";
 
 export default function CardProduct(props) {
-    const { data, openReviewCartModal } = props;
+    const { data } = props;
     const dispatch = useDispatch();
     function addProduct() {
         dispatch(addProductToCart());
         dispatch(openCartModal());
     }
     function openReviewProductModal() {
-        dispatch(openProductModal());
+        dispatch(openProductModal(data.id));
     }
     return (
         <div className="product_card user-not-selected">
@@ -40,16 +40,19 @@ export default function CardProduct(props) {
                 </Link>
             </p>
             <Row style={{ paddingBottom: "15px" }}>
-                <Col md={data.oldPrice ? 6 : 12} style={{ color: "#f6470e", fontWeight: "bold", textAlign: "center" }}>
-                    {format_d_currency(data.curPrice)}
-                </Col>
-
                 {data?.oldPrice ? (
-                    <Col md={6} style={{ color: "#acacac", textDecoration: "line-through", textAlign: "center" }}>
-                        {format_d_currency(data.oldPrice)}
-                    </Col>
+                    <>
+                        <Col md={6} style={{ color: "#f6470e", fontWeight: "bold", textAlign: "right", fontSize: "15px" }}>
+                            {format_d_currency(data.curPrice)}
+                        </Col>
+                        <Col md={6} style={{ color: "#acacac", textDecoration: "line-through", textAlign: "left", fontSize: "15px" }}>
+                            {format_d_currency(data.oldPrice)}
+                        </Col>
+                    </>
                 ) : (
-                    <></>
+                    <Col md={12} style={{ color: "#f6470e", fontWeight: "bold", textAlign: "center", fontSize: "15px" }}>
+                        {format_d_currency(data.curPrice)}
+                    </Col>
                 )}
             </Row>
             <span className={"product_card-status " + "product_card-status-" + data?.status}></span>

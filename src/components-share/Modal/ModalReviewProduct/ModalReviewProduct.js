@@ -9,7 +9,7 @@ import ProductDetail from "src/components/pages/san-pham/chi-tiet-san-pham/Produ
 
 export default function ModalReviewProduct(props) {
     const modalProductSlice = useSelector((stores) => stores.modalProductSlice);
-    const { open = false, product, loading } = modalProductSlice;
+    const { open = false, value, loading } = modalProductSlice;
     const dispatch = useDispatch();
 
     function closeModalEvent() {
@@ -17,7 +17,7 @@ export default function ModalReviewProduct(props) {
     }
     return (
         <ModalLayout isOpen={open} closeModalEvent={() => closeModalEvent()}>
-            <ProductDetail product={product} />
+            <ProductDetail product={value.data || {}} />
         </ModalLayout>
     );
 }

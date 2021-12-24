@@ -15,6 +15,29 @@
         border-left: 1px solid rgb(197, 197, 197);
         min-height: 100vh;
     }
+    .payment {
+        padding: 0px 10px;
+        border: 1px solid rgb(186, 186, 186);
+        border-radius: 5px;
+        .payment_choice {
+            border-bottom: 1px solid rgb(186, 186, 186);
+            &:last-child {
+                border-bottom: none;
+            }
+            .payment_choice_title {
+                padding: 16px 10px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+            .payment_choice_content {
+                margin: 10px 0px;
+                padding: 16px 10px;
+                border-radius: 5px;
+                background-color: rgb(226, 226, 226);
+            }
+        }
+    }
 }
 
 .box_radio {
