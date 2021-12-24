@@ -77,7 +77,7 @@ export default function ProductDetail(props) {
                     {listImg?.map((item, index) => {
                         return (
                             <div key={"detailproduct" + item.id + index}>
-                                <img src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/media/${item.id}`} />
+                                <img src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.id}`} />
                             </div>
                         );
                     })}

@@ -4,6 +4,7 @@ export const productData = {
     urlProduct: "#",
     title: "Tiện ích nhà bếp",
     curPrice: 120000,
+    oldPrice: 0,
     status: "new",
 };
 export const productData2 = {

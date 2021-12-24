@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/dist/client/link";
 import Transport from "src/components/pages/checkout/Transport";
+import PaymentMethod from "src/components/pages/checkout/PaymentMethod";
 
 export default function Checkout(props) {
     return (
@@ -19,7 +20,9 @@ export default function Checkout(props) {
                 <Row>
                     <Col lg={8}>
                         <div className="checkout_header">
-                            <img src={ImagesPath.LOGO} />
+                            <Link href="/" passHref>
+                                <img src={ImagesPath.LOGO} />
+                            </Link>
                             <Link href="/dang-nhap" passHref>
                                 <span className="login_logout">
                                     <FontAwesomeIcon icon={faUserCircle} /> Đăng nhập
@@ -32,6 +35,7 @@ export default function Checkout(props) {
                             </Col>
                             <Col lg={6}>
                                 <Transport />
+                                <PaymentMethod />
                             </Col>
                         </Row>
                     </Col>

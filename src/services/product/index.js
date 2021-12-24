@@ -1,4 +1,5 @@
-import { apiGetDetailProduct } from "./../../api/product/index";
+import { getStateProduct } from "src/share_function";
+import { apiGetDetailProduct, apiGetListProduct } from "./../../api/product/index";
 
 // transform data to fit with UI;
 export const productService = {
@@ -30,6 +31,28 @@ export const productService = {
             return {
                 ...response,
                 data: dataFillter,
+            };
+        });
+    },
+    getListProduct: function (params, token) {
+        return apiGetListProduct(params, token).then((response) => {
+            const dataFillter = response.data.listProduct.map((val) => {
+                return {
+                    id: val?.id || null,
+                    urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${val?.featureImageId}`,
+                    urlProduct: `/san-pham?product_id=${val?.url}` || "#",
+                    title: val?.title || "",
+                    curPrice: val?.price || 0,
+                    oldPrice: val?.comparePrice || 0,
+                    status: getStateProduct(val?.createdAt, val?.price || 0, val?.comparePrice || 0),
+                };
+            });
+            return {
+                ...response,
+                data: {
+                    ...response.data,
+                    listProduct: dataFillter,
+                },
             };
         });
     },

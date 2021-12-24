@@ -38,3 +38,14 @@ export const convertURL = (name) => {
     }
     return "";
 };
+
+export const getStateProduct = (timeCreate, curPrice, oldPrice) => {
+    const tenDayAgo = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
+    const timeCreated = new Date(timeCreate);
+    if (timeCreated > tenDayAgo) {
+        return "new";
+    } else if (curPrice < oldPrice) {
+        return "sale";
+    }
+    return "";
+};
