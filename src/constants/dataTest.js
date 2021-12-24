@@ -16,6 +16,40 @@ export const productData2 = {
     oldPrice: 120300,
     status: "sale",
 };
+export const danhmuc = [
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật xxxxx",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+    {
+        title: "Sản phẩm nổi bật",
+        url: "#",
+    },
+];
 
 export const list_img_product = [
     "https://bizweb.dktcdn.net/thumb/large/100/367/937/products/3-f821fea3-9d0d-4a0e-b3d5-74ba76ddc54d.jpg",

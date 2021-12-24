@@ -13,6 +13,29 @@
             }
         }
     }
+    .range_price {
+        & > div {
+            padding: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            .checkbox_icon {
+                margin-right: 10px;
+                display: inline-flex;
+                width: 20px;
+                height: 20px;
+                font-size: 14px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 6px;
+                border: 1px solid black;
+                color: $text_color_hover;
+            }
+            &:hover {
+                color: $text_color_hover;
+            }
+        }
+    }
     .sort_by {
         float: right;
         position: relative;

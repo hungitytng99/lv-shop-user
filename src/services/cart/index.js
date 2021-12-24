@@ -8,7 +8,7 @@ export const cartService = {
         });
     },
 
-    getCart: function () {
+    getUserCart: function () {
         return apiGetCart().then((response) => {
             return response;
         });

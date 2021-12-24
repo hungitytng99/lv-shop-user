@@ -27,8 +27,9 @@ export const apiGetCart = async (params) => {
     } catch (error) {
         console.log("error", error);
         return {
+            error: error,
             state: REQUEST_STATE.ERROR,
-            data: [],
+            data: {},
         };
     }
 };
