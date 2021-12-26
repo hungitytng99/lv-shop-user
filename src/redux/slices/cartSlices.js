@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { storageKey } from "./../../constants/storageKeys";
+import { cartService } from "./../../services/cart/index";
 const initialState = {
     value: {
         totalProduct: 0,
@@ -11,62 +12,18 @@ const initialState = {
 };
 
 export const getProductCart = createAsyncThunk("cart/get_product_cart", async () => {
-    if (localStorage.getItem(storageKey.TOKEN)) {
-        //call api
-        return {
-            totalProduct: 10,
-            totalPrice: 100,
-            products: [],
-        };
-    } else {
-        return JSON.parse(localStorage.getItem(storageKey.CART)) || initialState.value;
-    }
+    //call api
+    const response = await cartService.getUserCart();
+    console.log(response);
+    return response;
+    // return {
+    //     totalProduct: 10,
+    //     totalPrice: 100,
+    //     products: [],
+    // };
 });
 
-export const addProductToCart = createAsyncThunk("cart/add_product", async (idProduct, thunkAPI) => {
-    const { dispatch, getState } = thunkAPI;
-    const { cartSlice } = getState();
-    //call api lấy sản phẩm
-    const sp = {
-        id: "1234",
-        quantity: 1,
-        urlImg: "https://bizweb.dktcdn.net/thumb/large/100/367/937/products/2-4d4650c2-dfd4-4467-bcb4-205c692552e1.jpg?v=1615519760717",
-        title: "Cửa lưới chống muỗi loại to to to",
-        price: 100000,
-    };
-
-    if (localStorage.getItem(storageKey.TOKEN) == null) {
-        let productList = [...cartSlice.value.products];
-        const length = productList.length;
-        // console.log(productList)
-        let kt = false;
-        let totalProducts = 0;
-        let totalPrice = 0;
-        for (let i = 0; i < length; i++) {
-            if (productList[i].id === sp.id) {
-                productList[i] = {
-                    ...productList[i],
-                    quantity: productList[i].quantity + sp.quantity,
-                };
-                kt = true;
-                // console.log("tìm thấy sản phẩm trong cart")
-            }
-            totalProducts += productList[i].quantity;
-            totalPrice += productList[i].quantity * productList[i].price;
-        }
-        if (kt === false) {
-            productList = [...productList, sp];
-        }
-
-        const result = {
-            products: productList,
-            totalProduct: totalProducts,
-            totalPrice: totalPrice,
-        };
-        localStorage.setItem(storageKey.CART, JSON.stringify(result));
-        return result;
-    }
-});
+export const addProductToCart = createAsyncThunk("cart/add_product", async (idProduct, thunkAPI) => {});
 
 export const cartSlice = createSlice({
     name: "cart",
@@ -86,7 +43,6 @@ export const cartSlice = createSlice({
         },
         [getProductCart.rejected]: (state, action) => {
             state.loading = false;
-            console.log("getProductCart lỗi");
         },
         //---------------------------------------------------------------------
         [addProductToCart.pending]: (state, action) => {
@@ -98,7 +54,6 @@ export const cartSlice = createSlice({
         },
         [addProductToCart.rejected]: (state, action) => {
             state.loading = false;
-            console.log("lỗi add product to cart");
         },
     },
 });

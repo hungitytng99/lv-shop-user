@@ -1,9 +1,13 @@
 import { GET, PUT, POST, DELETE } from "../fetch";
 import { REQUEST_STATE } from "../../app-configs/index";
 
-export const apiGetDetailProduct = async (id) => {
+export const apiGetDetailProduct = async (id, token) => {
     try {
-        const response = await GET(`/products/${id}`, null, { isFullPath: false });
+        let param3 = { isFullPath: false };
+        if (token !== undefined) {
+            param3.headers = { Authorization: "Bearer " + token };
+        }
+        const response = await GET(`/products/${id}`, null, param3);
         return {
             state: REQUEST_STATE.SUCCESS,
             data: response.result,

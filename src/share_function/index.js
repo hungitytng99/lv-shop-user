@@ -49,3 +49,25 @@ export const getStateProduct = (timeCreate, curPrice, oldPrice) => {
     }
     return "";
 };
+
+export const getListRandomNumber = (lengthArrReturn, maxValue) => {
+    let checkNumExist = {};
+    let arrResult = [];
+    if (maxValue == 0) return [];
+    if (maxValue < lengthArrReturn) {
+        for (let i = 0; i < lengthArrReturn; i++) {
+            arrResult.push(Math.floor(Math.random() * maxValue));
+        }
+    } else {
+        for (let i = 0; i < lengthArrReturn; i++) {
+            let newNum = Math.floor(Math.random() * maxValue);
+            while (checkNumExist["" + newNum] === true) {
+                newNum = Math.floor(Math.random() * maxValue);
+            }
+            arrResult.push(newNum);
+            checkNumExist["" + newNum] = true;
+        }
+    }
+
+    return arrResult;
+};

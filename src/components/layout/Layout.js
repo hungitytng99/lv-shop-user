@@ -7,6 +7,7 @@ import ModalReviewProduct from "src/components-share/Modal/ModalReviewProduct/Mo
 import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalReviewCart";
 import { getVisitorInformation } from "./../../redux/slices/userSlice";
 import { getMenu } from "./../../redux/slices/menuSlice";
+import { getProductCart } from "./../../redux/slices/cartSlices";
 
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props;
@@ -15,6 +16,7 @@ function Layout(props) {
         (async () => {
             await dispatch(getVisitorInformation());
             dispatch(getMenu());
+            dispatch(getProductCart());
         })();
     }, []);
 

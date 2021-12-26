@@ -6,6 +6,8 @@ import CardReview from "src/components-share/Card/CardReview/CardReview";
 import CarouselProduct from "src/components-share/Carousel/CarouselProduct";
 import CarouselBannerHomePage from "src/components/pages/home/CarouselBannerHomePage";
 import { productData, productData2 } from "src/constants/dataTest";
+import { useSelector } from "react-redux";
+import { getListRandomNumber } from "./../src/share_function/index";
 
 const reviewCard = {
     imageUrl: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
@@ -14,7 +16,8 @@ const reviewCard = {
 };
 
 export default function Home() {
-    console.log("HOme");
+    const menu = useSelector((stores) => stores.menuSlice.value);
+    const randomCardReview = getListRandomNumber(4, menu.data?.length || 0);
     return (
         <>
             <Head>
@@ -24,7 +27,14 @@ export default function Home() {
                 <CarouselBannerHomePage />
                 <Container className="home">
                     <Row>
-                        <Col lg={3} xs={6}>
+                        {randomCardReview.map((item, index) => {
+                            return (
+                                <Col key={menu.data[item].urlPage + "review"} lg={3} xs={6}>
+                                    <CardReview data={menu.data[item]} />
+                                </Col>
+                            );
+                        })}
+                        {/* <Col lg={3} xs={6}>
                             <CardReview data={reviewCard} />
                         </Col>
                         <Col lg={3} xs={6}>
@@ -35,7 +45,7 @@ export default function Home() {
                         </Col>
                         <Col lg={3} xs={6}>
                             <CardReview data={reviewCard} />
-                        </Col>
+                        </Col> */}
                     </Row>
                     <div className="box_title">
                         <h4>Hot Sale Mỗi Ngày</h4>
