@@ -53,7 +53,7 @@ export const getStateProduct = (timeCreate, curPrice, oldPrice) => {
 export const getListRandomNumber = (lengthArrReturn, maxValue) => {
     let checkNumExist = {};
     let arrResult = [];
-    if (maxValue == 0) return [];
+    if (maxValue <= 0) return [];
     if (maxValue < lengthArrReturn) {
         for (let i = 0; i < lengthArrReturn; i++) {
             arrResult.push(Math.floor(Math.random() * maxValue));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Layout from "src/components/layout/Layout";
 import { Col, Row, Container } from "react-bootstrap";
@@ -15,11 +15,8 @@ import { productService } from "./../../src/services/product/index";
 import cookies from "next-cookies";
 import { rangePrice } from "./../../src/constants/rangePrice";
 import { getListRandomNumber } from "src/share_function";
-const reviewCard = {
-    imageUrl: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
-    urlPage: "#",
-    title: "Tiện ích nhà bếp",
-};
+import { REQUEST_STATE } from "src/app-configs";
+import { useRouter } from "next/router";
 
 export default function Slug(props) {
     let breadcrumb = [
@@ -29,6 +26,13 @@ export default function Slug(props) {
         },
     ];
     const { dataResponse, collectionId, query, baseUrlForPagination, baseUrlForSort, baseUrlForRange, itemsPerPage } = props;
+    // useEffect(()=> {
+    //     if (dataResponse.state === REQUEST_STATE.ERROR) {
+    //         const route = useRouter();
+    //         route.push("/");
+    //     }
+    // },[])
+
     console.log(dataResponse);
     const { page = "1", sort = "latest" } = query;
     const menu = useSelector((stores) => stores.menuSlice.value.data);
@@ -195,9 +199,16 @@ export async function getServerSideProps(context) {
             sortPrice: getSortPriceType(query.sort),
             createdAt: query.sort === "oldest" ? "ASC" : "DESC",
         };
-        // console.log({ resolvedUrl, query, params })
-        // console.log(context)
+
         const token = cookies(context).auth;
+        if (token == undefined) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false,
+                },
+            };
+        }
         const [baseUrl] = resolvedUrl.split("?");
         let baseUrlForPagination = baseUrl + "?sort=" + (query.sort === undefined ? "latest" : query.sort) + (query.range === undefined ? "" : "&range=" + query.range);
         let baseUrlForSort = baseUrl + "?page=1" + (query.range === undefined ? "" : "&range=" + query.range);
@@ -213,6 +224,7 @@ export async function getServerSideProps(context) {
             baseUrlForPagination,
             baseUrlForSort,
             baseUrlForRange,
+            token,
         });
         return {
             props: {

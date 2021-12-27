@@ -8,7 +8,7 @@ export const getMenu = createAsyncThunk("menu/getMenu", async () => {
 
 export const menuSlice = createSlice({
     name: "menu",
-    initialState: { value: [], loading: false },
+    initialState: { value: { data: [] }, loading: false },
     reducers: {
         saveMenuData: (state, action) => {
             state.value = action.payload;
