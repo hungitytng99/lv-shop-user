@@ -13,12 +13,14 @@ import { useState } from "react";
 import CardNews from "./../src/components-share/Card/CardNews/CardNews";
 import Cookies from "js-cookie";
 import { storageKey } from "src/constants/storageKeys";
+import { articleService } from "./../src/services/articles/index";
 
 export default function Home(props) {
     const token = Cookies.get(storageKey.Cookie_token);
     const [productData, setProductData] = useState({
         hotProduct: {},
         newProduct: {},
+        articles: {},
     });
 
     const [specificProduct, setSpecificProduct] = useState({
@@ -42,9 +44,11 @@ export default function Home(props) {
                 });
                 const hotProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: true, createdAt: "DESC" }, token);
                 const newProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: false, createdAt: "DESC" }, token);
+                const listArticles = await articleService.getListArticles({ limit: 3, offset: 0 }, token);
                 setProductData({
                     hotProduct: hotProductdata,
                     newProduct: newProductdata,
+                    articles: listArticles,
                 });
             }
         })();
@@ -109,15 +113,13 @@ export default function Home(props) {
                     </div>
                     <div>
                         <Row>
-                            <Col lg={4} xs={6}>
-                                <CardNews />
-                            </Col>
-                            <Col lg={4} xs={6}>
-                                <CardNews />
-                            </Col>
-                            <Col lg={4} xs={6}>
-                                <CardNews />
-                            </Col>
+                            {productData.articles.data?.map((item, index) => {
+                                return (
+                                    <Col key={item.urlPage + index} lg={4} xs={6}>
+                                        <CardNews data={item} />
+                                    </Col>
+                                );
+                            })}
                         </Row>
                     </div>
                 </Container>

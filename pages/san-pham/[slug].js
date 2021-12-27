@@ -4,7 +4,6 @@ import Layout from "src/components/layout/Layout";
 import { Col, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Link from "next/dist/client/link";
-import { productData, productData2 } from "./../../src/constants/dataTest";
 import CardProduct from "src/components-share/Card/CardProduct/CardProduct";
 import PaginationCustom from "src/components-share/Pagination/PaginationCustom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,8 +14,6 @@ import { productService } from "./../../src/services/product/index";
 import cookies from "next-cookies";
 import { rangePrice } from "./../../src/constants/rangePrice";
 import { getListRandomNumber } from "src/share_function";
-import { REQUEST_STATE } from "src/app-configs";
-import { useRouter } from "next/router";
 
 export default function Slug(props) {
     let breadcrumb = [
@@ -26,12 +23,6 @@ export default function Slug(props) {
         },
     ];
     const { dataResponse, collectionId, query, baseUrlForPagination, baseUrlForSort, baseUrlForRange, itemsPerPage } = props;
-    // useEffect(()=> {
-    //     if (dataResponse.state === REQUEST_STATE.ERROR) {
-    //         const route = useRouter();
-    //         route.push("/");
-    //     }
-    // },[])
 
     console.log(dataResponse);
     const { page = "1", sort = "latest" } = query;
@@ -188,6 +179,15 @@ export async function getServerSideProps(context) {
         return "";
     }
     try {
+        const token = cookies(context).auth;
+        if (token == undefined) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false,
+                },
+            };
+        }
         let params_post = {
             limit: 16,
             offset: (Number(query?.page) - 1) * 16 || 0,
@@ -200,15 +200,6 @@ export async function getServerSideProps(context) {
             createdAt: query.sort === "oldest" ? "ASC" : "DESC",
         };
 
-        const token = cookies(context).auth;
-        if (token == undefined) {
-            return {
-                redirect: {
-                    destination: "/",
-                    permanent: false,
-                },
-            };
-        }
         const [baseUrl] = resolvedUrl.split("?");
         let baseUrlForPagination = baseUrl + "?sort=" + (query.sort === undefined ? "latest" : query.sort) + (query.range === undefined ? "" : "&range=" + query.range);
         let baseUrlForSort = baseUrl + "?page=1" + (query.range === undefined ? "" : "&range=" + query.range);

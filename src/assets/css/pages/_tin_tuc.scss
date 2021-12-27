@@ -1,0 +1,20 @@
+.article_detail {
+    .share_icon {
+        cursor: pointer;
+        .fb {
+            &:hover {
+                color: rgb(23, 23, 223);
+            }
+        }
+        .ggplus {
+            &:hover {
+                color: red;
+            }
+        }
+        .twist {
+            &:hover {
+                color: rgb(0, 183, 255);
+            }
+        }
+    }
+}
