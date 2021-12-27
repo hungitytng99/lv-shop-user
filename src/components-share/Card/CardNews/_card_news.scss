@@ -1,4 +1,5 @@
 .card_news {
+    margin-bottom: 30px;
     max-width: 376px;
     .thumb {
         width: 100%;
@@ -32,5 +33,32 @@
                 font-size: small;
             }
         }
+    }
+    .title {
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 12px 0px;
+        cursor: pointer;
+        &:hover {
+            color: $text_color_hover;
+        }
+    }
+    .author {
+        display: flex;
+        align-items: center;
+        span {
+            margin-right: 12px;
+            &:first-child {
+                color: $text_color_hover;
+            }
+        }
+    }
+    .news_content {
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        display: -webkit-box;
     }
 }
