@@ -1,0 +1,36 @@
+.card_news {
+    max-width: 376px;
+    .thumb {
+        width: 100%;
+        position: relative;
+        img {
+            width: inherit;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        .date {
+            position: absolute;
+            border-radius: 50%;
+            background-color: $text_color_hover;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            width: 80px;
+            height: 80px;
+            top: 8px;
+            left: 8px;
+            span {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .day {
+                font-weight: 700;
+            }
+            .month {
+                font-size: small;
+            }
+        }
+    }
+}

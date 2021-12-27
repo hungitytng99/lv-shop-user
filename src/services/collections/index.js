@@ -11,6 +11,7 @@ export const collectionService = {
                     cateId: item.id,
                     urlPage: "/san-pham/" + item.id + "-" + convertURL(item.title),
                     title: item.title,
+                    imageUrl: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.thumbnailId}`,
                 };
             });
             return response;

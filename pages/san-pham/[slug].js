@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Layout from "src/components/layout/Layout";
 import { Col, Row, Container } from "react-bootstrap";
@@ -14,25 +14,30 @@ import CardReview from "src/components-share/Card/CardReview/CardReview";
 import { productService } from "./../../src/services/product/index";
 import cookies from "next-cookies";
 import { rangePrice } from "./../../src/constants/rangePrice";
-
-const reviewCard = {
-    imageUrl: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
-    urlPage: "#",
-    title: "Tiện ích nhà bếp",
-};
+import { getListRandomNumber } from "src/share_function";
+import { REQUEST_STATE } from "src/app-configs";
+import { useRouter } from "next/router";
 
 export default function Slug(props) {
     let breadcrumb = [
         {
             title: "Tất cả sản phẩm",
-            url: "/san-pham",
+            url: "/san-pham/all",
         },
     ];
     const { dataResponse, collectionId, query, baseUrlForPagination, baseUrlForSort, baseUrlForRange, itemsPerPage } = props;
+    // useEffect(()=> {
+    //     if (dataResponse.state === REQUEST_STATE.ERROR) {
+    //         const route = useRouter();
+    //         route.push("/");
+    //     }
+    // },[])
+
     console.log(dataResponse);
     const { page = "1", sort = "latest" } = query;
     const menu = useSelector((stores) => stores.menuSlice.value.data);
     const lengthMenu = menu?.length || 0;
+    const randomCardReview = getListRandomNumber(4, lengthMenu);
     for (let i = 0; i < lengthMenu; i++) {
         if (menu[i].cateId === collectionId) {
             breadcrumb.push({
@@ -50,18 +55,13 @@ export default function Slug(props) {
             <Layout titlePage={breadcrumb[1]?.title || breadcrumb[0].title} breadcrumb={breadcrumb}>
                 <Container className="san_pham">
                     <Row style={{ marginTop: "30px" }}>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
-                        <Col lg={3} xs={6}>
-                            <CardReview data={reviewCard} />
-                        </Col>
+                        {randomCardReview.map((item, index) => {
+                            return (
+                                <Col key={menu[item].urlPage + index} lg={3} xs={6}>
+                                    <CardReview data={menu[item]} />
+                                </Col>
+                            );
+                        })}
                     </Row>
                     <hr />
 
@@ -199,9 +199,16 @@ export async function getServerSideProps(context) {
             sortPrice: getSortPriceType(query.sort),
             createdAt: query.sort === "oldest" ? "ASC" : "DESC",
         };
-        // console.log({ resolvedUrl, query, params })
-        // console.log(context)
+
         const token = cookies(context).auth;
+        if (token == undefined) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false,
+                },
+            };
+        }
         const [baseUrl] = resolvedUrl.split("?");
         let baseUrlForPagination = baseUrl + "?sort=" + (query.sort === undefined ? "latest" : query.sort) + (query.range === undefined ? "" : "&range=" + query.range);
         let baseUrlForSort = baseUrl + "?page=1" + (query.range === undefined ? "" : "&range=" + query.range);
@@ -217,6 +224,7 @@ export async function getServerSideProps(context) {
             baseUrlForPagination,
             baseUrlForSort,
             baseUrlForRange,
+            token,
         });
         return {
             props: {

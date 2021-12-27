@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Row } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 import { Col } from "react-bootstrap";
@@ -8,13 +8,18 @@ import { format_d_currency } from "src/share_function";
 export default function ProductDetail(props) {
     const { product } = props;
     const { listImg = [], title = "", trademark = "", status = "", productInfo = "", curPrice = 0, oldPrice = 0, options = [], variants = [] } = product;
-    const [datashow, setDataShow] = useState({
-        oldPrice: oldPrice,
-        curPrice: curPrice,
-        imageIndex: 0,
-        activeOption: variants[0]?.existByOptions || [],
-    });
-
+    const [datashow, setDataShow] = useState({ oldPrice: 0, curPrice: 0, imageIndex: 0, activeOption: [] });
+    useEffect(() => {
+        setDataShow({
+            oldPrice: oldPrice,
+            curPrice: curPrice,
+            imageIndex: 0,
+            activeOption: variants[0]?.existByOptions || [],
+        });
+        return () => {
+            setDataShow({ oldPrice: 0, curPrice: 0, imageIndex: 0, activeOption: [] });
+        };
+    }, [product]);
     function changeOptionVariant(indexOptionChange, valueChange) {
         let newActiveOption = [...datashow.activeOption];
         newActiveOption[indexOptionChange] = valueChange;
@@ -36,6 +41,7 @@ export default function ProductDetail(props) {
                     }
                 });
                 newDataShow = {
+                    ...newDataShow,
                     oldPrice: variants[i].oldPrice,
                     curPrice: variants[i].curPrice,
                     activeOption: variants[i].existByOptions,
