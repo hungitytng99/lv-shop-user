@@ -5,21 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 import { format_d_currency } from "./../../../share_function/index";
+import Link from "next/dist/client/link";
 
 export default function CartItem(props) {
     const { data } = props;
     const numberOrder = useRef();
-    const [totalCost, setTotalCost] = useState(data.price * data.quantity);
 
     function increaseOder() {
         numberOrder.current.value++;
-        setTotalCost(data.price * Number.parseInt(numberOrder.current.value));
     }
     function decreaseOder() {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (currentvalue > 1) {
             numberOrder.current.value--;
-            setTotalCost(data.price * Number.parseInt(numberOrder.current.value));
         }
     }
     function checkInputNum(e) {
@@ -27,7 +25,6 @@ export default function CartItem(props) {
         if (isNaN(currentvalue) || currentvalue < 1) {
             numberOrder.current.value = "1";
         }
-        setTotalCost(data.price * Number.parseInt(numberOrder.current.value));
     }
     return (
         <Row className="cart_item">
@@ -40,7 +37,9 @@ export default function CartItem(props) {
                 <img src={data.urlImg} />
             </Col>
             <Col md={3} xs={5} className="cart_item-title">
-                {data.title}
+                <Link href={data.urlProduct} passHref>
+                    {data.title}
+                </Link>
             </Col>
             <Col md={2} className="cart_item-price">
                 {format_d_currency(data.price)}
@@ -57,7 +56,7 @@ export default function CartItem(props) {
                 </div>
             </Col>
             <Col md={2} className="cart_item-total_price">
-                <span>{format_d_currency(totalCost)}</span>
+                <span>{format_d_currency(data.totalPrice)}</span>
             </Col>
         </Row>
     );

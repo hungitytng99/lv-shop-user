@@ -13,6 +13,7 @@
         img {
             aspect-ratio: 1/1;
             width: calc(100% + 30px);
+            object-fit: cover;
         }
     }
     &-delete {

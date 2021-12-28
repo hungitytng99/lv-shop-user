@@ -1,16 +1,41 @@
-import { apiAddProductToCart, apiGetCart } from "./../../api/cart/index";
+import { apiAddProductToCart, apiGetCart, apiUpdateItemInCart } from "./../../api/cart/index";
 
 export const cartService = {
     addProductToCart: function (params) {
+        // params = { variantId: 0, quantity: 0 };
         return apiAddProductToCart(params).then((response) => {
-            response.data;
+            // response.data;
+            return response;
+        });
+    },
+    updateProductInCart: function (idCartItem, params) {
+        // params = { variantId: 0, quantity: 0 };
+        return apiUpdateItemInCart(idCartItem, params).then((response) => {
             return response;
         });
     },
 
     getUserCart: function () {
         return apiGetCart().then((response) => {
-            return response;
+            return {
+                totalProduct: response.data.totalCountItems || 0,
+                totalPrice: response.data.totalPrice || 0,
+                totalComparePrice: response.data.totalComparePrice || 0,
+                products:
+                    response.data.cartItems?.map((item) => {
+                        return {
+                            cartId: item.id,
+                            variantId: item.variant.id,
+                            urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.variant?.featureImageId}`,
+                            title: item.variant?.product?.title,
+                            price: item.variant?.price,
+                            quantity: item.quantity,
+                            urlProduct: `/san-pham?product=${item?.variant?.product?.id}-${item?.variant?.product?.url}`,
+                            totalPrice: item.linePrice || 0,
+                            totalComparePrice: item.lineComparePrice || 0,
+                        };
+                    }) || [],
+            };
         });
     },
 };

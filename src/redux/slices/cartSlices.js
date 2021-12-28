@@ -16,11 +16,11 @@ export const getProductCart = createAsyncThunk("cart/get_product_cart", async ()
     const response = await cartService.getUserCart();
     console.log(response);
     return response;
-    // return {
-    //     totalProduct: 10,
-    //     totalPrice: 100,
-    //     products: [],
-    // };
+});
+export const updateProductCart = createAsyncThunk("cart/update_cart", async ({ idCartItem, params }, thunkAPI) => {
+    const response = await cartService.updateProductInCart(idCartItem, params);
+    console.log(response);
+    return;
 });
 
 export const addProductToCart = createAsyncThunk("cart/add_product", async (idProduct, thunkAPI) => {});
