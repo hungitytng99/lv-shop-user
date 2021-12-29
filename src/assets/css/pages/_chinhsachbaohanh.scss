@@ -1,0 +1,15 @@
+.chinh_sach_bao_hanh {
+    text-align: justify;
+    font-size: 15px;
+    h1 {
+        margin: 40px 0 20px 0;
+        font-size: 40px;
+        cursor: pointer;
+        &:hover {
+            color: $text_color_hover;
+        }
+    }
+    p {
+        margin-bottom: 15px;
+    }
+}
