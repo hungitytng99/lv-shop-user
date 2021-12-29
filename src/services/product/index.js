@@ -22,6 +22,7 @@ export const productService = {
                     }) || [],
                 variants: response.data?.variants.map((variant, index) => {
                     return {
+                        id: variant?.id || null,
                         oldPrice: variant?.comparePrice || 0,
                         curPrice: variant?.price || 0,
                         featureImageId: variant?.featureImageId,

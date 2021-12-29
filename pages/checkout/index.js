@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import Head from "next/head";
@@ -9,8 +9,19 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/dist/client/link";
 import Transport from "src/components/pages/checkout/Transport";
 import PaymentMethod from "src/components/pages/checkout/PaymentMethod";
+import { useDispatch } from "react-redux";
+import { getProductCart } from "./../../src/redux/slices/cartSlices";
+import { getVisitorInformation } from "src/redux/slices/userSlice";
+import CartAndCheckout from "./../../src/components/pages/checkout/CartAndCheckout";
 
 export default function Checkout(props) {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        (async () => {
+            await dispatch(getVisitorInformation());
+            dispatch(getProductCart());
+        })();
+    }, []);
     return (
         <>
             <Head>
@@ -40,7 +51,7 @@ export default function Checkout(props) {
                         </Row>
                     </Col>
                     <Col lg={4} className="checkout_order">
-                        Đơn hàng (3 sản phẩm)
+                        <CartAndCheckout />
                     </Col>
                 </Row>
             </Container>

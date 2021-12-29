@@ -53,3 +53,20 @@ export const apiGetCart = async (params) => {
         };
     }
 };
+
+export const apiGetCheckoutData = async () => {
+    try {
+        const response = await GET("/user/cart/checkout", null, { isFullPath: false });
+        return {
+            state: REQUEST_STATE.SUCCESS,
+            data: response.result,
+        };
+    } catch (error) {
+        console.log("error", error);
+        return {
+            error: error,
+            state: REQUEST_STATE.ERROR,
+            data: {},
+        };
+    }
+};

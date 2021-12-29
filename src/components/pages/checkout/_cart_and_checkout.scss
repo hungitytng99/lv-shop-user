@@ -1,0 +1,31 @@
+.cart_and_checkout {
+    .box_img {
+        padding-right: 0px;
+        div {
+            width: 100%;
+            position: relative;
+            img {
+                width: inherit;
+                aspect-ratio: 1/1;
+                border: 1px solid #bee5eb;
+            }
+            .quantity {
+                position: absolute;
+                background-color: #2a9dcc;
+                padding: 2px 6px;
+                top: -10px;
+                right: -10px;
+                font-size: x-small;
+                border-radius: 50%;
+                color: white;
+            }
+        }
+    }
+    .title {
+        font-size: small;
+    }
+    .flex_space_between {
+        display: flex;
+        justify-content: space-between;
+    }
+}

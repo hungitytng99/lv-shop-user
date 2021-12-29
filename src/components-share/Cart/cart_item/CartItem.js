@@ -6,24 +6,32 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 import { format_d_currency } from "./../../../share_function/index";
 import Link from "next/dist/client/link";
+import { useDispatch } from "react-redux";
+import { updateProductCart } from "src/redux/slices/cartSlices";
 
 export default function CartItem(props) {
     const { data } = props;
+    const dispatch = useDispatch();
     const numberOrder = useRef();
 
     function increaseOder() {
         numberOrder.current.value++;
+        dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
     }
     function decreaseOder() {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (currentvalue > 1) {
             numberOrder.current.value--;
+            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
         }
     }
     function checkInputNum(e) {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (isNaN(currentvalue) || currentvalue < 1) {
             numberOrder.current.value = "1";
+            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: 1 } }));
+        } else {
+            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
         }
     }
     return (
@@ -38,7 +46,10 @@ export default function CartItem(props) {
             </Col>
             <Col md={3} xs={5} className="cart_item-title">
                 <Link href={data.urlProduct} passHref>
-                    {data.title}
+                    <span>
+                        <span>{data.title}</span> <br />
+                        <span>{data.variantTitle}</span>
+                    </span>
                 </Link>
             </Col>
             <Col md={2} className="cart_item-price">

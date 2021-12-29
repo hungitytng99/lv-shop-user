@@ -4,8 +4,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPodcast } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import Image from "next/image";
+import { useSelector } from "react-redux";
+
 export default function Footer() {
+    const shopInfor = useSelector((stores) => stores.shopSlice.value);
     return (
         <div className="footer">
             <Container>
@@ -32,9 +34,11 @@ export default function Footer() {
                             <div className="contact">
                                 <h4 className="title-info">Liên hệ</h4>
                                 <div className="contact-info">
-                                    <div className="contact-info-logo">
-                                        <img src={ImagesPath.LOGO}></img>
-                                    </div>
+                                    <Link href="/" passHref>
+                                        <div className="contact-info-logo">
+                                            <img src={ImagesPath.LOGO}></img>
+                                        </div>
+                                    </Link>
                                     <div className="contact-info-item">
                                         <div className="item">
                                             <b>Tiện ích Xanh</b>{" "}
@@ -48,8 +52,8 @@ export default function Footer() {
                                         <div className="item">
                                             <span>
                                                 <span style={{ color: "#f6470e" }}>Hotline: </span>
-                                                <Link href={{ pathname: "tel:0962020446" }} passHref>
-                                                    <span className="hotline-item">0962.020.446</span>
+                                                <Link href={{ pathname: `tel:${shopInfor?.data?.phone}` }} passHref>
+                                                    <span className="hotline-item">{shopInfor?.data?.phone}</span>
                                                 </Link>
                                             </span>
                                         </div>
@@ -75,7 +79,7 @@ export default function Footer() {
                                         </Link>
                                     </li>
                                     <li className="item-info">
-                                        <Link href="/san-pham">
+                                        <Link href="/san-pham/all">
                                             <span>Sản phẩm</span>
                                         </Link>
                                     </li>

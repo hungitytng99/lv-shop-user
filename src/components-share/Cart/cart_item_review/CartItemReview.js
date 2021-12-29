@@ -5,7 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { format_d_currency } from "./../../../share_function/index";
 import Link from "next/dist/client/link";
 export default function CartItemReview(props) {
-    const { title, urlImg, price, quantity, urlProduct } = props.data;
+    const { title, urlImg, price, quantity, urlProduct, variantTitle } = props.data;
     return (
         <Row className="cart_item_review ">
             <Col xs={5} className="no_pading_col">
@@ -24,7 +24,10 @@ export default function CartItemReview(props) {
             </Col>
             <Link href={urlProduct} passHref>
                 <Col xs={7}>
-                    <p className="cart_item_review-title">{title}</p>
+                    <p className="cart_item_review-title">
+                        <span className="overflow_ellipsis">{title}</span>
+                        <span>{variantTitle}</span>
+                    </p>
                     <div className="cart_item_review-price">
                         <span>{format_d_currency(price)}</span>
                         <span>{"   x" + quantity}</span>

@@ -3,7 +3,7 @@ import Link from "next/dist/client/link";
 import { Col } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faCogs, faEye } from "@fortawesome/free-solid-svg-icons";
 import { addProductToCart } from "src/redux/slices/cartSlices";
 import { useDispatch } from "react-redux";
 import { format_d_currency } from "./../../../share_function/index";
@@ -28,10 +28,17 @@ export default function CardProduct(props) {
                     <span onClick={() => openReviewProductModal()}>
                         <FontAwesomeIcon icon={faEye} />
                     </span>
-                    <span onClick={() => addProduct()}>
-                        {" "}
-                        <FontAwesomeIcon icon={faCartPlus} />
-                    </span>
+                    {data.variant ? (
+                        <span onClick={() => addProduct()}>
+                            <FontAwesomeIcon icon={faCartPlus} />
+                        </span>
+                    ) : (
+                        <Link href={data.urlProduct} passHref>
+                            <span>
+                                <FontAwesomeIcon icon={faCogs} />
+                            </span>
+                        </Link>
+                    )}
                 </div>
             </div>
             <p className="product_card-title">

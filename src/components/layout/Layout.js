@@ -8,6 +8,7 @@ import ModalReviewCart from "src/components-share/Modal/ModalReviewCart/ModalRev
 import { getVisitorInformation } from "./../../redux/slices/userSlice";
 import { getMenu } from "./../../redux/slices/menuSlice";
 import { getProductCart } from "./../../redux/slices/cartSlices";
+import { getShopInfor } from "./../../redux/slices/shopSlice";
 
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props;
@@ -15,6 +16,7 @@ function Layout(props) {
     useEffect(() => {
         (async () => {
             await dispatch(getVisitorInformation());
+            dispatch(getShopInfor());
             dispatch(getMenu());
             dispatch(getProductCart());
         })();

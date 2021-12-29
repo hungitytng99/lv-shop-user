@@ -100,7 +100,8 @@ export default function ProductDetail(props) {
                     <h3 className="detal_product-cost-current">{format_d_currency(datashow.curPrice)}</h3>
                     <span className="detal_product-cost-old">{format_d_currency(datashow.oldPrice)}</span>
                 </div>
-                <p>Thông tin sản phẩm {productInfo}</p>
+                <p>Thông tin sản phẩm: </p>
+                <div dangerouslySetInnerHTML={{ __html: productInfo }} />
                 <hr />
                 {options?.map((opt, i) => {
                     return (
