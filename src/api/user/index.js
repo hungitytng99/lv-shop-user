@@ -9,7 +9,7 @@ export const apiLogin = async (params) => {
             data: response.result,
             state: REQUEST_STATE.SUCCESS,
         };
-        console.log("apiLogin", result);
+        // console.log("apiLogin", result);
         return result;
     } catch (error) {
         console.log("error", error);
@@ -28,7 +28,7 @@ export const apiRegisterByDevice = async (params) => {
             data: response.result,
             state: REQUEST_STATE.SUCCESS,
         };
-        console.log("apiRegisterByDevice", result);
+        // console.log("apiRegisterByDevice", result);
         return result;
     } catch (error) {
         console.log("error", error);
@@ -47,7 +47,7 @@ export const apiGetUserInforbyToken = async (params) => {
             data: response.result,
             state: REQUEST_STATE.SUCCESS,
         };
-        console.log("apiGetUserInforbyToken", result);
+        // console.log("apiGetUserInforbyToken", result);
         return result;
     } catch (error) {
         console.log("error", error);

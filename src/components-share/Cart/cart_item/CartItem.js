@@ -5,29 +5,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 import { format_d_currency } from "./../../../share_function/index";
+import Link from "next/dist/client/link";
+import { useDispatch } from "react-redux";
+import { updateProductCart } from "src/redux/slices/cartSlices";
 
 export default function CartItem(props) {
     const { data } = props;
+    const dispatch = useDispatch();
     const numberOrder = useRef();
-    const [totalCost, setTotalCost] = useState(data.price * data.quantity);
 
     function increaseOder() {
         numberOrder.current.value++;
-        setTotalCost(data.price * Number.parseInt(numberOrder.current.value));
+        dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
     }
     function decreaseOder() {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (currentvalue > 1) {
             numberOrder.current.value--;
-            setTotalCost(data.price * Number.parseInt(numberOrder.current.value));
+            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
         }
     }
     function checkInputNum(e) {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (isNaN(currentvalue) || currentvalue < 1) {
             numberOrder.current.value = "1";
+            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: 1 } }));
+        } else {
+            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
         }
-        setTotalCost(data.price * Number.parseInt(numberOrder.current.value));
     }
     return (
         <Row className="cart_item">
@@ -40,7 +45,12 @@ export default function CartItem(props) {
                 <img src={data.urlImg} />
             </Col>
             <Col md={3} xs={5} className="cart_item-title">
-                {data.title}
+                <Link href={data.urlProduct} passHref>
+                    <span>
+                        <span>{data.title}</span> <br />
+                        <span>{data.variantTitle}</span>
+                    </span>
+                </Link>
             </Col>
             <Col md={2} className="cart_item-price">
                 {format_d_currency(data.price)}
@@ -57,7 +67,7 @@ export default function CartItem(props) {
                 </div>
             </Col>
             <Col md={2} className="cart_item-total_price">
-                <span>{format_d_currency(totalCost)}</span>
+                <span>{format_d_currency(data.totalPrice)}</span>
             </Col>
         </Row>
     );

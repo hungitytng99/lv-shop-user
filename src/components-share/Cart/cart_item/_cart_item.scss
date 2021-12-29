@@ -9,10 +9,17 @@
         justify-content: center;
         align-items: center;
     }
+    &-title {
+        span {
+            cursor: pointer;
+            color: $text_color_hover;
+        }
+    }
     &-img {
         img {
             aspect-ratio: 1/1;
             width: calc(100% + 30px);
+            object-fit: cover;
         }
     }
     &-delete {

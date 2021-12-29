@@ -12,18 +12,19 @@ const initialState = {
 };
 
 export const getProductCart = createAsyncThunk("cart/get_product_cart", async () => {
-    //call api
     const response = await cartService.getUserCart();
     console.log(response);
     return response;
-    // return {
-    //     totalProduct: 10,
-    //     totalPrice: 100,
-    //     products: [],
-    // };
+});
+export const updateProductCart = createAsyncThunk("cart/update_cart", async ({ idCartItem, params }, thunkAPI) => {
+    const response = await cartService.updateProductInCart(idCartItem, params);
+    return response;
 });
 
-export const addProductToCart = createAsyncThunk("cart/add_product", async (idProduct, thunkAPI) => {});
+export const addProductToCart = createAsyncThunk("cart/add_product", async (params, thunkAPI) => {
+    const response = await cartService.addProductToCart(params);
+    return response;
+});
 
 export const cartSlice = createSlice({
     name: "cart",
@@ -53,6 +54,17 @@ export const cartSlice = createSlice({
             state.loading = false;
         },
         [addProductToCart.rejected]: (state, action) => {
+            state.loading = false;
+        },
+        // ---------------------------------------------------------------------------
+        [updateProductCart.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [updateProductCart.fulfilled]: (state, action) => {
+            state.value = action.payload;
+            state.loading = false;
+        },
+        [updateProductCart.rejected]: (state, action) => {
             state.loading = false;
         },
     },

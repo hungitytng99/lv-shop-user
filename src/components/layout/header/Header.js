@@ -13,29 +13,30 @@ export default function Header(props) {
     const route = useRouter().route;
     const { titlePage, breadcrumb } = props;
     const subMenu = useSelector((stores) => stores.menuSlice.value);
+    const shopInfor = useSelector((stores) => stores.shopSlice.value);
     return (
         <header className="header">
             <Container>
                 <div className="header-top">
                     <div className="contact">
-                        <Link href={{ pathname: "tel:0962020446" }} passHref>
+                        <Link href={{ pathname: `tel:${shopInfor?.data?.phone}` }} passHref>
                             <a className="contact-item">
                                 <div className="contact-item-icon">
                                     <Image src={ImagesPath.phoneIcon} alt="phone" />
                                 </div>
-                                <div className="contact-item-title">0962.020.446</div>
+                                <div className="contact-item-title">{shopInfor?.data?.phone}</div>
                             </a>
                         </Link>
-                        <Link href={{ pathname: "mailto:sales@giangminhviet.com" }} passHref>
-                            <a target="_blank" data-tip="Mail: sales@giangminhviet.com" className="contact-item">
+                        <Link href={{ pathname: `mailto:${shopInfor?.data?.email}` }} passHref>
+                            <a target="_blank" data-tip={`Mail: ${shopInfor?.data?.email}`} className="contact-item">
                                 <div className="contact-item-icon">
-                                    <Image src={ImagesPath.emailIcon} alt="phone" />
+                                    <Image src={ImagesPath.emailIcon} alt="email" />
                                 </div>
-                                <div className="contact-item-title">manhremvuonghong@gmail.com</div>
+                                <div className="contact-item-title">{shopInfor?.data?.email}</div>
                             </a>
                         </Link>
-                        <Link href={{ pathname: "mailto:sales@giangminhviet.com" }} passHref>
-                            <a style={{ float: "right" }} target="_blank" data-tip="Mail: sales@giangminhviet.com" className="contact-item">
+                        <Link href="#" passHref>
+                            <a style={{ float: "right" }} className="contact-item">
                                 <div className="contact-item-icon">
                                     <Image src={ImagesPath.listIcon} alt="phone" />
                                 </div>
