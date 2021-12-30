@@ -13,7 +13,7 @@ export default function CartAndCheckout() {
     useEffect(() => {
         (async () => {
             const response = await cartService.getCheckoutData();
-            console.log(response);
+            // console.log(response);
             setCartData(response);
         })();
     }, []);
@@ -24,7 +24,7 @@ export default function CartAndCheckout() {
             <hr />
             {cartData?.products?.map((item, index) => {
                 return (
-                    <Row key={item.urlProduct + index}>
+                    <Row key={item.urlProduct + index} className="mb-3">
                         <Col xs={2} className="box_img">
                             <div>
                                 <img src={item.urlImg} alt="locvungshop" />
