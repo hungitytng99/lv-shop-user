@@ -4,22 +4,38 @@ import { Carousel } from "react-responsive-carousel";
 import { Col } from "react-bootstrap";
 import StarRating from "src/components-share/Rating/StarRating";
 import { format_d_currency } from "src/share_function";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "./../../../../redux/slices/cartSlices";
 
 export default function ProductDetail(props) {
+    const dispatch = useDispatch();
     const { product } = props;
     const { listImg = [], title = "", trademark = "", status = "", productInfo = "", curPrice = 0, oldPrice = 0, options = [], variants = [] } = product;
-    const [datashow, setDataShow] = useState({ oldPrice: 0, curPrice: 0, imageIndex: 0, activeOption: [] });
+    const [datashow, setDataShow] = useState({
+        variantId: variants[0]?.id || null,
+        oldPrice: oldPrice,
+        curPrice: curPrice,
+        imageIndex: 0,
+        activeOption: variants[0]?.existByOptions || [],
+    });
+    const numberOrder = useRef(1);
+    // console.log({ datashow });
     useEffect(() => {
         setDataShow({
+            variantId: variants[0]?.id || null,
             oldPrice: oldPrice,
             curPrice: curPrice,
             imageIndex: 0,
             activeOption: variants[0]?.existByOptions || [],
         });
-        return () => {
-            setDataShow({ oldPrice: 0, curPrice: 0, imageIndex: 0, activeOption: [] });
-        };
+        // return () => {
+        //     setDataShow({ oldPrice: 0, curPrice: 0, imageIndex: 0, activeOption: [] });
+        // };
     }, [product]);
+    function addProduct() {
+        console.log({ variantId: datashow.variantId, quantity: Number(numberOrder.current.value) });
+        dispatch(addProductToCart({ variantId: datashow.variantId, quantity: Number(numberOrder.current.value) }));
+    }
     function changeOptionVariant(indexOptionChange, valueChange) {
         let newActiveOption = [...datashow.activeOption];
         newActiveOption[indexOptionChange] = valueChange;
@@ -42,6 +58,7 @@ export default function ProductDetail(props) {
                 });
                 newDataShow = {
                     ...newDataShow,
+                    variantId: variants[i].id,
                     oldPrice: variants[i].oldPrice,
                     curPrice: variants[i].curPrice,
                     activeOption: variants[i].existByOptions,
@@ -52,7 +69,6 @@ export default function ProductDetail(props) {
         }
         setDataShow({ ...newDataShow });
     }
-    const numberOrder = useRef(1);
 
     function increaseOder() {
         numberOrder.current.value++;
@@ -63,7 +79,6 @@ export default function ProductDetail(props) {
 
     function checkInputNum(e) {
         let currentvalue = Number.parseInt(numberOrder.current.value);
-        // console.log(currentvalue == NaN)
         if (isNaN(currentvalue) || currentvalue < 1) numberOrder.current.value = "1";
     }
     return (
@@ -133,7 +148,9 @@ export default function ProductDetail(props) {
                             {" + "}
                         </span>
                     </div>
-                    <div className="order_product-btn_order">Thêm vào giỏ hàng</div>
+                    <div className="order_product-btn_order" onClick={addProduct}>
+                        Thêm vào giỏ hàng
+                    </div>
                 </div>
             </Col>
         </Row>

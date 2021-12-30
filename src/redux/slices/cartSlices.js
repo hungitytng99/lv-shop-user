@@ -13,7 +13,7 @@ const initialState = {
 
 export const getProductCart = createAsyncThunk("cart/get_product_cart", async () => {
     const response = await cartService.getUserCart();
-    console.log(response);
+    // console.log(response);
     return response;
 });
 export const updateProductCart = createAsyncThunk("cart/update_cart", async ({ idCartItem, params }, thunkAPI) => {
@@ -23,6 +23,10 @@ export const updateProductCart = createAsyncThunk("cart/update_cart", async ({ i
 
 export const addProductToCart = createAsyncThunk("cart/add_product", async (params, thunkAPI) => {
     const response = await cartService.addProductToCart(params);
+    return response;
+});
+export const deleteCartItem = createAsyncThunk("cart/delete_cart_item", async (idCartItem, thunkAPI) => {
+    const response = await cartService.deleteCartItem(idCartItem);
     return response;
 });
 
@@ -65,6 +69,17 @@ export const cartSlice = createSlice({
             state.loading = false;
         },
         [updateProductCart.rejected]: (state, action) => {
+            state.loading = false;
+        },
+        // ---------------------------------------------------------------------------
+        [deleteCartItem.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [deleteCartItem.fulfilled]: (state, action) => {
+            state.value = action.payload;
+            state.loading = false;
+        },
+        [deleteCartItem.rejected]: (state, action) => {
             state.loading = false;
         },
     },

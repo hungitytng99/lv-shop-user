@@ -7,7 +7,7 @@ import { useState, useRef } from "react";
 import { format_d_currency } from "./../../../share_function/index";
 import Link from "next/dist/client/link";
 import { useDispatch } from "react-redux";
-import { updateProductCart } from "src/redux/slices/cartSlices";
+import { updateProductCart, deleteCartItem } from "src/redux/slices/cartSlices";
 
 export default function CartItem(props) {
     const { data } = props;
@@ -16,28 +16,31 @@ export default function CartItem(props) {
 
     function increaseOder() {
         numberOrder.current.value++;
-        dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
+        dispatch(updateProductCart({ idCartItem: data.id, params: { variantId: data.variantId, quantity: Number.parseInt(numberOrder.current.value) } }));
     }
     function decreaseOder() {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (currentvalue > 1) {
             numberOrder.current.value--;
-            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
+            dispatch(updateProductCart({ idCartItem: data.id, params: { variantId: data.variantId, quantity: Number.parseInt(numberOrder.current.value) } }));
         }
     }
     function checkInputNum(e) {
         let currentvalue = Number.parseInt(numberOrder.current.value);
         if (isNaN(currentvalue) || currentvalue < 1) {
             numberOrder.current.value = "1";
-            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: 1 } }));
+            dispatch(updateProductCart({ idCartItem: data.id, params: { variantId: data.variantId, quantity: 1 } }));
         } else {
-            dispatch(updateProductCart({ idCartItem: data.cartId, params: { variantId: data.variantId, quantity: numberOrder.current.value } }));
+            dispatch(updateProductCart({ idCartItem: data.id, params: { variantId: data.variantId, quantity: Number.parseInt(numberOrder.current.value) } }));
         }
+    }
+    function deleteItem() {
+        dispatch(deleteCartItem(data.id));
     }
     return (
         <Row className="cart_item">
             <Col md={1} xs={0}>
-                <span className="cart_item-delete">
+                <span className="cart_item-delete" onClick={deleteItem}>
                     <FontAwesomeIcon icon={faTimes} />
                 </span>
             </Col>

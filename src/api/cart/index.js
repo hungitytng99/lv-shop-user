@@ -37,6 +37,23 @@ export const apiUpdateItemInCart = async (idCartItem, params) => {
     }
 };
 
+export const apiDeleteItemInCart = async (idCartItem) => {
+    try {
+        const response = await DELETE(`/cart-items/${idCartItem}`, null, { isFullPath: false });
+        return {
+            state: REQUEST_STATE.SUCCESS,
+            data: response.result,
+        };
+    } catch (error) {
+        console.log("error", error);
+        return {
+            error: error,
+            state: REQUEST_STATE.ERROR,
+            data: {},
+        };
+    }
+};
+
 export const apiGetCart = async (params) => {
     try {
         const response = await GET("/cart", params, { isFullPath: false });
