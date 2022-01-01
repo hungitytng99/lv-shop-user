@@ -36,7 +36,6 @@ export default function Home(props) {
     const randomCardReview = getListRandomNumber(4, menulength - 1);
     useEffect(() => {
         (async () => {
-            setLoading(true);
             if (menu.data?.length) {
                 const randomCollectionId = Math.floor(Math.random() * (menulength - 1));
                 const listproduct = await productService.getListProduct({ limit: 12, offset: 0, collectionId: randomCollectionId, createdAt: "DESC" }, token);
@@ -58,6 +57,9 @@ export default function Home(props) {
             }
             setLoading(false);
         })();
+        return () => {
+            setLoading(true);
+        };
     }, [menu]);
     return (
         <>
@@ -68,21 +70,30 @@ export default function Home(props) {
                 <CarouselBannerHomePage />
                 <Container className="home">
                     <Row className="mb-5">
-                        {loading
-                            ? [1, 2, 3, 4].map((item, index) => {
-                                  return (
-                                      <Col key={"review" + item + index} lg={3} xs={6}>
-                                          <CardProductReviewPlaceholder />
-                                      </Col>
-                                  );
-                              })
-                            : randomCardReview.map((item, index) => {
-                                  return (
-                                      <Col key={menu.data[item].urlPage + "review"} lg={3} xs={6}>
-                                          <CardReview data={menu.data[item]} />
-                                      </Col>
-                                  );
-                              })}
+                        {loading ? (
+                            <>
+                                <Col lg={3} xs={6}>
+                                    <CardProductReviewPlaceholder />
+                                </Col>
+                                <Col lg={3} xs={6}>
+                                    <CardProductReviewPlaceholder />
+                                </Col>
+                                <Col lg={3} xs={6}>
+                                    <CardProductReviewPlaceholder />
+                                </Col>
+                                <Col lg={3} xs={6}>
+                                    <CardProductReviewPlaceholder />
+                                </Col>
+                            </>
+                        ) : (
+                            randomCardReview.map((item, index) => {
+                                return (
+                                    <Col key={menu.data[item].urlPage + "review"} lg={3} xs={6}>
+                                        <CardReview data={menu.data[item]} />
+                                    </Col>
+                                );
+                            })
+                        )}
                     </Row>
                     <div className="box_title">
                         <h4>Hot Sale Mỗi Ngày</h4>

@@ -24,7 +24,7 @@ export default function Slug(props) {
     ];
     const { dataResponse, collectionId, query, baseUrlForPagination, baseUrlForSort, baseUrlForRange, itemsPerPage } = props;
 
-    console.log(dataResponse);
+    // console.log(dataResponse);
     const { page = "1", sort = "latest" } = query;
     const menu = useSelector((stores) => stores.menuSlice.value.data);
     const lengthMenu = menu?.length || 0;
@@ -189,8 +189,8 @@ export async function getServerSideProps(context) {
             };
         }
         let params_post = {
-            limit: 16,
-            offset: (Number(query?.page) - 1) * 16 || 0,
+            limit: 20,
+            offset: (Number(query?.page) - 1) * 20 || 0,
             title: "",
             collectionId: Number(query.slug.split("-")[0]) || "",
             status: "",
