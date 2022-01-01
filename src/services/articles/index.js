@@ -12,7 +12,7 @@ export const articleService = {
                     urlPage: "/tin-tuc/" + item.id + "-" + convertURL(item.title),
                     title: item.title,
                     imageUrl: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.avatar}`,
-                    author: "Không biết",
+                    author: item.user?.name || "Không rõ",
                     day: date.getDay(),
                     month: date.getMonth(),
                     content: item.content,
