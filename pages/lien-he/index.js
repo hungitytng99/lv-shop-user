@@ -71,7 +71,7 @@ export default function LienHe() {
                                     src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d59587.17725798849!2d105.81996841961926!3d21.024738945589732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1640969310959!5m2!1svi!2s"
                                     width="100%"
                                     height="400"
-                                    style={{ border: 0 }}
+                                    style={{ border: 0, borderRadius: "5px" }}
                                     allowfullscreen=""
                                     loading="lazy"
                                     className="gg-map"
