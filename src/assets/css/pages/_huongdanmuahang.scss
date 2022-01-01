@@ -1,6 +1,6 @@
 .huong_dan_mua_hang {
-    text-align: justify;
     font-size: 15px;
+    padding-left: 10px;
     h1 {
         margin: 40px 0 20px 0;
         font-size: 40px;
@@ -11,5 +11,6 @@
     }
     p {
         margin-bottom: 15px;
+        text-align: justify;
     }
 }
