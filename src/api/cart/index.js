@@ -87,3 +87,20 @@ export const apiGetCheckoutData = async () => {
         };
     }
 };
+
+export const apiOrder = async (params) => {
+    try {
+        const response = await POST("/orders", params, { isFullPath: false });
+        return {
+            state: REQUEST_STATE.SUCCESS,
+            data: response.result,
+        };
+    } catch (error) {
+        console.log("error", error);
+        return {
+            error: error,
+            state: REQUEST_STATE.ERROR,
+            data: {},
+        };
+    }
+};

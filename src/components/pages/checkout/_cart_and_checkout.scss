@@ -28,4 +28,11 @@
         display: flex;
         justify-content: space-between;
     }
+    .backtocart {
+        cursor: pointer;
+        &:hover {
+            color: $text_color_hover;
+            text-decoration: underline;
+        }
+    }
 }

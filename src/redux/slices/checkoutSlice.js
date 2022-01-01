@@ -4,12 +4,18 @@ const initValue = {
     value: {
         name: "",
         phone: "",
+        text_address: {
+            provinces: "",
+            districts: "",
+            wards: "",
+        },
         address: {
             street: "",
             provinces: "-1",
             districts: "-1",
             wards: "-1",
         },
+        note: "",
         shipfee: 0,
         paymentMethod: "COD",
     },
