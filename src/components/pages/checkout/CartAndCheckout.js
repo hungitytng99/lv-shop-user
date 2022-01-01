@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import { cartService } from "./../../../services/cart/index";
 import Link from "next/dist/client/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 export default function CartAndCheckout() {
+    const dataCheckout = useSelector((stores) => stores.checkoutSlice.value);
+    const [alertBox, setAlertBox] = useState({ open: false, type: "success", content: "", icon: faCheckCircle });
     const [cartData, setCartData] = useState({});
     useEffect(() => {
         (async () => {
@@ -17,6 +19,56 @@ export default function CartAndCheckout() {
             setCartData(response);
         })();
     }, []);
+
+    function checkMissInput() {
+        if (dataCheckout.name === "") {
+            return "name";
+        }
+        if (dataCheckout.phone === "") {
+            return "phone";
+        }
+        if (dataCheckout.address.provinces === "-1") {
+            return "city";
+        }
+        return "full";
+    }
+
+    function order() {
+        const missData = checkMissInput();
+        if (missData === "full") {
+            const dataOrder = {
+                customerAddress: `${dataCheckout.address.street} ${dataCheckout.text_address.wards} ${dataCheckout.text_address.districts} ${dataCheckout.text_address.provinces}`,
+                detailCustomerAddress: "string",
+                comment: dataCheckout.note,
+                customerEmail: "",
+                customerName: dataCheckout.name,
+                customerPhone: dataCheckout.phone,
+                paymentMethod: dataCheckout.paymentMethod,
+                status: "",
+                deliveryMethod: "",
+                shipFee: cartData.shipFee,
+                orderItems: cartData.products.map((item) => {
+                    return {
+                        variantId: item.variantId,
+                        quantity: item.quantity,
+                    };
+                }),
+            };
+            console.log(dataOrder);
+            setAlertBox({ open: true, type: "success", content: "Đặt hàng thành công", icon: faCheckCircle });
+        } else {
+            if (missData === "name") {
+                setAlertBox({ open: true, type: "warning", content: "Vui lòng nhập tên của bạn.", icon: faExclamationTriangle });
+            } else if (missData === "phone") {
+                setAlertBox({ open: true, type: "warning", content: "Vui lòng nhập số điện thoại của bạn.", icon: faExclamationTriangle });
+            } else if (missData === "city") {
+                setAlertBox({ open: true, type: "warning", content: "Vui lòng chọn địa điểm nhận hàng.", icon: faExclamationTriangle });
+            }
+            setTimeout(() => {
+                setAlertBox({ open: false, type: "", content: "", icon: faCheckCircle });
+            }, 2000);
+        }
+    }
 
     return (
         <div className="cart_and_checkout">
@@ -49,7 +101,9 @@ export default function CartAndCheckout() {
                     </FloatingLabel>
                 </Col>
                 <Col xs={4}>
-                    <Button style={{ height: "58px", width: "100%" }}>Áp dụng</Button>
+                    <Button variant="info" style={{ height: "58px", width: "100%" }}>
+                        Áp dụng
+                    </Button>
                 </Col>
             </Row>
             <hr />
@@ -68,11 +122,21 @@ export default function CartAndCheckout() {
             </div>
             <div className="flex_space_between" style={{ marginTop: "20px" }}>
                 <Link href="/cart" passHref>
-                    <span style={{ cursor: "pointer" }}>
+                    <span className="backtocart">
                         <FontAwesomeIcon icon={faChevronLeft} /> {"Quay về giỏ hàng"}
                     </span>
                 </Link>
-                <Button>Đặt hàng</Button>
+                <Button variant="success" onClick={order}>
+                    Đặt hàng
+                </Button>
+            </div>
+            <div className={`alert_box ${alertBox.type}`} style={{ top: alertBox.open ? "50px" : "-100px" }}>
+                <div className="alert_content">
+                    <span>
+                        <FontAwesomeIcon icon={alertBox.icon} />
+                    </span>
+                    <span style={{ marginLeft: "15px" }}>{alertBox.content}</span>
+                </div>
             </div>
         </div>
     );

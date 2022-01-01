@@ -6,9 +6,12 @@ import StarRating from "src/components-share/Rating/StarRating";
 import { format_d_currency } from "src/share_function";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "./../../../../redux/slices/cartSlices";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductDetail(props) {
     const dispatch = useDispatch();
+    const [alertBox, setAlertBox] = useState({ open: false, content: "", icon: faCheckCircle });
     const { product } = props;
     const { listImg = [], title = "", trademark = "", status = "", productInfo = "", curPrice = 0, oldPrice = 0, options = [], variants = [] } = product;
     const [datashow, setDataShow] = useState({
@@ -28,14 +31,21 @@ export default function ProductDetail(props) {
             imageIndex: 0,
             activeOption: variants[0]?.existByOptions || [],
         });
-        // return () => {
-        //     setDataShow({ oldPrice: 0, curPrice: 0, imageIndex: 0, activeOption: [] });
-        // };
     }, [product]);
+    let closeAlertTimeout = setTimeout(() => {}, 100);
     function addProduct() {
-        console.log({ variantId: datashow.variantId, quantity: Number(numberOrder.current.value) });
+        clearTimeout(closeAlertTimeout);
         dispatch(addProductToCart({ variantId: datashow.variantId, quantity: Number(numberOrder.current.value) }));
+        setAlertBox({ open: true, content: "Sản phẩm vừa được thêm vào giỏ hàng của bạn", icon: faCheckCircle });
+        closeAlertTimeout = setTimeout(() => {
+            setAlertBox({ open: false, content: "", icon: faCheckCircle });
+        }, 1500);
     }
+
+    // useEffect(()=> {
+
+    // },[alertBox])
+
     function changeOptionVariant(indexOptionChange, valueChange) {
         let newActiveOption = [...datashow.activeOption];
         newActiveOption[indexOptionChange] = valueChange;
@@ -153,6 +163,14 @@ export default function ProductDetail(props) {
                     </div>
                 </div>
             </Col>
+            <div className="alert_box success" style={{ top: alertBox.open ? "100px" : "-100px" }}>
+                <div className="alert_content">
+                    <span>
+                        <FontAwesomeIcon icon={alertBox.icon} />
+                    </span>
+                    <span style={{ marginLeft: "15px" }}>{alertBox.content}</span>
+                </div>
+            </div>
         </Row>
     );
 }

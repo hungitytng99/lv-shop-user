@@ -14,9 +14,13 @@ import CardNews from "./../src/components-share/Card/CardNews/CardNews";
 import Cookies from "js-cookie";
 import { storageKey } from "src/constants/storageKeys";
 import { articleService } from "./../src/services/articles/index";
+import CardProductPlaceholder from "./../src/components-share/Placeholder/CardProductPlaceholder";
+import CardProductReviewPlaceholder from "./../src/components-share/Placeholder/CardProductReviewPlaceholder";
+import CardNewsPlaceholder from "src/components-share/Placeholder/CardNewsPlaceholder";
 
 export default function Home(props) {
     const token = Cookies.get(storageKey.Cookie_token);
+    const [loading, setLoading] = useState(true);
     const [productData, setProductData] = useState({
         hotProduct: {},
         newProduct: {},
@@ -32,6 +36,7 @@ export default function Home(props) {
     const randomCardReview = getListRandomNumber(4, menulength - 1);
     useEffect(() => {
         (async () => {
+            setLoading(true);
             if (menu.data?.length) {
                 const randomCollectionId = Math.floor(Math.random() * (menulength - 1));
                 const listproduct = await productService.getListProduct({ limit: 12, offset: 0, collectionId: randomCollectionId, createdAt: "DESC" }, token);
@@ -51,6 +56,7 @@ export default function Home(props) {
                     articles: listArticles,
                 });
             }
+            setLoading(false);
         })();
     }, [menu]);
     return (
@@ -61,36 +67,60 @@ export default function Home(props) {
             <Layout>
                 <CarouselBannerHomePage />
                 <Container className="home">
-                    <Row>
-                        {randomCardReview.map((item, index) => {
-                            return (
-                                <Col key={menu.data[item].urlPage + "review"} lg={3} xs={6}>
-                                    <CardReview data={menu.data[item]} />
-                                </Col>
-                            );
-                        })}
+                    <Row className="mb-5">
+                        {loading
+                            ? [1, 2, 3, 4].map((item, index) => {
+                                  return (
+                                      <Col key={"review" + item + index} lg={3} xs={6}>
+                                          <CardProductReviewPlaceholder />
+                                      </Col>
+                                  );
+                              })
+                            : randomCardReview.map((item, index) => {
+                                  return (
+                                      <Col key={menu.data[item].urlPage + "review"} lg={3} xs={6}>
+                                          <CardReview data={menu.data[item]} />
+                                      </Col>
+                                  );
+                              })}
                     </Row>
                     <div className="box_title">
                         <h4>Hot Sale Mỗi Ngày</h4>
                         <p>Sản phẩm với giá cực kỳ hấp dẫn</p>
                     </div>
-                    <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }}>
-                        <CarouselProduct>
-                            {productData.hotProduct.data?.listProduct?.map((item, index) => {
-                                return <CardProduct key={item.urlProduct + "hot" + index} data={item} />;
-                            }) || <></>}
-                        </CarouselProduct>
+                    <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }} className="mb-5">
+                        {loading ? (
+                            <CarouselProduct>
+                                {[1, 2, 3, 4, 5].map((item, index) => {
+                                    return <CardProductPlaceholder key={item + "hot" + index} />;
+                                })}
+                            </CarouselProduct>
+                        ) : (
+                            <CarouselProduct>
+                                {productData.hotProduct.data?.listProduct?.map((item, index) => {
+                                    return <CardProduct key={item.urlProduct + "hot" + index} data={item} />;
+                                }) || <></>}
+                            </CarouselProduct>
+                        )}
                     </div>
                     <div className="box_title">
                         <h4>Sản Phẩm Mới</h4>
                         <p>Cập nhật sản phẩm mới nhất</p>
                     </div>
-                    <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }}>
-                        <CarouselProduct>
-                            {productData.newProduct.data?.listProduct?.map((item, index) => {
-                                return <CardProduct key={item.urlProduct + "new" + index} data={item} />;
-                            }) || <></>}
-                        </CarouselProduct>
+                    <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }} className="mb-5">
+                        {loading ? (
+                            <CarouselProduct>
+                                {[1, 2, 3, 4, 5].map((item, index) => {
+                                    return <CardProductPlaceholder key={item + "new" + index} />;
+                                })}
+                            </CarouselProduct>
+                        ) : (
+                            <CarouselProduct>
+                                {productData.newProduct.data?.listProduct?.map((item, index) => {
+                                    return <CardProduct key={item.urlProduct + "new" + index} data={item} />;
+                                }) || <></>}
+                            </CarouselProduct>
+                        )}
                     </div>
                     {menulength > 0 ? (
                         <>
@@ -98,7 +128,7 @@ export default function Home(props) {
                                 <h4>{specificProduct.title}</h4>
                                 <p>Cập nhật sản phẩm mới nhất</p>
                             </div>
-                            <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }}>
+                            <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }} className="mb-5">
                                 <CarouselProduct>
                                     {specificProduct?.data?.map((item, index) => {
                                         return <CardProduct key={item.urlProduct + index} data={item} />;
@@ -111,7 +141,7 @@ export default function Home(props) {
                     <div className="box_title">
                         <h4>Tin tức {"&"} kiến thức</h4>
                     </div>
-                    <div>
+                    <div className="mb-5">
                         <Row>
                             {productData.articles.data?.map((item, index) => {
                                 return (

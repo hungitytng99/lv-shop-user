@@ -7,20 +7,6 @@ import Link from "next/dist/client/link";
 import { format_d_currency } from "./../../src/share_function/index";
 import { useSelector } from "react-redux";
 
-const data1 = {
-    quantity: 1,
-    urlImg: "https://bizweb.dktcdn.net/thumb/large/100/367/937/products/2-4d4650c2-dfd4-4467-bcb4-205c692552e1.jpg?v=1615519760717",
-    title: "Cửa lưới chống muỗi",
-    price: 100000,
-};
-
-const data2 = {
-    quantity: 5,
-    urlImg: "https://bizweb.dktcdn.net/thumb/large/100/367/937/products/2-4d4650c2-dfd4-4467-bcb4-205c692552e1.jpg?v=1615519760717",
-    title: "Cửa lưới chống muỗi loại to to to",
-    price: 100000,
-};
-
 export default function Cart() {
     const breadcrumb = [
         {

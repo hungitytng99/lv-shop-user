@@ -1,4 +1,4 @@
-import { apiAddProductToCart, apiGetCart, apiGetCheckoutData, apiUpdateItemInCart, apiDeleteItemInCart } from "./../../api/cart/index";
+import { apiAddProductToCart, apiGetCart, apiGetCheckoutData, apiUpdateItemInCart, apiDeleteItemInCart, apiOrder } from "./../../api/cart/index";
 
 export const cartService = {
     addProductToCart: function (params) {
@@ -124,6 +124,11 @@ export const cartService = {
                         };
                     }) || [],
             };
+        });
+    },
+    orderProducts: function (params) {
+        return apiOrder(params).then((response) => {
+            return response;
         });
     },
 };

@@ -4,14 +4,21 @@ import { Col, Row } from "react-bootstrap";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { format_d_currency } from "./../../../share_function/index";
 import Link from "next/dist/client/link";
+import { useDispatch } from "react-redux";
+import { deleteCartItem } from "src/redux/slices/cartSlices";
+
 export default function CartItemReview(props) {
-    const { title, urlImg, price, quantity, urlProduct, variantTitle } = props.data;
+    const { id, title, urlImg, price, quantity, urlProduct, variantTitle } = props.data;
+    const dispatch = useDispatch();
+    const deleteProduct = () => {
+        dispatch(deleteCartItem(id));
+    };
     return (
         <Row className="cart_item_review ">
             <Col xs={5} className="no_pading_col">
                 <Row className="no_pading_col">
                     <Col xs={4} style={{ textAlign: "center" }}>
-                        <span className="cart_item_review-remove">
+                        <span className="cart_item_review-remove" onClick={deleteProduct}>
                             <FontAwesomeIcon icon={faTimes} />
                         </span>
                     </Col>

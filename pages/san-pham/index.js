@@ -9,22 +9,6 @@ import ProductDetail from "src/components/pages/san-pham/chi-tiet-san-pham/Produ
 import TabsInfor from "src/components/pages/san-pham/tabsInfor/TabsInfor";
 import { productService } from "./../../src/services/product/index";
 
-const productData = {
-    urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
-    urlProduct: "/san-pham?product_id=jfdhjsdkfhhfkfhkjsdhfjkdhfjhf",
-    title: "Tiện ích nhà bếp",
-    curPrice: 120000,
-    status: "new",
-};
-const productData2 = {
-    urlImg: "https://bizweb.dktcdn.net/100/367/937/themes/740363/assets/col1.jpg?1630998054887",
-    urlProduct: "/san-pham?product_id=cainaymoilam",
-    title: "Tiện ích nhà bếp",
-    curPrice: 120000,
-    oldPrice: 120300,
-    status: "sale",
-};
-
 export default function SanPham(props) {
     const { product, response, relatedProducts } = props;
     const breadcrumb = [
@@ -46,7 +30,7 @@ export default function SanPham(props) {
             <Layout titlePage={breadcrumb[1].title} breadcrumb={breadcrumb}>
                 <Container className="san_pham">
                     <ProductDetail product={response.data} />
-                    <TabsInfor />
+                    <TabsInfor product={response.data} />
                     <div>
                         <div className="box_title">
                             <h4 style={{ textAlign: "center" }}>Sản phẩm liên quan</h4>

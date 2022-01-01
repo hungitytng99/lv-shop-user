@@ -90,3 +90,44 @@
         }
     }
 }
+
+.alert_box {
+    display: flex;
+    position: fixed;
+    top: -100px;
+    left: 0;
+    justify-content: center;
+    width: 100%;
+    z-index: 10000000;
+    align-items: center;
+    transition: 0.3s;
+    .alert_content {
+        width: fit-content;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    &.success {
+        .alert_content {
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+            box-shadow: 1px 0px 10px 0px #badbcc;
+        }
+    }
+    &.error {
+        .alert_content {
+            color: #842029;
+            background-color: #f8d7da;
+            border-color: #f5c2c7;
+            box-shadow: 1px 0px 10px 0px #f5c2c7;
+        }
+    }
+    &.warning {
+        .alert_content {
+            color: #664d03;
+            background-color: #fff3cd;
+            border-color: #ffecb5;
+            box-shadow: 1px 0px 10px 0px #664d03;
+        }
+    }
+}

@@ -10,10 +10,11 @@ import { format_d_currency } from "src/share_function";
 import { ImagesPath } from "./../../../../constants/ImagesPath";
 import { userLogout } from "./../../../../redux/slices/userSlice";
 import { REQUEST_STATE } from "src/app-configs";
+import { useRouter } from "next/router";
 
 export default function SwitchLoginLogout() {
     const dispatch = useDispatch();
-
+    const router = useRouter();
     const cartData = useSelector((stores) => stores.cartSlice.value);
     const productList = cartData.products;
 
@@ -41,6 +42,7 @@ export default function SwitchLoginLogout() {
 
     function clickLogOut() {
         dispatch(userLogout());
+        router.push("/");
     }
     return (
         <div className="header-mid-account">

@@ -17,9 +17,15 @@ export default function ReceiveAddress() {
         })();
     }, []);
 
-    function updateProvince(newVal) {
+    function updateProvince(newVal, nameCity) {
+        // console.log(nameCity);
         const newDataCheckout = {
             ...dataCheckout,
+            text_address: {
+                provinces: nameCity,
+                districts: "",
+                wards: "",
+            },
             address: {
                 street: "",
                 provinces: newVal,
@@ -39,9 +45,14 @@ export default function ReceiveAddress() {
             })();
         }
     }
-    function updateDistrict(newVal) {
+    function updateDistrict(newVal, nameDistrict) {
         const newDataCheckout = {
             ...dataCheckout,
+            text_address: {
+                ...dataCheckout.text_address,
+                districts: nameDistrict,
+                wards: "",
+            },
             address: {
                 ...dataCheckout.address,
                 districts: newVal,
@@ -58,9 +69,13 @@ export default function ReceiveAddress() {
             })();
         }
     }
-    function updateWard(newVal) {
+    function updateWard(newVal, nameWard) {
         const newDataCheckout = {
             ...dataCheckout,
+            text_address: {
+                ...dataCheckout.text_address,
+                wards: nameWard,
+            },
             address: {
                 ...dataCheckout.address,
                 wards: newVal,
@@ -79,6 +94,13 @@ export default function ReceiveAddress() {
         const newDataCheckout = {
             ...dataCheckout,
             name: newVal,
+        };
+        dispatch(updateCheckoutInfo(newDataCheckout));
+    }
+    function updateNote(newVal) {
+        const newDataCheckout = {
+            ...dataCheckout,
+            note: newVal,
         };
         dispatch(updateCheckoutInfo(newDataCheckout));
     }
@@ -111,7 +133,11 @@ export default function ReceiveAddress() {
                 </FloatingLabel>
 
                 <FloatingLabel controlId="floatingSelect" label="Tỉnh thành" style={{ marginBottom: "20px" }}>
-                    <Form.Select aria-label="Tỉnh thành" value={dataCheckout.address.provinces} onChange={(e) => updateProvince(e.target.value)}>
+                    <Form.Select
+                        aria-label="Tỉnh thành"
+                        value={dataCheckout.address.provinces}
+                        onChange={(e) => updateProvince(e.target.value, e.target.selectedOptions[0].innerText)}
+                    >
                         <option value="-1">-------</option>
                         {provincesList.map((province, index) => {
                             return (
@@ -126,7 +152,7 @@ export default function ReceiveAddress() {
                     <Form.Select
                         aria-label="Quận, Huyện, Thị trấn"
                         value={dataCheckout.address.districts}
-                        onChange={(e) => updateDistrict(e.target.value)}
+                        onChange={(e) => updateDistrict(e.target.value, e.target.selectedOptions[0].innerText)}
                         disabled={dataCheckout.address.provinces == "-1" ? true : false}
                     >
                         <option value="-1">-------</option>
@@ -143,7 +169,7 @@ export default function ReceiveAddress() {
                     <Form.Select
                         aria-label="Thị trấn, phường, xã"
                         value={dataCheckout.address.wards}
-                        onChange={(e) => updateWard(e.target.value)}
+                        onChange={(e) => updateWard(e.target.value, e.target.selectedOptions[0].innerText)}
                         disabled={dataCheckout.address.districts == "-1" ? true : false}
                     >
                         <option value="-1">-------</option>
@@ -159,6 +185,15 @@ export default function ReceiveAddress() {
 
                 <FloatingLabel controlId="addressInput" label="Đường, phố, số nhà" className="mb-3">
                     <Form.Control type="text" placeholder="Address" value={dataCheckout.address.street} onChange={(e) => updateStreet(e.target.value)} />
+                </FloatingLabel>
+                <FloatingLabel controlId="floatingTextarea" label="Comments">
+                    <Form.Control
+                        as="textarea"
+                        placeholder="Để lại nhời nhắn của bạn ở đây."
+                        value={dataCheckout.note}
+                        onChange={(e) => updateNote(e.target.value)}
+                        style={{ height: "100px" }}
+                    />
                 </FloatingLabel>
             </div>
         </div>
