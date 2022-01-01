@@ -1,0 +1,12 @@
+.gioi_thieu {
+    padding-left: 20px;
+    margin-bottom: 30px;
+    h1 {
+        margin: 40px 0 10px 0;
+        font-size: 40px;
+        cursor: pointer;
+        &:hover {
+            color: $text_color_hover;
+        }
+    }
+}

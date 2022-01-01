@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "src/components/layout/Layout";
 import { Container } from "react-bootstrap";
+import Link from "next/link";
 export default function GioiThieu() {
     const breadcrumb = [
         {
@@ -11,7 +12,14 @@ export default function GioiThieu() {
     return (
         <div>
             <Layout titlePage="Giới thiệu" breadcrumb={breadcrumb}>
-                <Container>Giới thiệu</Container>
+                <Container className="gioi_thieu">
+                    <div className="page-title">
+                        <Link href="/gioi-thieu">
+                            <h1>Giới thiệu</h1>
+                        </Link>
+                        <span>Xin mời nhập lời giới thiệu tại đây.</span>
+                    </div>
+                </Container>
             </Layout>
         </div>
     );
