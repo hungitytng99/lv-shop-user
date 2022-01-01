@@ -6,12 +6,15 @@ import { useEffect } from "react";
 import { cartService } from "./../../../services/cart/index";
 import Link from "next/dist/client/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faCheckCircle, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faCheckCircle, faExclamationTriangle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { REQUEST_STATE } from "src/app-configs";
+import { useRouter } from "next/router";
 
 export default function CartAndCheckout() {
     const dataCheckout = useSelector((stores) => stores.checkoutSlice.value);
     const [alertBox, setAlertBox] = useState({ open: false, type: "success", content: "", icon: faCheckCircle });
     const [cartData, setCartData] = useState({});
+    const router = useRouter();
     useEffect(() => {
         (async () => {
             const response = await cartService.getCheckoutData();
@@ -32,19 +35,24 @@ export default function CartAndCheckout() {
         }
         return "full";
     }
-
+    function getCustomerAddress() {
+        let address = "";
+        address += dataCheckout.address.street !== "" ? dataCheckout.address.street + ", " : "";
+        address += dataCheckout.address.wards !== "-1" ? dataCheckout.text_address.wards + ", " : "";
+        address += dataCheckout.address.districts !== "-1" ? dataCheckout.text_address.districts + ", " : "";
+        address += dataCheckout.address.provinces !== "-1" ? dataCheckout.text_address.provinces : "";
+        return address;
+    }
     function order() {
         const missData = checkMissInput();
         if (missData === "full") {
             const dataOrder = {
-                customerAddress: `${dataCheckout.address.street} ${dataCheckout.text_address.wards} ${dataCheckout.text_address.districts} ${dataCheckout.text_address.provinces}`,
-                detailCustomerAddress: "string",
+                customerAddress: getCustomerAddress(),
                 comment: dataCheckout.note,
                 customerEmail: "",
                 customerName: dataCheckout.name,
                 customerPhone: dataCheckout.phone,
                 paymentMethod: dataCheckout.paymentMethod,
-                status: "",
                 deliveryMethod: "",
                 shipFee: cartData.shipFee,
                 orderItems: cartData.products.map((item) => {
@@ -54,8 +62,22 @@ export default function CartAndCheckout() {
                     };
                 }),
             };
+            (async () => {
+                const postOrder = await cartService.orderProducts(dataOrder);
+                console.log(postOrder);
+                if (postOrder.state === REQUEST_STATE.SUCCESS) {
+                    setAlertBox({ open: true, type: "success", content: "Đặt hàng thành công", icon: faCheckCircle });
+                    setTimeout(() => {
+                        router.push("/");
+                    }, 1500);
+                } else {
+                    setAlertBox({ open: true, type: "error", content: "Có lỗi hệ thống xảy ra. Vui lòng quay lại sau.", icon: faTimes });
+                    setTimeout(() => {
+                        setAlertBox({ open: false, type: "", content: "", icon: faTimes });
+                    }, 2500);
+                }
+            })();
             console.log(dataOrder);
-            setAlertBox({ open: true, type: "success", content: "Đặt hàng thành công", icon: faCheckCircle });
         } else {
             if (missData === "name") {
                 setAlertBox({ open: true, type: "warning", content: "Vui lòng nhập tên của bạn.", icon: faExclamationTriangle });

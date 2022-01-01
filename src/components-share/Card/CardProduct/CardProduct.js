@@ -13,8 +13,8 @@ import { openCartModal } from "src/redux/slices/modalCartSlice";
 export default function CardProduct(props) {
     const { data } = props;
     const dispatch = useDispatch();
-    function addProduct() {
-        dispatch(addProductToCart());
+    function addProduct(params) {
+        dispatch(addProductToCart(params));
         dispatch(openCartModal());
     }
     function openReviewProductModal() {
@@ -28,8 +28,8 @@ export default function CardProduct(props) {
                     <span onClick={() => openReviewProductModal()}>
                         <FontAwesomeIcon icon={faEye} />
                     </span>
-                    {data.variant ? (
-                        <span onClick={() => addProduct()}>
+                    {data.totalVariant === 1 ? (
+                        <span onClick={() => addProduct({ variantId: data.firstVariantId, quantity: 1 })}>
                             <FontAwesomeIcon icon={faCartPlus} />
                         </span>
                     ) : (

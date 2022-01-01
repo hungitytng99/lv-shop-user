@@ -40,7 +40,9 @@ export default function Header(props) {
                                 <div className="contact-item-icon">
                                     <Image src={ImagesPath.listIcon} alt="phone" />
                                 </div>
-                                <div className="contact-item-title">Kiểm tra đơn hàng</div>
+                                <Link href="/kiem-tra-don-hang" passHref>
+                                    <div className="contact-item-title">Kiểm tra đơn hàng</div>
+                                </Link>
                             </a>
                         </Link>
                     </div>

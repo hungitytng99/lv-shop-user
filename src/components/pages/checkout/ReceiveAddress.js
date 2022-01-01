@@ -186,7 +186,7 @@ export default function ReceiveAddress() {
                 <FloatingLabel controlId="addressInput" label="Đường, phố, số nhà" className="mb-3">
                     <Form.Control type="text" placeholder="Address" value={dataCheckout.address.street} onChange={(e) => updateStreet(e.target.value)} />
                 </FloatingLabel>
-                <FloatingLabel controlId="floatingTextarea" label="Comments">
+                <FloatingLabel controlId="floatingTextarea" label="Để lại nhời nhắn của bạn ở đây...">
                     <Form.Control
                         as="textarea"
                         placeholder="Để lại nhời nhắn của bạn ở đây."
