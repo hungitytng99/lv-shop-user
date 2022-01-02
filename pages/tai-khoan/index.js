@@ -26,9 +26,11 @@ export default function index() {
                         </Col>
                         <Col lg={9}>
                             <ListAddress />
-                            <HistoryOrders />
                         </Col>
                     </Row>
+                    <div style={{ marginTop: "60px" }}>
+                        <HistoryOrders />
+                    </div>
                 </Container>
             </Layout>
         </>

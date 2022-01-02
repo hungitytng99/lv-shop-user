@@ -9,12 +9,12 @@ export default function HistoryOrders() {
             <div className="history_orders">
                 <div className="table_data">
                     <Row className="table_header">
-                        <Col>Đơn hàng</Col>
-                        <Col>Ngày</Col>
-                        <Col>Địa chỉ nhận</Col>
-                        <Col>Giá trị</Col>
-                        <Col>TT thanh toán</Col>
-                        <Col>TT vận chuyển</Col>
+                        <Col xs={2}>Đơn hàng</Col>
+                        <Col xs={2}>Ngày</Col>
+                        <Col xs={2}>Địa chỉ nhận</Col>
+                        <Col xs={2}>Giá trị</Col>
+                        <Col xs={2}>TT thanh toán</Col>
+                        <Col xs={2}>TT vận chuyển</Col>
                     </Row>
                 </div>
             </div>
