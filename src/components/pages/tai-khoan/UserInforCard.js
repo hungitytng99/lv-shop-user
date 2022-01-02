@@ -30,7 +30,16 @@ export default function UserInforCard() {
                 <input className="input_file_upload avatar" type="file" accept="image/*" onChange={(e) => getImageUpload(e)} />
             </div>
             <div className="information">
-                {editState ? <input type="text" name="name" defaultValue={userData.data.name} /> : <p style={{ textTransform: "capitalize" }}>{userData.data.name}</p>}
+                {editState ? (
+                    <input
+                        type="text"
+                        style={{ width: "100%", padding: "5px 10px", border: "1px solid #2196f3", outline: "none", borderRadius: "5px" }}
+                        name="name"
+                        defaultValue={userData.data.name}
+                    />
+                ) : (
+                    <p style={{ textTransform: "capitalize" }}>{userData.data.name}</p>
+                )}
 
                 <p style={{}}>{userData.data.email}</p>
                 <div style={{ marginTop: "20px", textAlign: "right" }}>

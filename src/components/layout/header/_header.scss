@@ -110,9 +110,13 @@
                 align-items: center;
                 overflow: hidden;
                 border-radius: 50%;
+                position: relative;
                 .user_no_img {
                     width: inherit;
                     height: inherit;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
                     display: flex;
                     background-color: $text_color_hover;
                     border-radius: 50%;
@@ -123,6 +127,9 @@
                     font-size: 20px;
                 }
                 img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
                     width: inherit;
                     height: inherit;
                     border-radius: 50%;

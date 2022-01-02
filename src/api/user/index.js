@@ -95,3 +95,22 @@ export const apiGetUserInforbyToken = async (params) => {
         };
     }
 };
+
+export const apiUpdateUserInfor = async (params) => {
+    try {
+        const response = await PUT("/me", params, { isFullPath: false });
+        const result = {
+            data: response.result,
+            state: REQUEST_STATE.SUCCESS,
+        };
+        // console.log("apiGetUserInforbyToken", result);
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return {
+            state: REQUEST_STATE.ERROR,
+            error: error,
+            data: {},
+        };
+    }
+};

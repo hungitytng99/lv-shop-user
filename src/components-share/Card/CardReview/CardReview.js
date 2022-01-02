@@ -5,7 +5,9 @@ export default function CardReview(props) {
     return (
         <div className="review_card">
             <div className="review_card-img">
-                <img src={data.imageUrl} />
+                <Link href={data.urlPage} passHref>
+                    <img src={data.imageUrl} />
+                </Link>
             </div>
             <p className="review_card-title">
                 <Link href={data.urlPage} passHref>

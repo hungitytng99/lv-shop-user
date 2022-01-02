@@ -1,7 +1,7 @@
 import { apiRegisterNewAccount } from "src/api/user";
 import { apiGetUserInforbyToken } from "src/api/user";
 import { apiLogin, apiRegisterByDevice } from "src/api/user";
-import { apiChangePass } from "./../../api/user/index";
+import { apiChangePass, apiUpdateUserInfor } from "./../../api/user/index";
 
 export const userService = {
     registerByDevice: function (params) {
@@ -29,6 +29,11 @@ export const userService = {
     },
     changePassword: function (params) {
         return apiChangePass(params).then((response) => {
+            return response;
+        });
+    },
+    updateInfor: function (params) {
+        return apiUpdateUserInfor(params).then((response) => {
             return response;
         });
     },
