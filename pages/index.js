@@ -18,15 +18,11 @@ import CardProductPlaceholder from "./../src/components-share/Placeholder/CardPr
 import CardProductReviewPlaceholder from "./../src/components-share/Placeholder/CardProductReviewPlaceholder";
 import CardNewsPlaceholder from "src/components-share/Placeholder/CardNewsPlaceholder";
 
-export default function Home(props) {
-    const token = Cookies.get(storageKey.Cookie_token);
+export default function Home({ props }) {
+    const { hotProduct = [], newProduct = [], articles = [] } = props;
+    // const token = Cookies.get(storageKey.Cookie_token);
     const [loading, setLoading] = useState(true);
-    const [productData, setProductData] = useState({
-        hotProduct: {},
-        newProduct: {},
-        articles: {},
-    });
-
+    // console.log("token");
     const [specificProduct, setSpecificProduct] = useState({
         title: "",
         data: [],
@@ -38,21 +34,13 @@ export default function Home(props) {
         (async () => {
             if (menu.data?.length) {
                 const randomCollectionId = Math.floor(Math.random() * (menulength - 1));
-                const listproduct = await productService.getListProduct({ limit: 12, offset: 0, collectionId: randomCollectionId, createdAt: "DESC" }, token);
+                const listproduct = await productService.getListProduct({ limit: 12, offset: 0, collectionId: randomCollectionId, createdAt: "DESC" });
                 setSpecificProduct((prev) => {
                     return {
                         ...prev,
                         title: menu.data[randomCollectionId].title,
                         data: listproduct.data.listProduct,
                     };
-                });
-                const hotProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: true, createdAt: "DESC" }, token);
-                const newProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: false, createdAt: "DESC" }, token);
-                const listArticles = await articleService.getListArticles({ limit: 3, offset: 0 }, token);
-                setProductData({
-                    hotProduct: hotProductdata,
-                    newProduct: newProductdata,
-                    articles: listArticles,
                 });
             }
             setLoading(false);
@@ -100,38 +88,22 @@ export default function Home(props) {
                         <p>Sản phẩm với giá cực kỳ hấp dẫn</p>
                     </div>
                     <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }} className="mb-5">
-                        {loading ? (
-                            <CarouselProduct>
-                                {[1, 2, 3, 4, 5].map((item, index) => {
-                                    return <CardProductPlaceholder key={item + "hot" + index} />;
-                                })}
-                            </CarouselProduct>
-                        ) : (
-                            <CarouselProduct>
-                                {productData.hotProduct.data?.listProduct?.map((item, index) => {
-                                    return <CardProduct key={item.urlProduct + "hot" + index} data={item} />;
-                                }) || <></>}
-                            </CarouselProduct>
-                        )}
+                        <CarouselProduct>
+                            {hotProduct.data?.listProduct?.map((item, index) => {
+                                return <CardProduct key={item.urlProduct + "hot" + index} data={item} />;
+                            }) || <></>}
+                        </CarouselProduct>
                     </div>
                     <div className="box_title">
                         <h4>Sản Phẩm Mới</h4>
                         <p>Cập nhật sản phẩm mới nhất</p>
                     </div>
                     <div style={{ boxShadow: "0px 0px 25px 0px #d3dbee" }} className="mb-5">
-                        {loading ? (
-                            <CarouselProduct>
-                                {[1, 2, 3, 4, 5].map((item, index) => {
-                                    return <CardProductPlaceholder key={item + "new" + index} />;
-                                })}
-                            </CarouselProduct>
-                        ) : (
-                            <CarouselProduct>
-                                {productData.newProduct.data?.listProduct?.map((item, index) => {
-                                    return <CardProduct key={item.urlProduct + "new" + index} data={item} />;
-                                }) || <></>}
-                            </CarouselProduct>
-                        )}
+                        <CarouselProduct>
+                            {newProduct.data?.listProduct?.map((item, index) => {
+                                return <CardProduct key={item.urlProduct + "new" + index} data={item} />;
+                            }) || <></>}
+                        </CarouselProduct>
                     </div>
                     {menulength > 0 ? (
                         <>
@@ -154,7 +126,7 @@ export default function Home(props) {
                     </div>
                     <div className="mb-5">
                         <Row>
-                            {productData.articles.data?.map((item, index) => {
+                            {articles.data?.map((item, index) => {
                                 return (
                                     <Col key={item.urlPage + index} lg={4} xs={6}>
                                         <CardNews data={item} />
@@ -168,3 +140,23 @@ export default function Home(props) {
         </>
     );
 }
+
+Home.getInitialProps = async (context) => {
+    try {
+        const hotProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: true, createdAt: "DESC" });
+        const newProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: false, createdAt: "DESC" });
+        const listArticles = await articleService.getListArticles({ limit: 3, offset: 0 });
+        return {
+            props: {
+                hotProduct: hotProductdata,
+                newProduct: newProductdata,
+                articles: listArticles,
+            },
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            notFound: true,
+        };
+    }
+};
