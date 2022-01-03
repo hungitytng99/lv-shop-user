@@ -4,11 +4,18 @@ import { Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGooglePlus } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/dist/client/link";
-import { InputState } from "src/constants/InputState";
 import InputError from "src/components-share/Error/InputError";
 import Head from "next/head";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { REQUEST_STATE } from "src/app-configs";
+import { userService } from "./../../src/services/user/index";
+import { InputState } from "../../src/constants/InputState";
 
 export default function SignUp() {
+    const userData = useSelector((stores) => stores.userSlice.value);
+    const router = useRouter();
+    if (userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR) router.push("/");
     const breadcrumb = [
         {
             title: "Đăng ký",
@@ -57,7 +64,7 @@ export default function SignUp() {
         }
         return true;
     }
-    function dangkySubmit() {
+    async function dangkySubmit() {
         let checkSubmit = checkName();
         checkSubmit = checkEmail() && checkSubmit;
         checkSubmit = checkPhone() && checkSubmit;
@@ -69,7 +76,15 @@ export default function SignUp() {
                 phone: phoneRef.current.value,
                 password: passwordRef.current.value,
             };
-            alert("call api\n" + JSON.stringify(dataPost));
+            const response = await userService.register(dataPost);
+            if (response.state === REQUEST_STATE.SUCCESS) {
+                alert("Đăng kí thành công!\nĐăng nhập và mua sắm nào!");
+                router.push("/dang-nhap");
+            }
+            if (response.state === REQUEST_STATE.ERROR) {
+                if (response?.error?.message === InputState.WRONG_PASSWORD) setPasswordState(InputState.WRONG_PASSWORD);
+                if (response?.error?.message === InputState.USER_NOT_FOUND) setEmailState(InputState.USER_NOT_FOUND);
+            }
         }
     }
     function clearState(e, clearError) {

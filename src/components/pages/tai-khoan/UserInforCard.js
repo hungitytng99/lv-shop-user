@@ -1,6 +1,12 @@
-import React from "react";
+import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import Link from "next/dist/client/link";
 
 export default function UserInforCard() {
+    const userData = useSelector((stores) => stores.userSlice.value);
+    const [editState, setEditState] = useState(false);
     function getImageUpload(e) {
         const file = e.target.files[0];
         console.log(file);
@@ -10,8 +16,8 @@ export default function UserInforCard() {
         <div className="information_card">
             <div className="avatar-wrapper">
                 <div className="avatar">
-                    <span className="avatar user_no_img content_center">QL</span>
-                    <img className="user_img avatar" src="https://recmiennam.com/wp-content/uploads/2020/09/anh-gai-xinh-facebook-21.jpg" />
+                    <span className="avatar user_no_img content_center">{userData.data.name ? userData.data.name[0] : ""}</span>
+                    {userData.data.avatar ? <img className="user_img avatar" src={userData.data.avatar} /> : null}
                 </div>
                 <div className="content_center upload_button avatar" title="Upload new image">
                     <span className="icon_img_upload">
@@ -24,7 +30,34 @@ export default function UserInforCard() {
                 <input className="input_file_upload avatar" type="file" accept="image/*" onChange={(e) => getImageUpload(e)} />
             </div>
             <div className="information">
-                <p>Lê Đình Quyền</p>
+                {editState ? (
+                    <input
+                        type="text"
+                        style={{ width: "100%", padding: "5px 10px", border: "1px solid #2196f3", outline: "none", borderRadius: "5px" }}
+                        name="name"
+                        defaultValue={userData.data.name}
+                    />
+                ) : (
+                    <p style={{ textTransform: "capitalize" }}>{userData.data.name}</p>
+                )}
+
+                <p style={{}}>{userData.data.email}</p>
+                <div style={{ marginTop: "20px", textAlign: "right" }}>
+                    {editState ? (
+                        <span className="edit_btn" onClick={() => setEditState(false)}>
+                            <span>Save</span>
+                        </span>
+                    ) : (
+                        <span className="edit_btn" onClick={() => setEditState(true)}>
+                            <FontAwesomeIcon icon={faUserEdit} style={{ marginRight: "10px" }} />
+                            <span>Chỉnh sửa</span>
+                        </span>
+                    )}
+
+                    <Link href="/tai-khoan/doi-mat-khau" passHref>
+                        <span style={{ display: "block", fontSize: "14px", marginTop: "20px", cursor: "pointer" }}>Đổi mật khẩu ?</span>
+                    </Link>
+                </div>
             </div>
         </div>
     );

@@ -20,6 +20,43 @@ export const apiLogin = async (params) => {
         };
     }
 };
+export const apiRegisterNewAccount = async (params) => {
+    try {
+        const response = await POST("/auth/register", params, { isFullPath: false });
+        const result = {
+            data: response.result,
+            state: REQUEST_STATE.SUCCESS,
+        };
+        // console.log("apiLogin", result);
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return {
+            state: REQUEST_STATE.ERROR,
+            error: error,
+            data: {},
+        };
+    }
+};
+
+export const apiChangePass = async (params) => {
+    try {
+        const response = await PUT("/me/password", params, { isFullPath: false });
+        const result = {
+            data: response.result,
+            state: REQUEST_STATE.SUCCESS,
+        };
+        // console.log("apiLogin", result);
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return {
+            state: REQUEST_STATE.ERROR,
+            error: error,
+            data: {},
+        };
+    }
+};
 
 export const apiRegisterByDevice = async (params) => {
     try {
@@ -43,6 +80,25 @@ export const apiRegisterByDevice = async (params) => {
 export const apiGetUserInforbyToken = async (params) => {
     try {
         const response = await GET("/me", params, { isFullPath: false });
+        const result = {
+            data: response.result,
+            state: REQUEST_STATE.SUCCESS,
+        };
+        // console.log("apiGetUserInforbyToken", result);
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return {
+            state: REQUEST_STATE.ERROR,
+            error: error,
+            data: {},
+        };
+    }
+};
+
+export const apiUpdateUserInfor = async (params) => {
+    try {
+        const response = await PUT("/me", params, { isFullPath: false });
         const result = {
             data: response.result,
             state: REQUEST_STATE.SUCCESS,

@@ -1,5 +1,7 @@
 .account {
+    margin-bottom: 60px;
     .information_card {
+        height: 90%;
         .avatar-wrapper {
             position: relative;
             height: 110px;
@@ -7,7 +9,7 @@
             margin: 15px auto;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow: 1px 1px 15px -5px black;
+            box-shadow: 0px -1px 10px 0px #00968847;
             transition: all 0.3s ease;
             .content_center {
                 display: flex;
@@ -20,12 +22,14 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
 
                 .user_no_img {
+                    text-transform: uppercase;
                     background: $text_color_hover;
                     color: white;
-                    font-size: 70px;
-                    display: none;
+                    font-size: 50px;
+                    display: flex;
                 }
             }
             .upload_button {
@@ -46,11 +50,12 @@
             }
         }
         .information {
-            box-shadow: 1px 1px 15px 0px rgb(204, 204, 204);
+            box-shadow: 0px -1px 10px 0px #00968847;
             border-radius: 5px;
             padding: 85px 15px 15px 15px;
-            margin-top: -85px;
+            margin-top: -76px;
             text-align: center;
+            height: 100%;
         }
     }
     .add_address {
@@ -96,7 +101,7 @@
         overflow: auto;
     }
     .table_data {
-        width: 876px;
+        width: 100%;
         padding: 0px 10px;
         div.row {
             width: 100%;
@@ -110,6 +115,49 @@
         .icon_function {
             margin: 0px 6px;
             cursor: pointer;
+            opacity: 0.7;
+            &.eye {
+                &:hover {
+                    color: rgb(0, 123, 255);
+                    opacity: 1;
+                }
+            }
+            &.edit {
+                :hover {
+                    color: rgb(255, 174, 0);
+                    opacity: 1;
+                }
+            }
+            &.remove {
+                :hover {
+                    color: rgb(255, 25, 0);
+                    opacity: 1;
+                }
+            }
         }
     }
+}
+
+.edit_btn {
+    border: 1px solid #9e9e9e;
+    color: #9e9e9e;
+    border-radius: 5px;
+    padding: 2.5px 5px;
+    cursor: pointer;
+    &:hover {
+        color: $text_color_hover;
+        border-color: $text_color_hover;
+    }
+}
+
+.overflow_ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.address_modal {
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 20px 0px;
 }

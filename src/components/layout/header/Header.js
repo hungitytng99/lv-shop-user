@@ -65,7 +65,7 @@ export default function Header(props) {
             </Container>
             <div className="header-bottom-search">
                 <div>
-                    <input type="text" placeholder="Tìm kiếm sản phẩm..."></input>
+                    <input type="text" name="search" placeholder="Tìm kiếm sản phẩm..."></input>
                     <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                 </div>
             </div>

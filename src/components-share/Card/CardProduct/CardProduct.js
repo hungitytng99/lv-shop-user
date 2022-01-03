@@ -23,7 +23,9 @@ export default function CardProduct(props) {
     return (
         <div className="product_card user-not-selected">
             <div className="product_card-img">
-                <img src={data.urlImg} />
+                <Link href={data.urlProduct} passHref>
+                    <img src={data.urlImg} />
+                </Link>
                 <div className="product_card-img-mask">
                     <span onClick={() => openReviewProductModal()}>
                         <FontAwesomeIcon icon={faEye} />

@@ -15,17 +15,16 @@ import cookies from "next-cookies";
 import { rangePrice } from "./../../src/constants/rangePrice";
 import { getListRandomNumber } from "src/share_function";
 
-export default function Slug(props) {
+export default function ListProductByCollection(props) {
+    // console.log(props);
     let breadcrumb = [
         {
             title: "Tất cả sản phẩm",
             url: "/san-pham/all",
         },
     ];
-    const { dataResponse, collectionId, query, baseUrlForPagination, baseUrlForSort, baseUrlForRange, itemsPerPage } = props;
+    const { dataResponse, collectionId, query, sortBy, activePage, baseUrlForPagination, baseUrlForSort, baseUrlForRange, itemsPerPage } = props;
 
-    // console.log(dataResponse);
-    const { page = "1", sort = "latest" } = query;
     const menu = useSelector((stores) => stores.menuSlice.value.data);
     const lengthMenu = menu?.length || 0;
     const randomCardReview = getListRandomNumber(4, lengthMenu);
@@ -123,7 +122,7 @@ export default function Slug(props) {
                                 <span>{breadcrumb[1]?.title || breadcrumb[0].title}</span>
                                 <span className="sort_by">
                                     <span>
-                                        Sắp xếp theo: {sortType[sort]}{" "}
+                                        Sắp xếp theo: {sortType[sortBy]}{" "}
                                         <span>
                                             <FontAwesomeIcon icon={faCaretDown} />
                                         </span>
@@ -151,7 +150,7 @@ export default function Slug(props) {
                                 </span>
                             </div>
                             <Row>
-                                {dataResponse.data.listProduct.map((item, index) => {
+                                {dataResponse?.data?.listProduct.map((item, index) => {
                                     return (
                                         <Col key={"danhsachsanpham" + index} lg={3} xs={6} md={4} style={{ margin: "10px 0px" }}>
                                             <CardProduct data={item} />
@@ -160,7 +159,12 @@ export default function Slug(props) {
                                 })}
                             </Row>
                             <div style={{ float: "right" }}>
-                                <PaginationCustom totalItem={dataResponse.data.total} baseUrl={baseUrlForPagination} activePage={parseInt(page)} itemsPerPage={itemsPerPage} />
+                                <PaginationCustom
+                                    totalItem={dataResponse?.data?.total}
+                                    baseUrl={baseUrlForPagination}
+                                    activePage={parseInt(activePage)}
+                                    itemsPerPage={itemsPerPage}
+                                />
                             </div>
                         </Col>
                     </Row>
@@ -169,9 +173,8 @@ export default function Slug(props) {
         </>
     );
 }
-
-export async function getServerSideProps(context) {
-    const { resolvedUrl, query, params } = context;
+ListProductByCollection.getInitialProps = async (context) => {
+    const { asPath, query, params } = context;
     function getSortPriceType(sortType) {
         const isSortPrice = sortType || "";
         if (isSortPrice === "prices_desc") return "DESC";
@@ -179,18 +182,9 @@ export async function getServerSideProps(context) {
         return "";
     }
     try {
-        const token = cookies(context).auth;
-        if (token == undefined) {
-            return {
-                redirect: {
-                    destination: "/",
-                    permanent: false,
-                },
-            };
-        }
         let params_post = {
             limit: 20,
-            offset: (Number(query?.page) - 1) * 20 || 0,
+            offset: (Number(query.page) - 1) * 20 || 0,
             title: "",
             collectionId: Number(query.slug.split("-")[0]) || "",
             status: "",
@@ -200,33 +194,23 @@ export async function getServerSideProps(context) {
             createdAt: query.sort === "oldest" ? "ASC" : "DESC",
         };
 
-        const [baseUrl] = resolvedUrl.split("?");
+        const [baseUrl] = asPath.split("?");
         let baseUrlForPagination = baseUrl + "?sort=" + (query.sort === undefined ? "latest" : query.sort) + (query.range === undefined ? "" : "&range=" + query.range);
         let baseUrlForSort = baseUrl + "?page=1" + (query.range === undefined ? "" : "&range=" + query.range);
         let baseUrlForRange = baseUrl + "?page=1&sort=" + (query.sort === undefined ? "latest" : query.sort);
 
-        const dataResponse = await productService.getListProduct(params_post, token);
+        const dataResponse = await productService.getListProduct(params_post);
 
-        console.log({
-            params_post,
+        return {
             dataResponse,
             collectionId: params_post.collectionId,
             query,
+            sortBy: query.sort || "latest",
+            activePage: Number(query.page) || 1,
             baseUrlForPagination,
             baseUrlForSort,
             baseUrlForRange,
-            token,
-        });
-        return {
-            props: {
-                dataResponse,
-                collectionId: params_post.collectionId,
-                query,
-                baseUrlForPagination,
-                baseUrlForSort,
-                baseUrlForRange,
-                itemsPerPage: params_post.limit,
-            },
+            itemsPerPage: params_post.limit,
         };
     } catch (error) {
         console.log(error);
@@ -234,4 +218,4 @@ export async function getServerSideProps(context) {
             notFound: true,
         };
     }
-}
+};

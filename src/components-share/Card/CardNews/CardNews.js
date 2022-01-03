@@ -10,7 +10,9 @@ export default function CardNews(props) {
     return (
         <div className="card_news">
             <div className="thumb">
-                <img src={imageUrl} alt="Bài viết tiện ích xanh shop Lộc Vừng" />
+                <Link href={urlPage} passHref>
+                    <img src={imageUrl} alt="Bài viết tiện ích xanh shop Lộc Vừng" />
+                </Link>
                 <span className="date">
                     <div>
                         <span className="day">{day}</span>

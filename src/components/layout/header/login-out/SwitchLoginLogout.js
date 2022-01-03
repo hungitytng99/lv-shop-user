@@ -42,7 +42,11 @@ export default function SwitchLoginLogout() {
 
     function clickLogOut() {
         dispatch(userLogout());
-        router.push("/");
+        if (router.asPath == "/") {
+            router.reload("/");
+        } else {
+            router.push("/");
+        }
     }
     return (
         <div className="header-mid-account">
@@ -50,8 +54,9 @@ export default function SwitchLoginLogout() {
                 <div style={{ display: isUser ? "none" : "inline-block" }} className="header-mid-account-icon">
                     <Image src={ImagesPath.userIcon}></Image>
                 </div>
-                <div style={{ display: isUser ? "inline-block" : "none" }} className="header-mid-account-icon header-mid-account-avata">
-                    <img src="https://recmiennam.com/wp-content/uploads/2020/09/anh-gai-xinh-facebook-21.jpg"></img>
+                <div style={{ display: isUser ? "flex" : "none" }} className="header-mid-account-icon header-mid-account-avata">
+                    <span className=" user_no_img ">{userData.data.name ? userData.data.name[0] : ""}</span>
+                    {userData.data.avatar ? <img src={userData.data.avatar} /> : null}
                 </div>
                 <span>Tài khoản</span>
                 <div className="header-mid-account-option">
