@@ -71,3 +71,8 @@ export const getListRandomNumber = (lengthArrReturn, maxValue) => {
 
     return arrResult;
 };
+
+export const getFullday = (str) => {
+    const date = new Date(str);
+    return date.toLocaleString();
+};

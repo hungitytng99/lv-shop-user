@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPodcast } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import Image from "next/dist/client/image";
 
 export default function Footer() {
     const shopInfor = useSelector((stores) => stores.shopSlice.value);
@@ -36,12 +37,12 @@ export default function Footer() {
                                 <div className="contact-info">
                                     <Link href="/" passHref>
                                         <div className="contact-info-logo">
-                                            <img src={ImagesPath.LOGO}></img>
+                                            <Image width={95} height={95} src={ImagesPath.LOGO}></Image>
                                         </div>
                                     </Link>
                                     <div className="contact-info-item">
                                         <div className="item">
-                                            <b>Tiện ích Xanh</b>{" "}
+                                            <b>{shopInfor.data?.bossName}</b>
                                         </div>
                                         <div className="item">
                                             <span>

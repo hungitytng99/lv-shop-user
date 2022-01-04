@@ -329,9 +329,9 @@ export default function ListAddress() {
                                 </Col>
                                 <Col xs={2}>{item.value.phone}</Col>
                                 <Col xs={2}>
-                                    <span className="icon_function eye" title="xem" onClick={() => openModalLookAddress()}>
+                                    {/* <span className="icon_function eye" title="xem" onClick={() => openModalLookAddress()}>
                                         <FontAwesomeIcon icon={faEye} />
-                                    </span>
+                                    </span> */}
                                     <span className="icon_function edit" title="sửa" onClick={() => openEditAddressModal(item)}>
                                         <FontAwesomeIcon icon={faPencilAlt} />{" "}
                                     </span>

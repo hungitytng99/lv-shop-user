@@ -7,16 +7,17 @@ import { format_d_currency } from "src/share_function";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "./../../../../redux/slices/cartSlices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductDetail(props) {
     const dispatch = useDispatch();
-    const [alertBox, setAlertBox] = useState({ open: false, content: "", icon: faCheckCircle });
+    const [alertBox, setAlertBox] = useState({ open: false, type: "success", content: "", icon: faCheckCircle });
     const { product } = props;
     const { listImg = [], title = "", trademark = "", status = "", productInfo = "", curPrice = 0, oldPrice = 0, options = [], variants = [] } = product;
     const [datashow, setDataShow] = useState({
         variantId: variants[0]?.id || null,
         oldPrice: oldPrice,
+        availableNumber: variants[0]?.availableNumber,
         curPrice: curPrice,
         imageIndex: 0,
         activeOption: variants[0]?.existByOptions || [],
@@ -28,6 +29,7 @@ export default function ProductDetail(props) {
             variantId: variants[0]?.id || null,
             oldPrice: oldPrice,
             curPrice: curPrice,
+            availableNumber: variants[0]?.availableNumber,
             imageIndex: 0,
             activeOption: variants[0]?.existByOptions || [],
         });
@@ -35,11 +37,18 @@ export default function ProductDetail(props) {
     let closeAlertTimeout = setTimeout(() => {}, 100);
     function addProduct() {
         clearTimeout(closeAlertTimeout);
-        dispatch(addProductToCart({ variantId: datashow.variantId, quantity: Number(numberOrder.current.value) }));
-        setAlertBox({ open: true, content: "Sản phẩm vừa được thêm vào giỏ hàng của bạn", icon: faCheckCircle });
-        closeAlertTimeout = setTimeout(() => {
-            setAlertBox({ open: false, content: "", icon: faCheckCircle });
-        }, 1500);
+        if (Number(numberOrder.current.value) > datashow.availableNumber) {
+            setAlertBox({ open: true, type: "warning", content: "Sổ lượng sản phẩm không đủ.", icon: faTimes });
+            closeAlertTimeout = setTimeout(() => {
+                setAlertBox({ open: false, content: "", icon: faCheckCircle });
+            }, 1500);
+        } else {
+            dispatch(addProductToCart({ variantId: datashow.variantId, quantity: Number(numberOrder.current.value) }));
+            setAlertBox({ open: true, type: "success", content: "Sản phẩm vừa được thêm vào giỏ hàng của bạn", icon: faCheckCircle });
+            closeAlertTimeout = setTimeout(() => {
+                setAlertBox({ open: false, content: "", icon: faCheckCircle });
+            }, 1500);
+        }
     }
 
     // useEffect(()=> {
@@ -70,6 +79,7 @@ export default function ProductDetail(props) {
                     ...newDataShow,
                     variantId: variants[i].id,
                     oldPrice: variants[i].oldPrice,
+                    availableNumber: variants[i]?.availableNumber,
                     curPrice: variants[i].curPrice,
                     activeOption: variants[i].existByOptions,
                 };
@@ -117,7 +127,7 @@ export default function ProductDetail(props) {
             <Col md={7} className="detal_product">
                 <h2 className="detal_product-name">{title}</h2>
                 <p>
-                    Thương hiệu: {trademark} | Tình trạng: {status}
+                    Thương hiệu: {trademark} | Tình trạng: {status == "active" ? "Còn hàng" : ""}
                 </p>
 
                 {/* <StarRating initialRating={rating} /> */}
@@ -128,6 +138,9 @@ export default function ProductDetail(props) {
                 <p>Thông tin sản phẩm: </p>
                 <div dangerouslySetInnerHTML={{ __html: productInfo }} />
                 <hr />
+                <div>
+                    Số lượng còn: <b>{datashow.availableNumber}</b> sản phẩm
+                </div>
                 {options?.map((opt, i) => {
                     return (
                         <div key={"opt" + opt.title + i} className="pick_variant">
@@ -163,7 +176,7 @@ export default function ProductDetail(props) {
                     </div>
                 </div>
             </Col>
-            <div className="alert_box success" style={{ top: alertBox.open ? "100px" : "-100px" }}>
+            <div className={`alert_box ${alertBox.type}`} style={{ top: alertBox.open ? "50px" : "-100px" }}>
                 <div className="alert_content">
                     <span>
                         <FontAwesomeIcon icon={alertBox.icon} />

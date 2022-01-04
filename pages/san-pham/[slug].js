@@ -187,7 +187,7 @@ ListProductByCollection.getInitialProps = async (context) => {
             offset: (Number(query.page) - 1) * 20 || 0,
             title: "",
             collectionId: Number(query.slug.split("-")[0]) || "",
-            status: "",
+            status: "active",
             maxPrice: query.range ? rangePrice[query.range].maxPrice : "",
             minPrice: query.range ? rangePrice[query.range].minPrice : "",
             sortPrice: getSortPriceType(query.sort),

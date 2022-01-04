@@ -30,6 +30,7 @@ export const productService = {
                         availableNumber: variant?.availableNumber || 0,
                         existByOptions: variant?.options || [],
                         publicTitle: variant?.publicTitle || "Tiện ích Lộc Vừng shop",
+                        availableNumber: variant?.availableNumber || "Không rõ",
                     };
                 }),
             };

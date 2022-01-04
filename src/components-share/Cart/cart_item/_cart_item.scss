@@ -10,6 +10,7 @@
         align-items: center;
     }
     &-title {
+        justify-content: left !important;
         span {
             cursor: pointer;
             color: $text_color_hover;

@@ -1,0 +1,14 @@
+.card_his_order {
+    border: 1px solid $text_color_hover;
+    padding: 10px 20px;
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0px;
+        .order_code {
+            font-size: larger;
+            font-weight: 600;
+        }
+    }
+}

@@ -16,6 +16,7 @@ import CartAndCheckout from "./../../src/components/pages/checkout/CartAndChecko
 import { userLogout } from "src/redux/slices/userSlice";
 import { useRouter } from "next/router";
 import { REQUEST_STATE } from "src/app-configs";
+import Image from "next/dist/client/image";
 
 export default function Checkout(props) {
     const router = useRouter();
@@ -47,7 +48,7 @@ export default function Checkout(props) {
                     <Col lg={8}>
                         <div className="checkout_header">
                             <Link href="/" passHref>
-                                <img src={ImagesPath.LOGO} />
+                                <Image width={90} height={90} src={ImagesPath.LOGO} />
                             </Link>
                             {isUser ? (
                                 <span className="login_logout" onClick={clickLogOut}>
