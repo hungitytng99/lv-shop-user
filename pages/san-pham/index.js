@@ -57,7 +57,13 @@ SanPham.getInitialProps = async (context) => {
         const productID = Number(query.product.split("-")[0]);
 
         const response = await productService.getDetailProduct(productID);
-        const relatedProducts = await productService.getListProduct({ limit: 12, offset: 0, collectionId: response.data.collections[0] || "", createdAt: "DESC" });
+        const relatedProducts = await productService.getListProduct({
+            limit: 12,
+            offset: 0,
+            collectionId: response.data.collections[0] || "",
+            status: "active",
+            createdAt: "DESC",
+        });
 
         return {
             product,

@@ -30,6 +30,7 @@ export const productService = {
                         availableNumber: variant?.availableNumber || 0,
                         existByOptions: variant?.options || [],
                         publicTitle: variant?.publicTitle || "Tiện ích Lộc Vừng shop",
+                        availableNumber: variant?.availableNumber || "Không rõ",
                     };
                 }),
             };
@@ -51,7 +52,7 @@ export const productService = {
                     oldPrice: val?.comparePrice > val?.price ? val?.comparePrice : 0,
                     status: getStateProduct(val?.createdAt, val?.price || 0, val?.comparePrice || 0),
                     totalVariant: val.totalVariant || 1,
-                    firstVariantId: val.firstAvailableVariant.id || "",
+                    firstVariantId: val.firstAvailableVariant?.id || "",
                 };
             });
             return {

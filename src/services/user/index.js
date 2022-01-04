@@ -2,7 +2,17 @@ import { apiRegisterNewAccount } from "src/api/user";
 import { apiGetUserInforbyToken } from "src/api/user";
 import { apiLogin, apiRegisterByDevice } from "src/api/user";
 import { REQUEST_STATE } from "src/app-configs";
-import { apiChangePass, apiCreateUserMeta, apiDeleteUserMetaById, apiGetUserMeta, apiUpdateUserInfor, apiUpdateUserMetaById, apiUploadImg } from "./../../api/user/index";
+import {
+    apiChangePass,
+    apiCreateUserMeta,
+    apiDeleteUserMetaById,
+    apiGetUserMeta,
+    apiGetUserOrders,
+    apiUpdateUserInfor,
+    apiUpdateStateOrders,
+    apiUpdateUserMetaById,
+    apiUploadImg,
+} from "./../../api/user/index";
 import { userMetaKeys } from "./../../constants/userMetaKeys";
 
 export const userService = {
@@ -78,8 +88,17 @@ export const userService = {
         });
     },
     uploadImg: function (file) {
-        console.log("80", file);
         return apiUploadImg(file).then((response) => {
+            return response;
+        });
+    },
+    getUserOrders: function (params) {
+        return apiGetUserOrders(params).then((response) => {
+            return response;
+        });
+    },
+    updateOrderState: function (id, status) {
+        return apiUpdateStateOrders(id, status).then((response) => {
             return response;
         });
     },

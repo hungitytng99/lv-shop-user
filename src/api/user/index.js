@@ -203,3 +203,41 @@ export const apiUploadImg = async (file) => {
         };
     }
 };
+
+export const apiGetUserOrders = async (params) => {
+    try {
+        const response = await GET(`/user/orders`, params, { isFullPath: false });
+        const result = {
+            data: response.result,
+            state: REQUEST_STATE.SUCCESS,
+            total: response.total,
+        };
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return {
+            state: REQUEST_STATE.ERROR,
+            error: error,
+            total: 0,
+            data: [],
+        };
+    }
+};
+
+export const apiUpdateStateOrders = async (id, status) => {
+    try {
+        const response = await PUT(`/user/orders/${id}`, { status: status }, { isFullPath: false });
+        const result = {
+            data: response.result,
+            state: REQUEST_STATE.SUCCESS,
+        };
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return {
+            state: REQUEST_STATE.ERROR,
+            error: error,
+            data: {},
+        };
+    }
+};

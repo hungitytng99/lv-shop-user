@@ -104,3 +104,20 @@ export const apiOrder = async (params) => {
         };
     }
 };
+
+export const apiCheckCartAvailable = async () => {
+    try {
+        const response = await GET("/user/cart/check-available-items", null, { isFullPath: false });
+        return {
+            state: REQUEST_STATE.SUCCESS,
+            data: response.result,
+        };
+    } catch (error) {
+        console.log("error", error);
+        return {
+            error: error,
+            state: REQUEST_STATE.ERROR,
+            data: {},
+        };
+    }
+};

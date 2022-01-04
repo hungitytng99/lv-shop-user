@@ -9,13 +9,28 @@ import Link from "next/dist/client/link";
 import { format_d_currency } from "src/share_function";
 import { v4 as uuidv4 } from "uuid";
 import { closeCartModal } from "src/redux/slices/modalCartSlice";
+import { useRouter } from "next/router";
+import { cartService } from "./../../../services/cart/index";
 
 export default function ModalReviewCart(props) {
     const dispatch = useDispatch();
     const { open, loading } = useSelector((stores) => stores.modalCartSlice);
     const cartData = useSelector((stores) => stores.cartSlice.value);
     const productList = cartData.products;
-
+    const router = useRouter();
+    function gotoCart() {
+        dispatch(closeCartModal());
+        router.push("/cart");
+    }
+    async function gotoCheckout() {
+        const res = await cartService.checkCartAvailableForCheckout();
+        if (res.data.length > 0) {
+            alert("Có sản phẩm vượt quá số lượng hiện có của shop.\nVui lòng chọn lại.");
+        } else {
+            dispatch(closeCartModal());
+            router.push("/checkout");
+        }
+    }
     function closeModalEvent() {
         dispatch(closeCartModal());
     }
@@ -42,10 +57,13 @@ export default function ModalReviewCart(props) {
                     <span>{format_d_currency(cartData.totalPrice)}</span>
                 </div>
                 <div style={{ textAlign: "right", margin: "10px 0px" }}>
-                    <Link href="/cart" passHref>
-                        <span className="btn-gray">Tới giỏ hàng</span>
-                    </Link>
-                    <span className="btn-red">Tiến hành thanh toán</span>
+                    <span className="btn-gray" onClick={gotoCart}>
+                        Tới giỏ hàng
+                    </span>
+
+                    <span className="btn-red" onClick={gotoCheckout}>
+                        Tiến hành thanh toán
+                    </span>
                 </div>
             </div>
         </ModalLayout>

@@ -57,8 +57,8 @@ export default function Header(props) {
                             <FontAwesomeIcon icon={faBars} />
                         </label>
                     </div>
-                    <div className="header-mid-logo">
-                        <img src={ImagesPath.LOGO}></img>
+                    <div className="header-mid-logo" style={{ marginTop: "-53px" }}>
+                        <Image width={"90px"} height={90} src={ImagesPath.LOGO}></Image>
                     </div>
                     <SwitchLoginLogout />
                 </div>

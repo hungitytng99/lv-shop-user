@@ -11,6 +11,7 @@ import { ImagesPath } from "./../../../../constants/ImagesPath";
 import { userLogout } from "./../../../../redux/slices/userSlice";
 import { REQUEST_STATE } from "src/app-configs";
 import { useRouter } from "next/router";
+import { cartService } from "./../../../../services/cart/index";
 
 export default function SwitchLoginLogout() {
     const dispatch = useDispatch();
@@ -37,6 +38,14 @@ export default function SwitchLoginLogout() {
                     })}
                 </>
             );
+        }
+    }
+    async function checkout() {
+        const res = await cartService.checkCartAvailableForCheckout();
+        if (res.data.length > 0) {
+            alert("Có sản phẩm vượt quá số lượng hiện có của shop.\nVui lòng chọn lại.");
+        } else {
+            router.push("/checkout");
         }
     }
 
@@ -113,9 +122,9 @@ export default function SwitchLoginLogout() {
                         <Link href="/cart" passHref>
                             <span className="btn-gray">Tới giỏ hàng</span>
                         </Link>
-                        <Link href={cartData.totalProduct == 0 ? "#" : "/checkout"} passHref>
-                            <span className={`btn-red ${cartData.totalProduct == 0 ? "btn-disable" : ""}`}>Tiến hành thanh toán</span>
-                        </Link>
+                        <span className={`btn-red ${cartData.totalProduct == 0 ? "btn-disable" : ""}`} onClick={cartData.totalProduct == 0 ? () => {} : () => checkout()}>
+                            Tiến hành thanh toán
+                        </span>
                     </div>
                 </div>
             </span>

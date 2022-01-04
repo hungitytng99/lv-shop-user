@@ -58,7 +58,7 @@ export default function CartItem(props) {
             <Col md={2} className="cart_item-price">
                 {format_d_currency(data.price)}
             </Col>
-            <Col md={3} xs={3}>
+            <Col md={3} xs={3} style={{ flexDirection: "column" }}>
                 <div className="order_product-quantity">
                     <span className="order_product-quantity-minus" onClick={decreaseOder}>
                         {" - "}
@@ -68,6 +68,7 @@ export default function CartItem(props) {
                         {" + "}
                     </span>
                 </div>
+                <div style={{ fontSize: "13px", opacity: "0.7", marginBottom: "-20px" }}>{data.availableNumber}sp hiện có</div>
             </Col>
             <Col md={2} className="cart_item-total_price">
                 <span>{format_d_currency(data.totalPrice)}</span>
