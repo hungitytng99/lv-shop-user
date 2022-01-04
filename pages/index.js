@@ -18,7 +18,8 @@ import CardProductPlaceholder from "./../src/components-share/Placeholder/CardPr
 import CardProductReviewPlaceholder from "./../src/components-share/Placeholder/CardProductReviewPlaceholder";
 import CardNewsPlaceholder from "src/components-share/Placeholder/CardNewsPlaceholder";
 
-export default function Home({ props }) {
+export default function Home(props) {
+    console.log(props);
     const { hotProduct = [], newProduct = [], articles = [] } = props;
     // const token = Cookies.get(storageKey.Cookie_token);
     const [loading, setLoading] = useState(true);
@@ -147,11 +148,9 @@ Home.getInitialProps = async (context) => {
         const newProductdata = await productService.getListProduct({ limit: 12, offset: 0, bestSelling: false, status: "active", createdAt: "DESC" });
         const listArticles = await articleService.getListArticles({ limit: 3, offset: 0 });
         return {
-            props: {
-                hotProduct: hotProductdata,
-                newProduct: newProductdata,
-                articles: listArticles,
-            },
+            hotProduct: hotProductdata,
+            newProduct: newProductdata,
+            articles: listArticles,
         };
     } catch (error) {
         console.log(error);

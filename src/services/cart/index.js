@@ -1,4 +1,4 @@
-import { apiAddProductToCart, apiGetCart, apiGetCheckoutData, apiUpdateItemInCart, apiDeleteItemInCart, apiOrder } from "./../../api/cart/index";
+import { apiAddProductToCart, apiGetCart, apiGetCheckoutData, apiUpdateItemInCart, apiDeleteItemInCart, apiOrder, apiCheckCartAvailable } from "./../../api/cart/index";
 
 export const cartService = {
     addProductToCart: function (params) {
@@ -15,6 +15,7 @@ export const cartService = {
                             variantId: item.variant.id,
                             urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.variant?.featureImageId}`,
                             title: item.variant?.product?.title,
+                            availableNumber: item.variant?.availableNumber,
                             price: item.variant?.price,
                             quantity: item.quantity,
                             urlProduct: `/san-pham?product=${item?.variant?.product?.id}-${item?.variant?.product?.url}`,
@@ -40,6 +41,7 @@ export const cartService = {
                             variantId: item.variant.id,
                             urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.variant?.featureImageId}`,
                             title: item.variant?.product?.title,
+                            availableNumber: item.variant?.availableNumber,
                             price: item.variant?.price,
                             quantity: item.quantity,
                             urlProduct: `/san-pham?product=${item?.variant?.product?.id}-${item?.variant?.product?.url}`,
@@ -64,6 +66,7 @@ export const cartService = {
                             variantId: item.variant.id,
                             urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.variant?.featureImageId}`,
                             title: item.variant?.product?.title,
+                            availableNumber: item.variant?.availableNumber,
                             price: item.variant?.price,
                             quantity: item.quantity,
                             urlProduct: `/san-pham?product=${item?.variant?.product?.id}-${item?.variant?.product?.url}`,
@@ -90,6 +93,7 @@ export const cartService = {
                             urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.variant?.featureImageId}`,
                             title: item.variant?.product?.title,
                             price: item.variant?.price,
+                            availableNumber: item.variant?.availableNumber,
                             quantity: item.quantity,
                             urlProduct: `/san-pham?product=${item?.variant?.product?.id}-${item?.variant?.product?.url}`,
                             totalPrice: item.linePrice || 0,
@@ -115,6 +119,7 @@ export const cartService = {
                             variantId: item.variant.id,
                             urlImg: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.variant?.featureImageId}`,
                             title: item.variant?.product?.title,
+                            availableNumber: item.variant?.availableNumber,
                             price: item.variant?.price,
                             quantity: item.quantity,
                             urlProduct: `/san-pham?product=${item?.variant?.product?.id}-${item?.variant?.product?.url}`,
@@ -128,6 +133,11 @@ export const cartService = {
     },
     orderProducts: function (params) {
         return apiOrder(params).then((response) => {
+            return response;
+        });
+    },
+    checkCartAvailableForCheckout: function () {
+        return apiCheckCartAvailable().then((response) => {
             return response;
         });
     },

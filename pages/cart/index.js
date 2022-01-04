@@ -6,6 +6,8 @@ import CartItem from "./../../src/components-share/Cart/cart_item/CartItem";
 import Link from "next/dist/client/link";
 import { format_d_currency } from "./../../src/share_function/index";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { cartService } from "./../../src/services/cart/index";
 
 export default function Cart() {
     const breadcrumb = [
@@ -16,6 +18,16 @@ export default function Cart() {
     ];
     const cartData = useSelector((stores) => stores.cartSlice.value);
     const productList = cartData.products;
+    const router = useRouter();
+    async function checkout() {
+        const res = await cartService.checkCartAvailableForCheckout();
+        console.log(res);
+        if (res.data.length > 0) {
+            alert("Có sản phẩm vượt quá số lượng hiện có của shop.\nVui lòng chọn lại.");
+        } else {
+            router.push("/checkout");
+        }
+    }
     return (
         <>
             <Head>
@@ -49,9 +61,11 @@ export default function Cart() {
                                 <Link href="/" passHref>
                                     <span className="btn-gray">Tiếp tục mua hàng</span>
                                 </Link>
-                                <Link href={cartData.totalProduct == 0 ? "#" : "/checkout"} passHref>
-                                    <span className={`btn-red ${cartData.totalProduct == 0 ? "btn-disable" : ""}`}>Tiến hành thanh toán</span>
-                                </Link>
+                                {/* <Link href={cartData.totalProduct == 0 ? "#" : "/checkout"} passHref> */}
+                                <span className={`btn-red ${cartData.totalProduct == 0 ? "btn-disable" : ""}`} onClick={cartData.totalProduct == 0 ? () => {} : () => checkout()}>
+                                    Tiến hành thanh toán
+                                </span>
+                                {/* </Link> */}
                             </div>
                         </div>
                     </Container>

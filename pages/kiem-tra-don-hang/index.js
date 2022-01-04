@@ -4,6 +4,8 @@ import { Container, Button } from "react-bootstrap";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import CardHistoryOrder from "./../../src/components-share/Card/CardHistoryOrder/CardHistoryOrder";
+import { userService } from "src/services/user";
 
 export default function KiemTraDonHang() {
     const breadcrumb = [
@@ -12,6 +14,7 @@ export default function KiemTraDonHang() {
             url: "/kiem-tra-don-hang",
         },
     ];
+    const [listHistoryOrder, setListHistoryOrder] = useState([]);
     const [typeCheck, setTypeCheck] = useState("phone");
     const singlePhone = useRef(null);
     const singleEmail = useRef(null);
@@ -20,13 +23,20 @@ export default function KiemTraDonHang() {
     function changeRadiobox(e) {
         setTypeCheck(e.target.value);
     }
-    function submit() {
+    async function submit() {
         if (typeCheck === "phone") {
+            const res = await userService.getUserOrders({ phone: singlePhone.current.value });
+            setListHistoryOrder(res.data);
             console.log(singlePhone.current.value);
         } else if (typeCheck === "email") {
+            const res = await userService.getUserOrders({ phone: singleEmail.current.value });
+            setListHistoryOrder(res.data);
             console.log(singleEmail.current.value);
-        } else {
+        } else if (typeCheck === "both") {
+            const res = await userService.getUserOrders({ phone: bothPhone.current.value, email: bothEmail.current.value });
+            setListHistoryOrder(res.data);
             console.log(bothPhone.current.value, bothEmail.current.value);
+        } else {
         }
     }
     return (
@@ -135,7 +145,15 @@ export default function KiemTraDonHang() {
                             <Button onClick={submit}>Submit</Button>
                         </div>
                     </div>
-                    <div></div>
+                    <div>
+                        {listHistoryOrder.length === 0 ? (
+                            <div style={{ textAlign: "center" }}>Không có dữ liệu</div>
+                        ) : (
+                            listHistoryOrder.map((item, index) => {
+                                return <CardHistoryOrder key={"historycardse" + index} data={item} />;
+                            })
+                        )}
+                    </div>
                 </Container>
             </Layout>
         </div>

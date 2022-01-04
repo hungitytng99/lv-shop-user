@@ -19,7 +19,15 @@ export default function HistoryOrders() {
             <div>
                 <div>
                     {listHistoryOrder.map((item, index) => {
-                        return <CardHistoryOrder key={"historycard" + index} data={item} />;
+                        return (
+                            <CardHistoryOrder
+                                key={"historycard" + item.id + index}
+                                data={item}
+                                updateListOrder={(data) => {
+                                    setListHistoryOrder(data);
+                                }}
+                            />
+                        );
                     })}
                 </div>
             </div>

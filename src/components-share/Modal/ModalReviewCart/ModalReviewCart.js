@@ -10,6 +10,7 @@ import { format_d_currency } from "src/share_function";
 import { v4 as uuidv4 } from "uuid";
 import { closeCartModal } from "src/redux/slices/modalCartSlice";
 import { useRouter } from "next/router";
+import { cartService } from "./../../../services/cart/index";
 
 export default function ModalReviewCart(props) {
     const dispatch = useDispatch();
@@ -21,9 +22,14 @@ export default function ModalReviewCart(props) {
         dispatch(closeCartModal());
         router.push("/cart");
     }
-    function gotoCheckout() {
-        dispatch(closeCartModal());
-        router.push("/checkout");
+    async function gotoCheckout() {
+        const res = await cartService.checkCartAvailableForCheckout();
+        if (res.data.length > 0) {
+            alert("Có sản phẩm vượt quá số lượng hiện có của shop.\nVui lòng chọn lại.");
+        } else {
+            dispatch(closeCartModal());
+            router.push("/checkout");
+        }
     }
     function closeModalEvent() {
         dispatch(closeCartModal());
