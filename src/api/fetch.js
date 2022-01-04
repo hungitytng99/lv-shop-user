@@ -76,12 +76,12 @@ export const DELETE = (path, params, options = {}) => {
     return axios.delete(_url, _options).then((response) => response.data);
 };
 
-export const UPLOAD = (file, options, url, onProgress = () => {}) => {
-    const _url = options.isFullPath ? path : Configs.BASE_API + path;
+export const UPLOAD = (path, files, options, onProgress = () => {}) => {
+    const _url = options?.isFullPath ? path : Configs.BASE_API + path;
 
     const _form = new FormData();
-    _form.append("type", file.type);
-    _form.append("file", file);
+    _form.append("type", files.type);
+    _form.append("files", files);
 
     const _options = getOptions(options);
     _options.headers["Content-Type"] = "multipart/form-data";

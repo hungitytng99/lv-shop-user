@@ -39,7 +39,10 @@ export const userLogin = createAsyncThunk("users/login", async (params, thunkAPI
     }
     return response;
 });
-
+export const userUpdateInfor = createAsyncThunk("users/update_infor", async (params, thunkAPI) => {
+    const response = await userService.updateInfor(params);
+    return response;
+});
 export const userLogout = createAsyncThunk("users/logout", async (params, thunkAPI) => {
     await Cookies.remove(storageKey.Cookie_token);
 
@@ -98,6 +101,18 @@ export const userSlice = createSlice({
             state.loading = false;
         },
         [userLogout.rejected]: (state, action) => {
+            state.value = initialState;
+            state.loading = false;
+        },
+        // ----------------------------------------------------------------------------------------
+        [userUpdateInfor.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [userUpdateInfor.fulfilled]: (state, action) => {
+            state.value = action.payload;
+            state.loading = false;
+        },
+        [userUpdateInfor.rejected]: (state, action) => {
             state.value = initialState;
             state.loading = false;
         },

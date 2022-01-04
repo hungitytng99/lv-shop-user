@@ -82,8 +82,7 @@ export default function SignUp() {
                 router.push("/dang-nhap");
             }
             if (response.state === REQUEST_STATE.ERROR) {
-                if (response?.error?.message === InputState.WRONG_PASSWORD) setPasswordState(InputState.WRONG_PASSWORD);
-                if (response?.error?.message === InputState.USER_NOT_FOUND) setEmailState(InputState.USER_NOT_FOUND);
+                if (response?.error?.message === InputState.EMAIL_REGISTER_EXIST) setEmailState(InputState.EMAIL_REGISTER_EXIST);
             }
         }
     }
@@ -158,3 +157,15 @@ export default function SignUp() {
         </>
     );
 }
+
+// SignUp.getInitialProps = async (context) => {
+//     const { asPath, query, params } = context;
+//     try {
+//         return {};
+//     } catch (error) {
+//         console.log(error);
+//         return {
+//             notFound: true,
+//         };
+//     }
+// };

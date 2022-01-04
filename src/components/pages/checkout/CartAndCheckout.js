@@ -37,7 +37,7 @@ export default function CartAndCheckout() {
     }
     function getCustomerAddress() {
         let address = "";
-        address += dataCheckout.address.street !== "" ? dataCheckout.address.street + ", " : "";
+        address += dataCheckout.text_address.street !== "" ? dataCheckout.text_address.street + ", " : "";
         address += dataCheckout.address.wards !== "-1" ? dataCheckout.text_address.wards + ", " : "";
         address += dataCheckout.address.districts !== "-1" ? dataCheckout.text_address.districts + ", " : "";
         address += dataCheckout.address.provinces !== "-1" ? dataCheckout.text_address.provinces : "";

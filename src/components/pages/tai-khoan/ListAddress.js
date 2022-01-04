@@ -8,11 +8,15 @@ import ModalLayout from "src/components-share/Modal/ModalLayout";
 import { useDispatch } from "react-redux";
 import { addressService } from "./../../../services/address/index";
 import { FloatingLabel, Form, Button } from "react-bootstrap";
+import { userService } from "./../../../services/user/index";
+import { REQUEST_STATE } from "src/app-configs";
 
 const fakedata = [
     {
         name: "Lê Đình Quyền",
         address: "Số 2 ngõ 165, giáp bát, hoàng mai, hà nộidd asdj jsjk ạ ",
+        addressCode: { province: "-1", district: "-1", wards: "-1" },
+        textAddress: { province: "", district: "", wards: "", street: "" },
         phone: "0941158376",
     },
     {
@@ -26,8 +30,10 @@ const fakedata = [
         phone: "0941158376",
     },
 ];
+
 const initStateModal = {
     isOpen: false,
+    isCreateNew: true,
     titleModal: "Địa chỉ nhận hàng",
     name: "",
     phone: "",
@@ -44,18 +50,76 @@ const initStateModal = {
         wards: "-1",
     },
 };
+function getFullPathAddress(address, text_address) {
+    let fulladdress = "";
+    fulladdress += text_address.street !== "" ? text_address.street + ", " : "";
+    fulladdress += address.wards !== "-1" ? text_address.wards + ", " : "";
+    fulladdress += address.districts !== "-1" ? text_address.districts + ", " : "";
+    fulladdress += address.provinces !== "-1" ? text_address.provinces : "";
+    return fulladdress;
+}
 export default function ListAddress() {
     const [provincesList, setProvincesList] = useState([]);
     const [districtsList, setDistrictsList] = useState([]);
     const [wardsList, setWardsList] = useState([]);
-    const dispatch = useDispatch();
+    const [listAddress, setListAddress] = useState([]);
     const [dataModal, setDataModal] = useState(initStateModal);
     useEffect(() => {
         (async () => {
+            const getListAddress = await userService.getListAddressUser();
+            setListAddress(getListAddress.data);
             const response = await addressService.getProvinces();
             setProvincesList(response.data);
         })();
     }, []);
+
+    async function submitNewAddress() {
+        const value = {
+            name: dataModal.name,
+            phone: dataModal.phone,
+            isDefault: dataModal.isDefault,
+            address: dataModal.address,
+            text_address: dataModal.text_address,
+        };
+        const res = await userService.createAddressUser(value);
+        if (res.state === REQUEST_STATE.SUCCESS) {
+            const regetListAddress = await userService.getListAddressUser();
+            setListAddress(regetListAddress.data);
+            setDataModal(initStateModal);
+        } else {
+            alert("Có lỗi. Vui lòng thử lại sau");
+            setDataModal(initStateModal);
+        }
+    }
+    async function deleteAddress(id) {
+        const res = await userService.deleteMetaData(id);
+        if (res.state === REQUEST_STATE.SUCCESS) {
+            const regetListAddress = await userService.getListAddressUser();
+            setListAddress(regetListAddress.data);
+            setDataModal(initStateModal);
+        } else {
+            alert("Có lỗi. Vui lòng thử lại sau");
+            setDataModal(initStateModal);
+        }
+    }
+    async function updateAddress(id) {
+        const value = {
+            name: dataModal.name,
+            phone: dataModal.phone,
+            isDefault: dataModal.isDefault,
+            address: dataModal.address,
+            text_address: dataModal.text_address,
+        };
+        const res = await userService.updateAddressUser(id, value);
+        if (res.state === REQUEST_STATE.SUCCESS) {
+            const regetListAddress = await userService.getListAddressUser();
+            setListAddress(regetListAddress.data);
+            setDataModal(initStateModal);
+        } else {
+            alert("Có lỗi. Vui lòng thử lại sau");
+            setDataModal(initStateModal);
+        }
+    }
 
     function updateProvince(newVal, nameCity) {
         // console.log(nameCity);
@@ -159,6 +223,7 @@ export default function ListAddress() {
             ...initStateModal,
             isOpen: true,
             titleModal: "Thêm địa chỉ nhận hàng",
+            isCreateNew: true,
         };
         setDataModal(newdataModal);
     }
@@ -200,6 +265,37 @@ export default function ListAddress() {
         }
         setDataModal(newdataModal);
     }
+    function openEditAddressModal(dataItem) {
+        const newdataModal = {
+            isOpen: true,
+            titleModal: "Sửa địa chỉ nhận hàng",
+            isDefault: false,
+            isCreateNew: false,
+            name: dataItem.value.name,
+            phone: dataItem.value.phone,
+            text_address: dataItem.value.text_address,
+            address: dataItem.value.address,
+            idMeta: dataItem.idMeta,
+        };
+        if (newdataModal.address.provinces == "-1") {
+            setDistrictsList([]);
+            setWardsList([]);
+        } else {
+            if (newdataModal.address.districts == "-1") {
+                setWardsList([]);
+            } else {
+                (async () => {
+                    const response = await addressService.getWards(newdataModal.address.districts);
+                    setWardsList(response.data);
+                })();
+            }
+            (async () => {
+                const response = await addressService.getDistricts(newdataModal.address.provinces);
+                setDistrictsList(response.data);
+            })();
+        }
+        setDataModal(newdataModal);
+    }
     function closeModal() {
         const newdataModal = {
             ...dataModal,
@@ -219,27 +315,27 @@ export default function ListAddress() {
             <div className="list_address ">
                 <div className="table_data">
                     <Row className="table_header">
-                        <Col xs={3}>Tên</Col>
-                        <Col xs={5}>Địa chỉ</Col>
+                        <Col xs={2}>Tên</Col>
+                        <Col xs={6}>Địa chỉ</Col>
                         <Col xs={2}>Số điện thoại</Col>
                         <Col xs={2}>#</Col>
                     </Row>
-                    {fakedata.map((item, index) => {
+                    {listAddress.map((item, index) => {
                         return (
                             <Row key={"address_item" + index} className="table_row">
-                                <Col xs={3}>{item.name}</Col>
-                                <Col xs={5} className="overflow_ellipsis">
-                                    {item.address}
+                                <Col xs={2}>{item.value.name}</Col>
+                                <Col xs={6} className="overflow_ellipsis">
+                                    {getFullPathAddress(item.value.address, item.value.text_address)}
                                 </Col>
-                                <Col xs={2}>{item.phone}</Col>
+                                <Col xs={2}>{item.value.phone}</Col>
                                 <Col xs={2}>
                                     <span className="icon_function eye" title="xem" onClick={() => openModalLookAddress()}>
                                         <FontAwesomeIcon icon={faEye} />
                                     </span>
-                                    <span className="icon_function edit" title="sửa">
+                                    <span className="icon_function edit" title="sửa" onClick={() => openEditAddressModal(item)}>
                                         <FontAwesomeIcon icon={faPencilAlt} />{" "}
                                     </span>
-                                    <span className="icon_function remove" title="xoá">
+                                    <span className="icon_function remove" title="xoá" onClick={() => deleteAddress(item.idMeta)}>
                                         <FontAwesomeIcon icon={faTimes} />{" "}
                                     </span>
                                 </Col>
@@ -312,12 +408,23 @@ export default function ListAddress() {
                     <FloatingLabel controlId="addressInput" label="Đường, phố, số nhà" className="mb-3">
                         <Form.Control type="text" placeholder="Address" value={dataModal.text_address.street} onChange={(e) => updateStreet(e.target.value)} />
                     </FloatingLabel>
-                    <div>
+                    {/* <div>
                         <input type="checkbox" id="setDefaultAddress" checked={dataModal.isDefault} onClick={setIsDefaultAddress} readOnly />{" "}
                         <label htmlFor="setDefaultAddress">Đặt làm mặc định</label>
-                    </div>
+                    </div> */}
                     <div style={{ textAlign: "right" }}>
-                        <Button variant="success">Lưu</Button>
+                        <Button
+                            variant="success"
+                            onClick={
+                                dataModal.isCreateNew
+                                    ? () => submitNewAddress()
+                                    : () => {
+                                          updateAddress(dataModal.idMeta);
+                                      }
+                            }
+                        >
+                            Lưu
+                        </Button>
                     </div>
                 </div>
             </ModalLayout>
