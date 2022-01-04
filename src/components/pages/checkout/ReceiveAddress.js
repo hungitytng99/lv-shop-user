@@ -2,16 +2,33 @@ import React, { useEffect, useState } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { REQUEST_STATE } from "src/app-configs";
+import { clearCheckoutInfo } from "src/redux/slices/checkoutSlice";
 import { updateCheckoutInfo } from "src/redux/slices/checkoutSlice";
 import { addressService } from "./../../../services/address/index";
+import { userService } from "./../../../services/user/index";
+
+function getFullPathAddress(address, text_address) {
+    let fulladdress = "";
+    fulladdress += text_address.street !== "" ? text_address.street + ", " : "";
+    fulladdress += address.wards !== "-1" ? text_address.wards + ", " : "";
+    fulladdress += address.districts !== "-1" ? text_address.districts + ", " : "";
+    fulladdress += address.provinces !== "-1" ? text_address.provinces : "";
+    return fulladdress;
+}
+
 export default function ReceiveAddress() {
     const [provincesList, setProvincesList] = useState([]);
     const [districtsList, setDistrictsList] = useState([]);
     const [wardsList, setWardsList] = useState([]);
     const dispatch = useDispatch();
+    const [listAddress, setListAddress] = useState([]);
     const dataCheckout = useSelector((stores) => stores.checkoutSlice.value);
+    const userData = useSelector((stores) => stores.userSlice.value);
     useEffect(() => {
         (async () => {
+            const getListAddress = await userService.getListAddressUser();
+            setListAddress(getListAddress.data);
             const response = await addressService.getProvinces();
             setProvincesList(response.data);
         })();
@@ -25,9 +42,9 @@ export default function ReceiveAddress() {
                 provinces: nameCity,
                 districts: "",
                 wards: "",
+                street: "",
             },
             address: {
-                street: "",
                 provinces: newVal,
                 districts: "-1",
                 wards: "-1",
@@ -107,24 +124,66 @@ export default function ReceiveAddress() {
     function updateStreet(newVal) {
         const newDataCheckout = {
             ...dataCheckout,
-            address: {
-                ...dataCheckout.address,
+            text_address: {
+                ...dataCheckout.text_address,
                 street: newVal,
             },
         };
         dispatch(updateCheckoutInfo(newDataCheckout));
+    }
+    function changeReceiveInfo(index) {
+        if (index == -1) {
+            dispatch(clearCheckoutInfo());
+        } else {
+            const newDataCheckout = {
+                ...dataCheckout,
+                name: listAddress[index].value.name,
+                phone: listAddress[index].value.phone,
+                text_address: listAddress[index].value.text_address,
+                address: listAddress[index].value.address,
+            };
+            dispatch(updateCheckoutInfo(newDataCheckout));
+            if (newDataCheckout.address.provinces == "-1") {
+                setDistrictsList([]);
+                setWardsList([]);
+            } else {
+                if (newDataCheckout.address.districts == "-1") {
+                    setWardsList([]);
+                } else {
+                    (async () => {
+                        const response = await addressService.getWards(newDataCheckout.address.districts);
+                        setWardsList(response.data);
+                    })();
+                }
+                (async () => {
+                    const response = await addressService.getDistricts(newDataCheckout.address.provinces);
+                    setDistrictsList(response.data);
+                })();
+            }
+        }
     }
 
     return (
         <div>
             <h5>Thông tin nhận hàng</h5>
             <div className="receive_address">
-                <FloatingLabel controlId="floatingSelect" label="Sổ địa chỉ" style={{ marginBottom: "20px" }}>
-                    <Form.Select aria-label="Sổ địa chỉ" defaultChecked="-1">
-                        <option value="-1">Địa chỉ khác</option>
-                        <option value="1">One</option>
-                    </Form.Select>
-                </FloatingLabel>
+                {userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR ? (
+                    <FloatingLabel controlId="floatingSelect" label="Sổ địa chỉ" style={{ marginBottom: "20px" }}>
+                        <Form.Select aria-label="Sổ địa chỉ" defaultChecked="-1" onChange={(e) => changeReceiveInfo(Number(e.target.value))}>
+                            <option className="overflow_ellipsis" value="-1">
+                                ---Địa chỉ khác---
+                            </option>
+                            {listAddress.map((item, index) => {
+                                return (
+                                    <option className="overflow_ellipsis" key={"listaddress" + index} value={index}>
+                                        {getFullPathAddress(item.value.address, item.value.text_address)}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
+                    </FloatingLabel>
+                ) : null}
+
                 <FloatingLabel controlId="nameInput" label="Họ và Tên" className="mb-3">
                     <Form.Control type="name" placeholder="name@example.com" value={dataCheckout.name} onChange={(e) => updateName(e.target.value)} />
                 </FloatingLabel>
@@ -184,7 +243,7 @@ export default function ReceiveAddress() {
                 </FloatingLabel>
 
                 <FloatingLabel controlId="addressInput" label="Đường, phố, số nhà" className="mb-3">
-                    <Form.Control type="text" placeholder="Address" value={dataCheckout.address.street} onChange={(e) => updateStreet(e.target.value)} />
+                    <Form.Control type="text" placeholder="Address" value={dataCheckout.text_address.street} onChange={(e) => updateStreet(e.target.value)} />
                 </FloatingLabel>
                 <FloatingLabel controlId="floatingTextarea" label="Để lại nhời nhắn của bạn ở đây...">
                     <Form.Control

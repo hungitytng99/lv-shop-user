@@ -8,9 +8,9 @@ const initValue = {
             provinces: "",
             districts: "",
             wards: "",
+            street: "",
         },
         address: {
-            street: "",
             provinces: "-1",
             districts: "-1",
             wards: "-1",

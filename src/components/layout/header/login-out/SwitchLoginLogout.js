@@ -55,8 +55,11 @@ export default function SwitchLoginLogout() {
                     <Image src={ImagesPath.userIcon}></Image>
                 </div>
                 <div style={{ display: isUser ? "flex" : "none" }} className="header-mid-account-icon header-mid-account-avata">
-                    <span className=" user_no_img ">{userData.data.name ? userData.data.name[0] : ""}</span>
-                    {userData.data.avatar ? <img src={userData.data.avatar} /> : null}
+                    {userData.data.avatar ? (
+                        <img src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${userData.data.avatar}`} />
+                    ) : (
+                        <span className=" user_no_img ">{userData.data.name ? userData.data.name[0] : ""}</span>
+                    )}
                 </div>
                 <span>Tài khoản</span>
                 <div className="header-mid-account-option">
@@ -110,8 +113,8 @@ export default function SwitchLoginLogout() {
                         <Link href="/cart" passHref>
                             <span className="btn-gray">Tới giỏ hàng</span>
                         </Link>
-                        <Link href="/checkout" passHref>
-                            <span className="btn-red">Tiến hành thanh toán</span>
+                        <Link href={cartData.totalProduct == 0 ? "#" : "/checkout"} passHref>
+                            <span className={`btn-red ${cartData.totalProduct == 0 ? "btn-disable" : ""}`}>Tiến hành thanh toán</span>
                         </Link>
                     </div>
                 </div>
