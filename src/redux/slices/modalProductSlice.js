@@ -12,7 +12,7 @@ const initialState = {
 export const openProductModal = createAsyncThunk("modal_product/open_modal", async (productId, thunkAPI) => {
     // call api
     const response = await productService.getDetailProduct(productId);
-    console.log(response);
+    // console.log(response);
     return response;
 });
 

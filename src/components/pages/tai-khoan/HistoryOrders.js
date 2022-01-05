@@ -8,7 +8,7 @@ export default function HistoryOrders() {
     useEffect(() => {
         (async () => {
             const res = await userService.getUserOrders();
-            console.log(res);
+            // console.log(res);
             setListHistoryOrder(res.data);
         })();
     }, []);

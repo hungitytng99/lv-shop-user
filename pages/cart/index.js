@@ -21,7 +21,7 @@ export default function Cart() {
     const router = useRouter();
     async function checkout() {
         const res = await cartService.checkCartAvailableForCheckout();
-        console.log(res);
+        // console.log(res);
         if (res.data.length > 0) {
             alert("Có sản phẩm vượt quá số lượng hiện có của shop.\nVui lòng chọn lại.");
         } else {
