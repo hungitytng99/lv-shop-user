@@ -53,6 +53,11 @@
             &:first-child {
                 color: $text_color_hover;
             }
+            &:last-child {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
     .news_content {

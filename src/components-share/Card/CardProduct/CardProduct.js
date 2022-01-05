@@ -51,10 +51,10 @@ export default function CardProduct(props) {
             <Row style={{ paddingBottom: "15px" }}>
                 {data?.oldPrice ? (
                     <>
-                        <Col md={6} style={{ color: "#f6470e", fontWeight: "bold", textAlign: "right", fontSize: "15px", padding: "0px 5px" }}>
+                        <Col className="cur_price" md={6}>
                             {format_d_currency(data.curPrice)}
                         </Col>
-                        <Col md={6} style={{ color: "#acacac", textDecoration: "line-through", textAlign: "left", fontSize: "15px", padding: "0px 5px" }}>
+                        <Col className="old_price" md={6}>
                             {format_d_currency(data.oldPrice)}
                         </Col>
                     </>

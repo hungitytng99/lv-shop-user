@@ -1,0 +1,38 @@
+.search_result {
+    .search_box {
+        text-align: center;
+        .search_input {
+            // background-color: aquamarine;
+            width: fit-content;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            input[type="text"] {
+                outline: none;
+                border: none;
+                background: #57a545;
+                height: 45px;
+                margin-right: -29px;
+                padding-right: 32px;
+                padding-left: 20px;
+                color: white;
+                border-radius: 23px;
+                &::placeholder {
+                    color: white;
+                }
+            }
+            .search_icon {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: larger;
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                background-color: $text_color_hover;
+                color: white;
+            }
+        }
+    }
+}
