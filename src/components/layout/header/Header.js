@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Breadcrumb, Container } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,6 +14,27 @@ export default function Header(props) {
     const { titlePage, breadcrumb } = props;
     const subMenu = useSelector((stores) => stores.menuSlice.value);
     const shopInfor = useSelector((stores) => stores.shopSlice.value);
+    const router = useRouter();
+    const inputSearchRef = useRef();
+    const inputSearchRef2 = useRef();
+    function search() {
+        router.push(`/ket-qua-tim-kiem?forquery=${inputSearchRef.current.value}`);
+    }
+    function enterInput(e) {
+        console.log(e.key === "Enter");
+        if (e.key === "Enter") {
+            search();
+        }
+    }
+    function search2() {
+        router.push(`/ket-qua-tim-kiem?forquery=${inputSearchRef2.current.value}`);
+    }
+    function enterInput2(e) {
+        console.log(e.key === "Enter");
+        if (e.key === "Enter") {
+            search2();
+        }
+    }
     return (
         <header className="header">
             <Container>
@@ -49,8 +70,10 @@ export default function Header(props) {
                 </div>
                 <div className="header-mid">
                     <div className="header-mid-search">
-                        <input type="text" placeholder="Tìm kiếm sản phẩm..."></input>
-                        <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        <input type="text" placeholder="Tìm kiếm sản phẩm..." ref={inputSearchRef} onKeyDown={enterInput}></input>
+                        <span onClick={search}>
+                            <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        </span>
                     </div>
                     <div className="header-mid-toggle_menu_btn">
                         <label htmlFor="toggle_sidebar">
@@ -65,8 +88,10 @@ export default function Header(props) {
             </Container>
             <div className="header-bottom-search">
                 <div>
-                    <input type="text" name="search" placeholder="Tìm kiếm sản phẩm..."></input>
-                    <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                    <input ref={inputSearchRef2} onKeyDown={enterInput2} type="text" name="search" placeholder="Tìm kiếm sản phẩm..."></input>
+                    <span onClick={search2}>
+                        <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                    </span>
                 </div>
             </div>
             <div className="header-bottom-menu">

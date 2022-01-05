@@ -21,7 +21,7 @@ export default function CardNews(props) {
                 </span>
             </div>
             <Link href={urlPage} passHref>
-                <div className="title">{title}</div>
+                <div className="title ">{title}</div>
             </Link>
             <div className="author">
                 <span>

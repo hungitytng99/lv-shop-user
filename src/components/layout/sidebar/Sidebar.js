@@ -2,13 +2,14 @@ import React from "react";
 import { ImagesPath } from "../../../constants/ImagesPath";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import Image from "next/dist/client/image";
 
 export default function Sidebar() {
     const subMenu = useSelector((stores) => stores.menuSlice.value);
     return (
         <div className="sidebar">
-            <div className="sidebar-logo">
-                <img src={ImagesPath.LOGO}></img>
+            <div className="sidebar-logo" style={{ textAlign: "center" }}>
+                <Image width={90} height={90} src={ImagesPath.LOGO}></Image>
             </div>
             <ul>
                 <Link href="/" passHref>

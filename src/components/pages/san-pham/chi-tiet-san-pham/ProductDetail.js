@@ -126,7 +126,7 @@ export default function ProductDetail(props) {
             </Col>
             <Col md={7} className="detal_product">
                 <h2 className="detal_product-name">{title}</h2>
-                <p>
+                <p className="trademark">
                     Thương hiệu: {trademark} | Tình trạng: {status == "active" ? "Còn hàng" : ""}
                 </p>
 
@@ -135,8 +135,8 @@ export default function ProductDetail(props) {
                     <h3 className="detal_product-cost-current">{format_d_currency(datashow.curPrice)}</h3>
                     <span className="detal_product-cost-old">{format_d_currency(datashow.oldPrice)}</span>
                 </div>
-                <p>Thông tin sản phẩm: </p>
-                <div dangerouslySetInnerHTML={{ __html: productInfo }} />
+                <p className="product_infor">Thông tin sản phẩm: </p>
+                <div className="product_infor" dangerouslySetInnerHTML={{ __html: productInfo }} />
                 <hr />
                 <div>
                     Số lượng còn: <b>{datashow.availableNumber}</b> sản phẩm
@@ -145,7 +145,7 @@ export default function ProductDetail(props) {
                     return (
                         <div key={"opt" + opt.title + i} className="pick_variant">
                             <p className="opt_title">{opt.title}:</p>
-                            <div>
+                            <div className="opt_btns">
                                 {opt.values.map((val, j) => {
                                     return (
                                         <span
@@ -161,7 +161,8 @@ export default function ProductDetail(props) {
                         </div>
                     );
                 })}
-                <div className="order_product" style={{ marginTop: "20px" }}>
+                <p className="opt_title">Số lượng:</p>
+                <div className="order_product" style={{ marginTop: "5px" }}>
                     <div className="order_product-quantity">
                         <span className="order_product-quantity-minus" onClick={decreaseOder}>
                             {" - "}
@@ -171,8 +172,11 @@ export default function ProductDetail(props) {
                             {" + "}
                         </span>
                     </div>
-                    <div className="order_product-btn_order" onClick={addProduct}>
-                        Thêm vào giỏ hàng
+                    <div className="order_product-btns">
+                        <div className="order_product-btn_cart">Tới giỏ hàng</div>
+                        <div className="order_product-btn_order" onClick={addProduct}>
+                            Thêm vào giỏ hàng
+                        </div>
                     </div>
                 </div>
             </Col>
