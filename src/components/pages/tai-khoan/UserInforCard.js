@@ -19,7 +19,7 @@ export default function UserInforCard() {
     const dispatch = useDispatch();
     function getImageUpload(e) {
         const file = e.target.files[0];
-        console.log(file);
+        // console.log(file);
         uploadImg(file);
     }
 
@@ -47,7 +47,7 @@ export default function UserInforCard() {
 
     async function uploadImg(file) {
         const res = await userService.uploadImg(file);
-        console.log(res);
+        // console.log(res);
         if (res.state === REQUEST_STATE.SUCCESS) {
             const response = await userService.updateInfor({ avatar: res.data[0].id });
             if (response.state === REQUEST_STATE.SUCCESS) {

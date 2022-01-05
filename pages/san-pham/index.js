@@ -10,7 +10,7 @@ import TabsInfor from "src/components/pages/san-pham/tabsInfor/TabsInfor";
 import { productService } from "./../../src/services/product/index";
 
 export default function SanPham(props) {
-    console.log(props);
+    // console.log(props);
     const { product, response, relatedProducts } = props;
     const breadcrumb = [
         {

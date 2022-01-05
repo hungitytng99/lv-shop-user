@@ -19,7 +19,7 @@ import CardProductReviewPlaceholder from "./../src/components-share/Placeholder/
 import CardNewsPlaceholder from "src/components-share/Placeholder/CardNewsPlaceholder";
 
 export default function Home(props) {
-    console.log(props);
+    // console.log(props);
     const { hotProduct = [], newProduct = [], articles = [] } = props;
     // const token = Cookies.get(storageKey.Cookie_token);
     const [loading, setLoading] = useState(true);

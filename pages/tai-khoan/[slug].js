@@ -55,7 +55,7 @@ export default function changePass(props) {
                 oldPassword: oldPass.current.value,
                 newPassword: newPass.current.value,
             };
-            console.log("submit newpass", dataPost);
+            // console.log("submit newpass", dataPost);
             const response = await userService.changePassword(dataPost);
             if (response.state === REQUEST_STATE.SUCCESS) {
                 alert("Đổi mật khẩu thành công!");
@@ -119,7 +119,7 @@ export default function changePass(props) {
 export async function getServerSideProps(context) {
     const { resolvedUrl, query, params } = context;
     try {
-        console.log({ resolvedUrl, query, params });
+        // console.log({ resolvedUrl, query, params });
         return {
             props: {},
         };
