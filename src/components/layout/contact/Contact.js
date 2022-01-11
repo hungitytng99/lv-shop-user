@@ -13,26 +13,26 @@ export default function Contact() {
     return (
         <div className="social_contact">
             <Link href={shopInfor.data?.facebook || "#"} passHref>
-                <span style={{ color: "#1e3ad4" }}>
+                <a className="social_contact_icon" target="_blank" style={{ color: "#1e3ad4" }}>
                     <FontAwesomeIcon icon={faFacebookF} />
-                </span>
+                </a>
             </Link>
             <Link href={shopInfor.data?.instagram || "#"} passHref>
-                <span style={{ color: "#ff1e45" }}>
+                <a className="social_contact_icon" target="_blank" style={{ color: "#ff1e45" }}>
                     <FontAwesomeIcon icon={faInstagram} />
-                </span>
+                </a>
             </Link>
             <Link href={shopInfor.data?.youtube || "#"} passHref>
-                <span style={{ color: "#f44336" }}>
+                <a className="social_contact_icon" target="_blank" style={{ color: "#f44336" }}>
                     <FontAwesomeIcon icon={faYoutube} />
-                </span>
+                </a>
             </Link>
             <Link href={shopInfor.data?.zalo || "#"} passHref>
-                <span style={{ color: "rgb(1 128 199)" }}>
+                <a className="social_contact_icon" target="_blank" style={{ color: "rgb(1 128 199)" }}>
                     <Image src={ImagesPath.zaloIcon} alt="tiện ích lộc vừng" />
-                </span>
+                </a>
             </Link>
-            <span style={{ color: "#ff5722" }}>
+            <span className="social_contact_icon" style={{ color: "#ff5722" }}>
                 <FontAwesomeIcon icon={faPhone} />
             </span>
         </div>
