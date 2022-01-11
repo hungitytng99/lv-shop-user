@@ -69,14 +69,6 @@ export async function getServerSideProps(context) {
     const { resolvedUrl, query } = context;
 
     try {
-        if (token == undefined) {
-            return {
-                redirect: {
-                    destination: "/",
-                    permanent: false,
-                },
-            };
-        }
         const id = Number(query.slug.split("-")[0]) || "";
         const response = await articleService.getArticleById(id);
         console.log({
