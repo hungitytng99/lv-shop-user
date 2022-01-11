@@ -9,6 +9,7 @@ import { getVisitorInformation } from "./../../redux/slices/userSlice";
 import { getMenu } from "./../../redux/slices/menuSlice";
 import { getProductCart } from "./../../redux/slices/cartSlices";
 import { getShopInfor } from "./../../redux/slices/shopSlice";
+import Contact from "./contact/Contact";
 
 function Layout(props) {
     const { children, titlePage, breadcrumb } = props;
@@ -36,6 +37,7 @@ function Layout(props) {
             <div className="layout__footer">
                 <Footer />
             </div>
+            <Contact />
             <ModalReviewProduct />
             <ModalReviewCart />
         </div>

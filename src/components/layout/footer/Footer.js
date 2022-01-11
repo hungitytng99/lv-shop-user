@@ -6,6 +6,7 @@ import { faPodcast } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import Image from "next/dist/client/image";
+import { faFacebookF, faInstagram, faYoutube } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
     const shopInfor = useSelector((stores) => stores.shopSlice.value);
@@ -47,7 +48,7 @@ export default function Footer() {
                                         <div className="item">
                                             <span>
                                                 <span style={{ color: "#f6470e" }}>Địa chỉ: </span>
-                                                <span>Chung cư VP5, Nguyễn Duy Trinh, Quận Hoàng Mai, Hà Nội</span>
+                                                <span>{shopInfor?.data?.address}</span>
                                             </span>
                                         </div>
                                         <div className="item">
@@ -152,7 +153,29 @@ export default function Footer() {
                                 </div>
                                 <div className="tel-contact">
                                     <FontAwesomeIcon icon={faPodcast}></FontAwesomeIcon>
-                                    <span style={{ marginLeft: "20px" }}>0363.181.888</span>
+                                    <span style={{ marginLeft: "20px" }}>{shopInfor.data?.phone}</span>
+                                </div>
+                                <div className="social">
+                                    <Link href={shopInfor.data?.facebook || "#"} passHref>
+                                        <span style={{ color: "#1e3ad4" }}>
+                                            <FontAwesomeIcon icon={faFacebookF} />
+                                        </span>
+                                    </Link>
+                                    <Link href={shopInfor.data?.instagram || "#"} passHref>
+                                        <span style={{ color: "#ff1e45" }}>
+                                            <FontAwesomeIcon icon={faInstagram} />
+                                        </span>
+                                    </Link>
+                                    <Link href={shopInfor.data?.youtube || "#"} passHref>
+                                        <span style={{ color: "#f44336" }}>
+                                            <FontAwesomeIcon icon={faYoutube} />
+                                        </span>
+                                    </Link>
+                                    <Link href={shopInfor.data?.zalo || "#"} passHref>
+                                        <span style={{ color: "rgb(1 128 199)" }}>
+                                            <Image src={ImagesPath.zaloIcon} alt="tiện ích lộc vừng" />
+                                        </span>
+                                    </Link>
                                 </div>
                             </div>
                         </Col>
@@ -165,12 +188,15 @@ export default function Footer() {
                         <Col>
                             <span>
                                 Bản quyền thuộc về
-                                <span style={{ color: "#f6470e" }}> CÔNG TY THHH TIỆN ÍCH HT | 0326.330.338 </span>
+                                <span style={{ color: "#f6470e" }}>
+                                    {" "}
+                                    {shopInfor.data?.bossName} | {shopInfor.data?.phone}{" "}
+                                </span>
                                 <span className="hidden_sign"> | </span>
                             </span>
-                            <span>
+                            <span style={{ marginLeft: "10px" }}>
                                 Cung cấp bởi
-                                <span style={{ color: "#f6470e" }}> Sapo</span>
+                                <span style={{ color: "#f6470e", marginLeft: "5px" }}>{shopInfor.data?.bossName}</span>
                             </span>
                         </Col>
                     </Row>
