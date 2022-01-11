@@ -1,5 +1,4 @@
 import React from "react";
-import cookies from "next-cookies";
 import Head from "next/head";
 import Layout from "src/components/layout/Layout";
 import { Container, Row, Col } from "react-bootstrap";
@@ -70,7 +69,6 @@ export async function getServerSideProps(context) {
     const { resolvedUrl, query } = context;
 
     try {
-        const token = cookies(context).auth;
         if (token == undefined) {
             return {
                 redirect: {
@@ -80,7 +78,7 @@ export async function getServerSideProps(context) {
             };
         }
         const id = Number(query.slug.split("-")[0]) || "";
-        const response = await articleService.getArticleById(id, token);
+        const response = await articleService.getArticleById(id);
         console.log({
             query,
             response,

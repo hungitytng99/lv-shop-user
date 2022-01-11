@@ -3,9 +3,27 @@ import { ImagesPath } from "../../../constants/ImagesPath";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import Image from "next/dist/client/image";
+import { REQUEST_STATE } from "../../../app-configs";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { userLogout } from "../../../redux/slices/userSlice";
 
 export default function Sidebar() {
     const subMenu = useSelector((stores) => stores.menuSlice.value);
+    const userData = useSelector((stores) => stores.userSlice.value);
+    const dispatch = useDispatch();
+    const router = useRouter();
+    let isUser = false;
+    if (userData.data?.deviceId == null && userData.state != REQUEST_STATE.ERROR) isUser = true;
+
+    function clickLogOut() {
+        dispatch(userLogout());
+        if (router.asPath == "/") {
+            router.reload("/");
+        } else {
+            router.push("/");
+        }
+    }
     return (
         <div className="sidebar">
             <div className="sidebar-logo" style={{ textAlign: "center" }}>
@@ -52,25 +70,32 @@ export default function Sidebar() {
                         <span>Liên hệ</span>
                     </li>
                 </Link>
-                <Link href="/dang-nhap/#dangnhap" passHref>
-                    <li>
-                        <span>Đăng nhập</span>
-                    </li>
-                </Link>
-                <Link href="/dang-ky/#dangky" passHref>
-                    <li>
-                        <span>Đăng kí</span>
-                    </li>
-                </Link>
-                <Link href="#" passHref>
-                    <li>
-                        <span>Tài khoản</span>
-                    </li>
-                </Link>
 
-                <li>
-                    <span>Đăng xuất</span>
-                </li>
+                {isUser ? (
+                    <>
+                        <Link href="/tai-khoan" passHref>
+                            <li>
+                                <span>Tài khoản</span>
+                            </li>
+                        </Link>
+                        <li onClick={clickLogOut}>
+                            <span>Đăng xuất</span>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <Link href="/dang-nhap" passHref>
+                            <li>
+                                <span>Đăng nhập</span>
+                            </li>
+                        </Link>
+                        <Link href="/dang-ky" passHref>
+                            <li>
+                                <span>Đăng kí</span>
+                            </li>
+                        </Link>
+                    </>
+                )}
             </ul>
         </div>
     );

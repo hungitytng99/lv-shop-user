@@ -1,4 +1,7 @@
 .footer {
+    .title-info {
+        font-weight: 700;
+    }
     &-get_email {
         h3 {
             padding: 10px 0px 10px 30px;
@@ -127,6 +130,26 @@
                     display: flex;
                     justify-content: center;
                 }
+            }
+        }
+    }
+    .social {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 2px solid;
+            & > div,
+            svg {
+                height: 25px;
+                width: 25px;
             }
         }
     }
