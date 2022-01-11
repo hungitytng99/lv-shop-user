@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMapMarkerAlt, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStackExchange } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 export default function LienHe() {
     const breadcrumb = [
@@ -13,6 +14,8 @@ export default function LienHe() {
             url: "/lien-he",
         },
     ];
+    const shopInfor = useSelector((stores) => stores.shopSlice.value);
+
     return (
         <div>
             <Layout titlePage="Liên Hệ" breadcrumb={breadcrumb}>
@@ -25,21 +28,21 @@ export default function LienHe() {
                                         <span className="icon">
                                             <FontAwesomeIcon icon={faMapMarkerAlt}></FontAwesomeIcon>
                                         </span>
-                                        <span className="content">Chung cư VP5, Nguyễn Duy Trinh, bán đảo Linh Đàm, Hoàng Mai, Hà Nội</span>
+                                        <span className="content">{shopInfor?.data?.address}</span>
                                     </li>
                                     <li className="phone">
                                         <span className="icon">
                                             <FontAwesomeIcon icon={faMobileAlt}></FontAwesomeIcon>
                                         </span>
-                                        <Link href={{ pathname: "tel:0962020446" }} passHref>
-                                            <span className="content">0962.020.446</span>
+                                        <Link href={{ pathname: `tel:${shopInfor?.data?.phone}` }} passHref>
+                                            <span className="content">{shopInfor?.data?.phone}</span>
                                         </Link>
                                     </li>
                                     <li className="email">
                                         <span className="icon">
                                             <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                                         </span>
-                                        <span className="content">contact@tienichxanh.com.vn</span>
+                                        <span className="content">{shopInfor?.data?.email}</span>
                                     </li>
                                 </ul>
                             </div>
