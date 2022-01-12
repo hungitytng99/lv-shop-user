@@ -13,21 +13,19 @@ export default function HistoryOrders() {
         })();
     }, []);
 
+    async function updateListOrder() {
+        const res = await userService.getUserOrders();
+        // console.log(res);
+        setListHistoryOrder(res.data);
+    }
+
     return (
         <>
             <h4 className="box_title">Lịch sử đặt hàng</h4>
             <div>
                 <div>
                     {listHistoryOrder.map((item, index) => {
-                        return (
-                            <CardHistoryOrder
-                                key={"historycard" + item.id + index}
-                                data={item}
-                                updateListOrder={(data) => {
-                                    setListHistoryOrder(data);
-                                }}
-                            />
-                        );
+                        return <CardHistoryOrder key={"historycard" + item.id + index} data={item} updateListOrder={updateListOrder} />;
                     })}
                 </div>
             </div>

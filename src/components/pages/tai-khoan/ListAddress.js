@@ -315,20 +315,20 @@ export default function ListAddress() {
             <div className="list_address ">
                 <div className="table_data">
                     <Row className="table_header">
-                        <Col xs={2}>Tên</Col>
+                        <Col xs={3}>Tên</Col>
                         <Col xs={6}>Địa chỉ</Col>
                         <Col xs={2}>Số điện thoại</Col>
-                        <Col xs={2}>#</Col>
+                        <Col xs={1}>#</Col>
                     </Row>
                     {listAddress.map((item, index) => {
                         return (
                             <Row key={"address_item" + index} className="table_row">
-                                <Col xs={2}>{item.value.name}</Col>
+                                <Col xs={3}>{item.value.name}</Col>
                                 <Col xs={6} className="overflow_ellipsis">
                                     {getFullPathAddress(item.value.address, item.value.text_address)}
                                 </Col>
                                 <Col xs={2}>{item.value.phone}</Col>
-                                <Col xs={2}>
+                                <Col xs={1} style={{ padding: "0px" }}>
                                     {/* <span className="icon_function eye" title="xem" onClick={() => openModalLookAddress()}>
                                         <FontAwesomeIcon icon={faEye} />
                                     </span> */}

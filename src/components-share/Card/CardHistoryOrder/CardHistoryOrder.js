@@ -33,16 +33,21 @@ export default function CardHistoryOrder(props) {
         }
     }
     async function cancelOrder() {
-        const res = await userService.updateOrderState(id, "CANCEL");
-        // console.log(res);
-        props.updateListOrder(res.data);
+        const confr = confirm("Bạn xác nhận muốn huỷ đơn hàng?");
+        if (confr === true) {
+            const res = await userService.updateOrderState(id, "CANCEL");
+            if (res.state == "SUCCESS") {
+                props.updateListOrder();
+            }
+        }
     }
     async function doneRevieve() {
         const confr = confirm("Bạn xác nhận rằng đã nhận được hàng?");
         if (confr === true) {
             const res = await userService.updateOrderState(id, "DONE");
-            // console.log(res);
-            props.updateListOrder(res.data);
+            if (res.state == "SUCCESS") {
+                props.updateListOrder();
+            }
         }
     }
     return (
