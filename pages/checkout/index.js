@@ -48,7 +48,9 @@ export default function Checkout(props) {
                     <Col lg={8}>
                         <div className="checkout_header">
                             <Link href="/" passHref>
-                                <Image width={90} height={90} src={ImagesPath.LOGO} />
+                                <a>
+                                    <Image width={90} height={90} src={ImagesPath.LOGO} />
+                                </a>
                             </Link>
                             {isUser ? (
                                 <span className="login_logout" onClick={clickLogOut}>
