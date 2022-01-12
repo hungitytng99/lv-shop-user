@@ -9,6 +9,7 @@ import { updateCheckoutInfo } from "src/redux/slices/checkoutSlice";
 export default function PaymentMethod() {
     const dispatch = useDispatch();
     const dataCheckout = useSelector((stores) => stores.checkoutSlice.value);
+    const shopInfor = useSelector((stores) => stores.shopSlice.value);
 
     function changePaymentMethod(value) {
         const newDataCheckout = {
@@ -33,16 +34,13 @@ export default function PaymentMethod() {
                         <p>
                             Quý khách hàng có thể thanh toán bằng hình thức chuyển khoản tới một trong các ngân hàng dưới đây.
                             <br />
-                            Nội dung chuyển khoản vui lòng ghi chính xác Mã đơn_Số điện thoại đặt hàng (ví dụ: HTW1308_0968123468).
+                            Nội dung chuyển khoản vui lòng ghi chính xác Mã đơn_Số điện thoại đặt hàng <br /> (ví dụ: HTW1308_0968123468).
                             <br /> Shop sẽ gọi điện lại để xác nhận ngay sau đó.
                             <br />
-                            ------------------------------------------------
+                            ---------------------------------------------
                             <br /> VPBank - Ngân hàng Việt Nam Thịnh Vượng.
-                            <br /> Đinh Văn Thư 6782299
+                            <br /> Nguyễn Sơn Tùng {shopInfor.data?.bankAccountId}
                             <br />
-                            ------------------------------------------------
-                            <br /> ACB - Ngân hàng Á Châu
-                            <br /> Đinh Văn Thư 214135819
                         </p>
                     </div>
                 </div>

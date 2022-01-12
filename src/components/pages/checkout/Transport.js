@@ -1,8 +1,10 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { format_d_currency } from "../../../share_function";
 
 export default function Transport() {
+    const shopInfor = useSelector((stores) => stores.shopSlice.value);
     const dataCheckout = useSelector((stores) => stores.checkoutSlice.value);
     return (
         <div>
@@ -10,18 +12,21 @@ export default function Transport() {
             {dataCheckout.address.provinces === "-1" ? (
                 <div style={{ background: "#d1ecf1", color: "#0c5460", borderRadius: "5px", padding: "10px", margin: "0px 10px" }}>Vui lòng nhập địa chỉ giao hàng</div>
             ) : (
-                <Row className="box_radio">
-                    <Col xs={1}>
-                        <input type="radio" name="freeFee" id="free" readOnly={true} />
-                    </Col>
-                    <Col xs={8}>
-                        <div>Miễn phí giao hàng</div>
-                        <div style={{ fontSize: "small" }}>(Áp dụng cho đơn hàng từ 300K)</div>
-                    </Col>
-                    <Col xs={3}>
-                        <span>Miễn phí</span>
-                    </Col>
-                </Row>
+                // <Row className="box_radio">
+                //     <Col xs={1}>
+                //         <input type="radio" name="freeFee" id="free" readOnly={true} />
+                //     </Col>
+                //     <Col xs={8}>
+                //         <div>Miễn phí giao hàng</div>
+                //         <div style={{ fontSize: "small" }}>(Áp dụng cho đơn hàng từ 300K)</div>
+                //     </Col>
+                //     <Col xs={3}>
+                //         <span>Miễn phí</span>
+                //     </Col>
+                // </Row>
+                <div style={{ background: "#d1ecf1", color: "#0c5460", borderRadius: "5px", padding: "10px", margin: "0px 10px" }}>
+                    Phí vận chuyển: {format_d_currency(shopInfor.data?.shipFee)}
+                </div>
             )}
         </div>
     );
