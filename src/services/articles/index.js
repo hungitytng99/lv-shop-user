@@ -14,7 +14,7 @@ export const articleService = {
                     imageUrl: `${process.env.NEXT_PUBLIC_IMG_BASE_URL}/${item.avatar}`,
                     author: item.user?.name || "Không rõ",
                     day: date.getDay(),
-                    month: date.getMonth(),
+                    month: date.getMonth() + 1,
                     content: item.content,
                     desc: item.description,
                 };
