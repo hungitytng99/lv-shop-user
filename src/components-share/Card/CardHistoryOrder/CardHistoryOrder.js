@@ -22,7 +22,7 @@ export default function CardHistoryOrder(props) {
         if (status === "NEW") {
             return <div style={{ color: "#00bcd4" }}>Đặt hàng thành công...</div>;
         }
-        if (status === "COMMING") {
+        if (status === "INCOMING") {
             return <div style={{ color: "#00bcd4" }}>Đang giao hàng...</div>;
         }
         if (status === "DONE") {
@@ -107,7 +107,7 @@ export default function CardHistoryOrder(props) {
                         Huỷ
                     </Button>
                 ) : null}
-                {status === "COMMING" ? (
+                {status === "INCOMING" ? (
                     <Button variant="success" onClick={doneRevieve}>
                         Đã nhận hàng
                     </Button>
