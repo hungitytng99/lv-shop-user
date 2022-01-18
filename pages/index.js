@@ -35,7 +35,7 @@ export default function Home(props) {
         (async () => {
             if (menu.data?.length) {
                 const randomCollectionId = Math.floor(Math.random() * (menulength - 1));
-                const listproduct = await productService.getListProduct({ limit: 12, offset: 0, collectionId: randomCollectionId, status: "active", createdAt: "DESC" });
+                const listproduct = await productService.getListProduct({ limit: 12, offset: 0, collectionId: menu.data[randomCollectionId], status: "active", createdAt: "DESC" });
                 setSpecificProduct((prev) => {
                     return {
                         ...prev,
